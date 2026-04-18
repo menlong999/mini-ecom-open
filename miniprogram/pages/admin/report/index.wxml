@@ -1,0 +1,77 @@
+<view class="page">
+  <t-toast id="t-toast" />
+
+  <view class="summary-grid">
+    <view class="summary-card">
+      <view class="summary-title">今日</view>
+      <view class="summary-row">
+        <text class="label">订单量</text>
+        <text class="value">{{summary.day.orderCount}}</text>
+      </view>
+      <view class="summary-row">
+        <text class="label">销售额</text>
+        <text class="value">¥{{summary.day.salesAmount}}</text>
+      </view>
+    </view>
+
+    <view class="summary-card">
+      <view class="summary-title">本周</view>
+      <view class="summary-row">
+        <text class="label">订单量</text>
+        <text class="value">{{summary.week.orderCount}}</text>
+      </view>
+      <view class="summary-row">
+        <text class="label">销售额</text>
+        <text class="value">¥{{summary.week.salesAmount}}</text>
+      </view>
+    </view>
+
+    <view class="summary-card">
+      <view class="summary-title">本月</view>
+      <view class="summary-row">
+        <text class="label">订单量</text>
+        <text class="value">{{summary.month.orderCount}}</text>
+      </view>
+      <view class="summary-row">
+        <text class="label">销售额</text>
+        <text class="value">¥{{summary.month.salesAmount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">最近30天（按天）</view>
+    <view class="table">
+      <view class="table-row table-head">
+        <text class="col date">日期</text>
+        <text class="col num">订单量</text>
+        <text class="col amount">销售额</text>
+      </view>
+      <view wx:for="{{dayRows}}" wx:key="label" class="table-row">
+        <text class="col date">{{item.label}}</text>
+        <text class="col num">{{item.orderCount}}</text>
+        <text class="col amount">¥{{item.salesAmount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">最近12个月（按月）</view>
+    <view class="table">
+      <view class="table-row table-head">
+        <text class="col date">月份</text>
+        <text class="col num">订单量</text>
+        <text class="col amount">销售额</text>
+      </view>
+      <view wx:for="{{monthRows}}" wx:key="label" class="table-row">
+        <text class="col date">{{item.label}}</text>
+        <text class="col num">{{item.orderCount}}</text>
+        <text class="col amount">¥{{item.salesAmount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading-mask">
+    <t-loading theme="circular" size="48rpx" text="加载中..." inherit-color />
+  </view>
+</view>

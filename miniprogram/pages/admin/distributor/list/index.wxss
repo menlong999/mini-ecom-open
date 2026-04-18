@@ -1,0 +1,91 @@
+.page {
+  min-height: 100vh;
+  background: #f7f8fa;
+  padding: 20rpx 24rpx 40rpx;
+  box-sizing: border-box;
+}
+
+.search-bar {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.loading-wrap {
+  padding: 48rpx 0;
+  text-align: center;
+  color: #b9b9b9;
+}
+
+.empty {
+  text-align: center;
+  color: #999;
+  padding: 32rpx 0;
+  font-size: 26rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-top: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.card-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1f1f1f;
+}
+
+.card-status {
+  font-size: 24rpx;
+  color: #ff5f15;
+}
+
+.card-row {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 6rpx;
+  word-break: break-all;
+}
+
+.card-actions {
+  margin-top: 16rpx;
+  display: flex;
+  gap: 12rpx;
+}
+
+.finish {
+  text-align: center;
+  color: #b9b9b9;
+  padding: 20rpx 0;
+  font-size: 24rpx;
+}
+
+.reject-panel {
+  background: #fff;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  padding: 24rpx;
+}
+
+.reject-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin-bottom: 16rpx;
+}
+
+.reject-actions {
+  margin-top: 20rpx;
+  display: flex;
+  gap: 16rpx;
+}

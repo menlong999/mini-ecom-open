@@ -1,0 +1,65 @@
+<view class="page">
+  <t-toast id="t-toast" />
+
+  <view class="search-bar">
+    <t-input placeholder="搜索昵称" value="{{keyword}}" bind:change="onKeywordChange" />
+    <t-button size="small" theme="primary" bind:tap="onSearch">搜索</t-button>
+  </view>
+
+  <t-tabs value="{{currentStatus}}" bind:change="onStatusTabChange">
+    <t-tab-panel wx:for="{{statusTabs}}" wx:key="key" label="{{item.text}}" value="{{item.key}}" />
+  </t-tabs>
+
+  <view wx:if="{{loading}}" class="loading-wrap">
+    <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
+  </view>
+
+  <view wx:else>
+    <view wx:if="{{list.length === 0}}" class="empty">暂无申请</view>
+    <view wx:for="{{list}}" wx:key="_openid" class="card">
+      <view class="card-header">
+        <view class="card-name">{{item.nickName || '未命名用户'}}</view>
+        <view class="card-status">{{item.statusDesc}}</view>
+      </view>
+      <view class="card-row">OpenID：{{item._openid}}</view>
+      <view class="card-row" wx:if="{{item.phoneNumber}}">手机号：{{item.phoneNumber}}</view>
+      <view class="card-row">申请时间：{{item.applyAtText}}</view>
+      <view class="card-row" wx:if="{{item.rejectReason}}">拒绝原因：{{item.rejectReason}}</view>
+
+      <view class="card-actions" wx:if="{{item.canApprove}}">
+        <t-button
+          size="small"
+          theme="primary"
+          bind:tap="handleApprove"
+          data-openid="{{item._openid}}"
+          >通过</t-button
+        >
+        <t-button size="small" theme="danger" bind:tap="openReject" data-openid="{{item._openid}}"
+          >拒绝</t-button
+        >
+      </view>
+    </view>
+
+    <view wx:if="{{finished && list.length > 0}}" class="finish">没有更多了</view>
+  </view>
+
+  <t-popup
+    visible="{{rejectVisible}}"
+    placement="bottom"
+    bind:visible-change="onRejectVisibleChange"
+  >
+    <view class="reject-panel">
+      <view class="reject-title">拒绝原因</view>
+      <t-textarea
+        value="{{rejectReason}}"
+        placeholder="填写拒绝原因（可选）"
+        maxlength="200"
+        bind:change="onRejectReasonChange"
+      />
+      <view class="reject-actions">
+        <t-button theme="default" bind:tap="closeReject">取消</t-button>
+        <t-button theme="danger" bind:tap="confirmReject">确认拒绝</t-button>
+      </view>
+    </view>
+  </t-popup>
+</view>

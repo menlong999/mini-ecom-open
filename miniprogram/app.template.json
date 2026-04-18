@@ -1,0 +1,94 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/category/index",
+    "pages/cart/index",
+    "pages/usercenter/index",
+    "pages/usercenter/person-info/index",
+    "pages/usercenter/address/list/index",
+    "pages/usercenter/address/edit/index",
+    "pages/usercenter/name-edit/index"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/goods",
+      "name": "goods",
+      "pages": ["list/index", "details/index", "comments/index", "comments/create/index"]
+    },
+    {
+      "root": "pages/order",
+      "name": "order",
+      "pages": [
+        "order-confirm/index",
+        "invoice/index",
+        "pay-result/index",
+        "order-list/index",
+        "order-detail/index",
+        "apply-service/index",
+        "after-service-list/index",
+        "after-service-detail/index",
+        "fill-tracking-no/index",
+        "delivery-detail/index"
+      ]
+    },
+    {
+      "root": "pages/admin",
+      "name": "admin",
+      "pages": [
+        "dashboard/index",
+        "home-config/index",
+        "report/index",
+        "distributor-report/index",
+        "distributor/list/index",
+        "stock/index",
+        "category/index",
+        "goods/list/index",
+        "goods/edit/index",
+        "order/list/index",
+        "order/ship/index",
+        "after-service/list/index",
+        "after-service/detail/index"
+      ]
+    }
+  ],
+  "tabBar": {
+    "custom": true,
+    "color": "#666666",
+    "selectedColor": "#FF5F15",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/category/index",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/cart/index",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/usercenter/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "requiredPrivateInfos": ["chooseAddress"],
+  "lazyCodeLoading": "requiredComponents",
+  "usingComponents": {},
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "极简电商",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于订单配送、地址选择和门店自提"
+    }
+  }
+}

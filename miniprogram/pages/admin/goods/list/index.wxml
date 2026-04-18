@@ -1,0 +1,81 @@
+<view class="goods-list-container">
+  <t-toast id="t-toast" />
+
+  <!-- Category Filter Bar -->
+  <view class="filter-bar">
+    <view class="filter-item" bindtap="onShowCategory1Picker">
+      <text>{{selectedCategory1Name || '一级分类'}}</text>
+      <t-icon name="chevron-down" size="32rpx" />
+    </view>
+    <view class="filter-item" bindtap="onShowCategory2Picker">
+      <text>{{selectedCategory2Name || '二级分类'}}</text>
+      <t-icon name="chevron-down" size="32rpx" />
+    </view>
+    <view
+      class="filter-clear"
+      wx:if="{{selectedCategory1Id || selectedCategory2Id}}"
+      bindtap="onClearFilter"
+    >
+      <t-icon name="close-circle" size="36rpx" />
+    </view>
+  </view>
+
+  <!-- Category 1 Picker -->
+  <t-picker
+    visible="{{showCategory1Picker}}"
+    value="{{[selectedCategory1Id]}}"
+    title="选择一级分类"
+    cancelBtn="取消"
+    confirmBtn="确认"
+    bind:confirm="onCategory1PickerChange"
+    bind:cancel="onCategory1PickerCancel"
+  >
+    <t-picker-item options="{{category1List}}" />
+  </t-picker>
+
+  <!-- Category 2 Picker -->
+  <t-picker
+    visible="{{showCategory2Picker}}"
+    value="{{[selectedCategory2Id]}}"
+    title="选择二级分类"
+    cancelBtn="取消"
+    confirmBtn="确认"
+    bind:confirm="onCategory2PickerChange"
+    bind:cancel="onCategory2PickerCancel"
+  >
+    <t-picker-item options="{{filteredCategory2List}}" />
+  </t-picker>
+
+  <view class="list-wrapper">
+    <block wx:for="{{goodsList}}" wx:key="_id">
+      <view class="goods-card" bindtap="onEditGoods" data-id="{{item._id}}">
+        <t-image
+          src="{{item.primaryImage}}"
+          mode="aspectFill"
+          width="160rpx"
+          height="160rpx"
+          class="goods-img"
+        />
+        <view class="goods-info">
+          <view class="goods-title">{{item.title}}</view>
+          <view class="goods-detail">
+            <view class="goods-price">¥{{item.minSalePrice}}</view>
+            <view class="goods-stock">库存: {{item.spuStockQuantity}}</view>
+          </view>
+          <view class="goods-tags">
+            <t-tag
+              variant="light"
+              theme="{{item.isPutOnSale ? (item.spuStockQuantity > 0 ? 'success' : 'danger') : 'default'}}"
+              size="small"
+            >
+              {{item.isPutOnSale ? (item.spuStockQuantity > 0 ? '上架中' : '已售罄') : '已下架'}}
+            </t-tag>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{goodsList.length === 0 && !loading}}" class="empty-tip">暂无商品</view>
+  </view>
+
+  <t-fab icon="add" bind:click="onAddGoods" aria-label="新增商品"></t-fab>
+</view>

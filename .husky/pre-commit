@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "🔍 Running pre-commit checks..."
+# Enter miniprogram directory and run lint-staged
+cd miniprogram && npx lint-staged

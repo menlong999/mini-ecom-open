@@ -1,0 +1,83 @@
+<wxs module="phoneMask">
+  var toHide = function(phone) { if (!phone || phone.length < 7) return phone || ''; return
+  phone.substring(0, 3) + '****' + phone.substring(7); } module.exports.toHide = toHide;
+</wxs>
+
+<view class="address-container">
+  <!-- 地址列表 -->
+  <view class="address-list" wx:if="{{addressList.length > 0}}">
+    <view class="address-item" wx:for="{{addressList}}" wx:key="id">
+      <t-swipe-cell>
+        <!-- 地址主体区域 -->
+        <view class="address-content" bindtap="handleAddressSelect" data-item="{{item}}">
+          <!-- 选中状态（选择模式下显示） -->
+          <view class="address-check" wx:if="{{selectMode && item.checked}}">
+            <t-icon name="check" size="40rpx" color="#FA4126" />
+          </view>
+
+          <!-- 地址信息 -->
+          <view class="address-info">
+            <view class="address-header">
+              <text class="address-name">{{item.name}}</text>
+              <text class="address-phone"
+                >{{phoneMask.toHide(item.phone || item.phoneNumber || '')}}</text
+              >
+            </view>
+            <view class="address-detail">
+              <text class="address-tag default-tag" wx:if="{{item.isDefault === 1}}">默认</text>
+              <text class="address-tag normal-tag" wx:if="{{item.addressTag || item.tag}}"
+                >{{item.addressTag || item.tag}}</text
+              >
+              <text class="address-text">{{item.fullAddress || item.address}}</text>
+            </view>
+          </view>
+
+          <!-- 编辑按钮 -->
+          <view class="address-edit" catchtap="handleAddressEdit" data-id="{{item.id}}">
+            <t-icon name="edit" size="40rpx" color="#bbb" />
+          </view>
+        </view>
+
+        <!-- 右滑删除 -->
+        <view
+          slot="right"
+          class="swipe-delete"
+          catchtap="handleDeleteAddress"
+          data-id="{{item.id}}"
+        >
+          删除
+        </view>
+      </t-swipe-cell>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="no-address" wx:else>
+    <t-empty description="暂无收货地址，赶快添加吧" />
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-fixed">
+    <view class="btn-wrap">
+      <view class="wx-address-btn" bindtap="handleWXAddress" wx:if="{{addressList.length < 20}}">
+        <t-icon name="location" size="36rpx" color="#333" />
+        <text>微信地址导入</text>
+      </view>
+      <view class="wx-address-btn btn-disabled" wx:else>
+        <t-icon name="location" size="36rpx" color="#999" />
+        <text>微信地址导入</text>
+      </view>
+
+      <view
+        class="create-btn {{addressList.length >= 20 ? 'btn-disabled' : ''}}"
+        bindtap="handleAddressCreate"
+      >
+        <t-icon name="add" size="40rpx" color="#fff" />
+        <text>新建收货地址</text>
+      </view>
+    </view>
+    <view class="footer-tip" wx:if="{{addressList.length >= 20}}">最多支持添加20个收货地址</view>
+  </view>
+</view>
+
+<t-toast id="t-toast" />

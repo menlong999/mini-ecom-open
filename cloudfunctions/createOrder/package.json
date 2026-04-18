@@ -1,0 +1,14 @@
+{
+    "name": "createOrder",
+    "version": "1.0.0",
+    "description": "Create order with transaction",
+    "main": "index.js",
+    "dependencies": {
+        "wx-server-sdk": "latest"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC"
+}

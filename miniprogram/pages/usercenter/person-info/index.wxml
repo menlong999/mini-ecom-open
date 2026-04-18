@@ -1,0 +1,81 @@
+<view class="person-info">
+  <t-cell-group>
+    <!-- 1. 头像选择：使用 button open-type="chooseAvatar" -->
+    <!-- 利用样式覆盖，使 button 透明且铺满整个 cell -->
+    <view style="position: relative">
+      <t-cell title="头像" center="{{true}}" arrow t-class-left="order-group__left">
+        <t-image
+          slot="note"
+          src="{{personInfo.avatarUrl || 'https://tdesign.gtimg.com/miniprogram/template/retail/usercenter/icon-user-center-avatar@2x.png'}}"
+          t-class="avatarUrl"
+          mode="aspectFill"
+        />
+      </t-cell>
+      <button
+        class="avatar-wrapper-btn"
+        open-type="chooseAvatar"
+        bind:chooseavatar="handleChooseAvatar"
+      ></button>
+    </view>
+
+    <!-- 2. 昵称：跳转到编辑页 (那里使用 input type="nickname") -->
+    <t-cell
+      title="昵称"
+      arrow
+      note="{{personInfo.nickName || '微信用户'}}"
+      data-type="name"
+      bind:click="handleCellClick"
+      t-class="t-cell-class"
+      t-class-left="order-group__left"
+    />
+
+    <t-cell
+      title="性别"
+      arrow
+      note="{{genderMap[personInfo.gender]}}"
+      data-type="gender"
+      bind:click="handleCellClick"
+      t-class="t-cell-class"
+      t-class-left="order-group__left"
+    />
+
+    <!-- 3. 手机号：使用 button open-type="getPhoneNumber" -->
+    <t-cell
+      bordered="{{false}}"
+      title="手机号"
+      arrow
+      t-class="t-cell-class"
+      t-class-left="order-group__left"
+    >
+      <!-- 如果已有手机号，显示手机号（中间4位隐藏）；否则放置获取按钮 -->
+      <block wx:if="{{personInfo.phoneNumber}}">
+        <view slot="note"
+          >{{personInfo.phoneNumber.substring(0,
+          3)}}****{{personInfo.phoneNumber.substring(7)}}</view
+        >
+      </block>
+      <block wx:else>
+        <button
+          class="phone-wrapper-btn"
+          slot="note"
+          open-type="getPhoneNumber"
+          bindgetphonenumber="handleGetPhoneNumber"
+        >
+          去绑定手机号
+        </button>
+      </block>
+    </t-cell>
+  </t-cell-group>
+</view>
+<view class="person-info__wrapper">
+  <view class="person-info__btn" bind:tap="handleLogout"> 切换账号登录 </view>
+</view>
+<t-select-picker
+  show="{{typeVisible}}"
+  picker-options="{{pickerOptions}}"
+  title="选择性别"
+  value="{{personInfo.gender}}"
+  bind:confirm="handleFilterConfirm"
+  bind:close="handleFilterPopupClose"
+/>
+<t-toast id="t-toast" />

@@ -1,0 +1,11 @@
+[
+  {
+    "name": "示例门店",
+    "address": "广东省深圳市南山区示例路 1 号",
+    "phone": "0755-00000000",
+    "businessHours": "09:00-18:00",
+    "status": 1,
+    "createdAt": 0,
+    "updatedAt": 0
+  }
+]

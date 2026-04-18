@@ -1,0 +1,171 @@
+page {
+  background-color: #f5f5f5;
+}
+
+.goods-list-container {
+  display: block;
+  padding: 0 24rpx;
+}
+
+/* 过滤栏 */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 20rpx 24rpx;
+  margin: 0 -24rpx;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  margin-right: 48rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.filter-item.filter-active {
+  color: #FA4126;
+}
+
+.filter-arrows {
+  display: flex;
+  flex-direction: column;
+  margin-left: 4rpx;
+}
+
+/* 价格筛选弹窗 */
+.price-container {
+  width: 600rpx;
+  height: 100vh;
+  padding: 40rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.price-header {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 24rpx;
+}
+
+.price-ipts-wrap {
+  display: flex;
+  align-items: center;
+  --td-input-bg-color: #f5f5f5;
+  --td-input-vertical-padding: 16rpx;
+  --td-input-border-color: transparent;
+}
+
+.price-ipt {
+  flex: 1;
+  border-radius: 8rpx;
+}
+
+.price-divided {
+  width: 32rpx;
+  text-align: center;
+  color: #333;
+}
+
+.filter-btns {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 48rpx;
+}
+
+.filter-btns .t-button {
+  flex: 1;
+}
+
+/* 空状态 */
+.empty-wrap {
+  margin-top: 200rpx;
+  text-align: center;
+}
+
+/* 商品列表样式 */
+.goods-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 16rpx 0;
+}
+
+.goods-card {
+  width: 342rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+  overflow: hidden;
+}
+
+.goods-thumb {
+  width: 100%;
+  height: 342rpx;
+  display: block;
+}
+
+.goods-info {
+  padding: 16rpx 20rpx 20rpx;
+}
+
+.goods-title {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 36rpx;
+  height: 72rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.goods-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8rpx;
+}
+
+.goods-tag {
+  color: #fa4126;
+  font-size: 20rpx;
+  border: 1rpx solid #fa4126;
+  padding: 0 8rpx;
+  border-radius: 16rpx;
+  line-height: 30rpx;
+  margin-right: 8rpx;
+  margin-bottom: 8rpx;
+}
+
+.goods-price-row {
+  display: flex;
+  align-items: baseline;
+  margin-top: 8rpx;
+  position: relative;
+}
+
+.goods-price {
+  font-size: 36rpx;
+  color: #fa4126;
+  font-weight: bold;
+}
+
+.goods-origin-price {
+  font-size: 24rpx;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 12rpx;
+}
+
+.goods-cart-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 8rpx;
+}

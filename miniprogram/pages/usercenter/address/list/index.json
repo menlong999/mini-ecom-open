@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "收货地址",
+  "usingComponents": {
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-toast": "tdesign-miniprogram/toast/toast",
+    "t-empty": "tdesign-miniprogram/empty/empty",
+    "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell"
+  }
+}

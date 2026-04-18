@@ -1,0 +1,79 @@
+<view class="page-container">
+  <t-pull-down-refresh
+    id="t-pull-down-refresh"
+    bindrefresh="handlePullDownRefresh"
+    t-class-indicator="t-class-indicator"
+  >
+    <view
+      class="order-card"
+      wx:for="{{dataList}}"
+      wx:key="rightsNo"
+      wx:for-item="order"
+      wx:for-index="oIndex"
+      bindtap="handleCardTap"
+      data-order="{{order}}"
+    >
+      <!-- 头部 -->
+      <view class="header">
+        <view class="header__left"> 售后单号：{{order.rightsNo}} </view>
+        <view class="header__right">
+          <t-icon
+            prefix="wr"
+            color="#FA4126"
+            name="{{order.typeDescIcon}}"
+            size="20px"
+            class="header__right__icon"
+          />
+          {{order.typeDesc}}
+        </view>
+      </view>
+
+      <!-- 商品列表 -->
+      <view
+        class="goods-item"
+        wx:for="{{order.goodsList}}"
+        wx:key="id"
+        wx:for-item="goods"
+        wx:for-index="gIndex"
+      >
+        <t-image src="{{goods.thumb}}" t-class="goods-image" mode="aspectFill" />
+        <view class="goods-content">
+          <view class="goods-title">{{goods.title}}</view>
+          <view class="goods-specs">{{goods.specs}}</view>
+          <view class="goods-bottom">
+            <wr-price
+              wr-class="goods-price"
+              price="{{goods.itemRefundAmount}}"
+              fill="{{true}}"
+              decimalSmaller
+              priceUnit="yuan"
+            />
+            <view class="goods-num">x{{goods.rightsQuantity}}</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 底部状态和按钮 -->
+      <view class="more-slot">
+        <view class="status-desc">{{order.statusDesc}}</view>
+        <wr-after-service-button-bar service="{{order}}" bindrefresh="handleRefresh" />
+      </view>
+    </view>
+    <!-- 列表加载中/已全部加载 -->
+    <wr-load-more
+      wx:if="{{!pullDownRefreshing}}"
+      list-is-empty="{{!dataList.length}}"
+      status="{{listLoading}}"
+      bindretry="handleRetryLoad"
+    >
+      <!-- 空态 -->
+      <view slot="empty" class="empty-wrapper">
+        <t-empty size="240rpx" textColor="#999999" textSize="28rpx" src="{{emptyImg}}">
+          暂无退款或售后申请记录
+        </t-empty>
+      </view>
+    </wr-load-more>
+  </t-pull-down-refresh>
+</view>
+<t-toast id="t-toast" />
+<t-dialog id="t-dialog" />

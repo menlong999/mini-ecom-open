@@ -1,0 +1,306 @@
+<view class="edit-container">
+  <t-toast id="t-toast" />
+
+  <view class="card">
+    <view class="card-title">基本信息</view>
+    <t-cell-group>
+      <t-input
+        label="商品标题"
+        placeholder="请输入商品标题"
+        value="{{formData.title}}"
+        bind:change="onInputChange"
+        data-field="title"
+      />
+
+      <!-- 分类选择 -->
+      <t-cell title="一级分类" arrow bindtap="onShowCategory1Picker">
+        <text slot="note">{{selectedCategory1Name || '请选择'}}</text>
+      </t-cell>
+      <t-cell title="二级分类" arrow bindtap="onShowCategory2Picker">
+        <text slot="note">{{selectedCategory2Name || '请选择'}}</text>
+      </t-cell>
+
+      <t-input
+        label="商品价格"
+        placeholder="0.00"
+        type="number"
+        value="{{formData.minSalePrice}}"
+        bind:change="onInputChange"
+        data-field="minSalePrice"
+      >
+        <view slot="suffix">元</view>
+      </t-input>
+      <t-input
+        label="市场价格"
+        placeholder="0.00"
+        type="number"
+        value="{{formData.maxLinePrice}}"
+        bind:change="onInputChange"
+        data-field="maxLinePrice"
+      >
+        <view slot="suffix">元</view>
+      </t-input>
+      <t-input
+        label="初始库存"
+        placeholder="0"
+        type="number"
+        value="{{formData.spuStockQuantity}}"
+        bind:change="onInputChange"
+        data-field="spuStockQuantity"
+      />
+      <t-cell title="是否上架">
+        <t-switch
+          value="{{formData.isPutOnSale}}"
+          bind:change="onSwitchChange"
+          data-field="isPutOnSale"
+          slot="note"
+        />
+      </t-cell>
+    </t-cell-group>
+  </view>
+
+  <!-- Category 1 Picker -->
+  <t-picker
+    visible="{{showCategory1Picker}}"
+    value="{{[selectedCategory1Id]}}"
+    title="选择一级分类"
+    cancelBtn="取消"
+    confirmBtn="确认"
+    bind:confirm="onCategory1PickerChange"
+    bind:cancel="onCategory1PickerCancel"
+  >
+    <t-picker-item options="{{category1List}}" />
+  </t-picker>
+
+  <!-- Category 2 Picker -->
+  <t-picker
+    visible="{{showCategory2Picker}}"
+    value="{{[formData.categoryId]}}"
+    title="选择二级分类"
+    cancelBtn="取消"
+    confirmBtn="确认"
+    bind:confirm="onCategory2PickerChange"
+    bind:cancel="onCategory2PickerCancel"
+  >
+    <t-picker-item options="{{filteredCategory2List}}" />
+  </t-picker>
+
+  <!-- 主图 (列表页显示) -->
+  <view class="card">
+    <view class="card-title">商品主图 (列表页显示)</view>
+    <t-upload
+      mediaType="{{['image']}}"
+      max="1"
+      files="{{primaryFileList}}"
+      bind:success="onSuccessPrimaryImage"
+      bind:remove="onRemovePrimaryImage"
+    />
+  </view>
+
+  <!-- 轮播图 (详情页顶部) -->
+  <view class="card">
+    <view class="card-title">轮播展示 (详情页顶部, 支持视频)</view>
+    <t-upload
+      mediaType="{{['image', 'video']}}"
+      max="9"
+      files="{{imagesFileList}}"
+      bind:success="onSuccessCarouselImage"
+      bind:remove="onRemoveCarouselImage"
+    />
+  </view>
+
+  <!-- 详情图 (详情页正文) -->
+  <view class="card">
+    <view class="card-title">商品详情 (正文长图/视频)</view>
+    <t-upload
+      mediaType="{{['image', 'video']}}"
+      max="20"
+      files="{{descFileList}}"
+      bind:success="onSuccessDescImage"
+      bind:remove="onRemoveDescImage"
+    />
+  </view>
+
+  <!-- 商品标签 -->
+  <view class="card">
+    <view class="card-title">商品标签</view>
+    <view class="spec-values tags-values">
+      <t-tag
+        wx:for="{{formData.tags}}"
+        wx:key="index"
+        variant="light"
+        closable
+        bind:close="onDeleteTag"
+        data-index="{{index}}"
+        class="spec-tag"
+        >{{item}}</t-tag
+      >
+      <view class="add-value-btn" bind:tap="onShowAddTag">
+        <t-icon name="add" size="32rpx" /> 添加标签
+      </view>
+    </view>
+  </view>
+
+  <!-- 规格设置 -->
+  <view class="card">
+    <view class="card-header">
+      <view class="card-title">商品规格</view>
+      <t-button size="small" theme="primary" variant="text" icon="add" bind:tap="onAddSpec"
+        >添加规格</t-button
+      >
+    </view>
+
+    <block wx:for="{{formData.specList}}" wx:key="specId" wx:for-index="specIndex">
+      <view class="spec-item">
+        <view class="spec-row">
+          <t-input
+            placeholder="规格名 (e.g. 颜色)"
+            value="{{item.title}}"
+            bind:change="onSpecTitleChange"
+            data-index="{{specIndex}}"
+            class="spec-name-input"
+          />
+          <t-icon
+            name="delete"
+            size="48rpx"
+            class="delete-icon"
+            bind:tap="onDeleteSpec"
+            data-index="{{specIndex}}"
+          />
+        </view>
+        <view class="spec-values">
+          <t-tag
+            wx:for="{{item.values}}"
+            wx:key="valueId"
+            wx:for-item="val"
+            wx:for-index="valIndex"
+            variant="light"
+            closable
+            bind:close="onDeleteSpecValue"
+            data-spec-index="{{specIndex}}"
+            data-val-index="{{valIndex}}"
+            class="spec-tag"
+            >{{val.value}}</t-tag
+          >
+
+          <view class="add-value-btn" bind:tap="onShowAddValue" data-index="{{specIndex}}">
+            <t-icon name="add" size="32rpx" /> 添加值
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- SKU 列表 (当有规格时显示) -->
+  <view class="card" wx:if="{{formData.skuList.length > 0}}">
+    <view class="card-title">规格明细 (SKU)</view>
+    <view class="sku-list">
+      <view class="sku-header">
+        <text class="sku-header__spec">规格</text>
+        <text class="sku-header__image">图片</text>
+        <view class="sku-header__inputs">
+          <text>价格</text>
+          <text>库存</text>
+        </view>
+      </view>
+      <view class="sku-item" wx:for="{{formData.skuList}}" wx:key="skuId">
+        <view class="sku-info">
+          <view class="sku-specs">
+            <block wx:for="{{item.specValues}}" wx:key="specId" wx:for-item="sv">
+              <text>{{sv.specValue}}</text>
+              <text wx:if="{{index < item.specValues.length - 1}}" class="divider">/</text>
+            </block>
+          </view>
+        </view>
+        <view class="sku-image">
+          <image
+            wx:if="{{item.image || primaryPreviewUrl}}"
+            class="sku-thumb"
+            src="{{item.image || primaryPreviewUrl}}"
+            mode="aspectFill"
+          />
+          <view wx:else class="sku-thumb sku-thumb--placeholder"></view>
+          <view class="sku-image-actions">
+            <t-button
+              size="small"
+              theme="primary"
+              variant="text"
+              bind:tap="onChooseSkuImage"
+              data-index="{{index}}"
+            >
+              上传
+            </t-button>
+            <t-button
+              wx:if="{{item.image}}"
+              size="small"
+              theme="danger"
+              variant="text"
+              bind:tap="onClearSkuImage"
+              data-index="{{index}}"
+            >
+              清除
+            </t-button>
+          </view>
+        </view>
+        <view class="sku-inputs">
+          <t-input
+            type="number"
+            placeholder="价格"
+            value="{{item.price}}"
+            bind:change="onSkuPriceChange"
+            data-index="{{index}}"
+            borderless="{{true}}"
+            t-class="sku-input"
+          />
+          <t-input
+            type="number"
+            placeholder="库存"
+            value="{{item.stock}}"
+            bind:change="onSkuStockChange"
+            data-index="{{index}}"
+            borderless="{{true}}"
+            t-class="sku-input"
+          />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 弹窗：添加规格值 -->
+  <t-dialog
+    visible="{{showAddValueDialog}}"
+    title="添加规格值"
+    confirm-btn="确定"
+    cancel-btn="取消"
+    bind:confirm="onConfirmAddValue"
+    bind:cancel="onCancelAddValue"
+  >
+    <t-input
+      slot="content"
+      placeholder="请输入规格值 (e.g. 红色)"
+      value="{{tempSpecValue}}"
+      bind:change="onTempSpecValueChange"
+    />
+  </t-dialog>
+
+  <!-- 弹窗：添加标签 -->
+  <t-dialog
+    visible="{{showAddTagDialog}}"
+    title="添加标签"
+    confirm-btn="确定"
+    cancel-btn="取消"
+    bind:confirm="onConfirmAddTag"
+    bind:cancel="onCancelAddTag"
+  >
+    <t-input
+      slot="content"
+      placeholder="请输入标签 (e.g. 热卖)"
+      value="{{tempTagValue}}"
+      bind:change="onTempTagValueChange"
+    />
+  </t-dialog>
+
+  <view class="footer-btn">
+    <t-button theme="primary" block size="large" bind:tap="onSubmit">保存商品</t-button>
+  </view>
+</view>

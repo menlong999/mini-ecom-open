@@ -1,0 +1,239 @@
+<view class="order-sure" wx:if="{{!loading}}">
+  <!-- 收货地址 -->
+  <t-tabs value="{{deliveryType}}" bind:change="onDeliveryTypeChange" t-class="mb-3">
+    <t-tab-panel label="快递配送" value="{{1}}">
+      <address-card
+        addressData="{{userAddress}}"
+        bind:addclick="handleAddressClick"
+        bind:addressclick="handleAddressClick"
+      />
+    </t-tab-panel>
+    <t-tab-panel wx:if="{{pickupEnabled}}" label="门店自提" value="{{2}}">
+      <view
+        class="store-pickup-panel"
+        style="background: #fff; border-radius: 0; overflow: hidden; margin-bottom: 24rpx"
+      >
+        <t-cell
+          title="选择门店"
+          note="{{selectedStore.name || '请选择'}}"
+          arrow
+          bind:click="handleStoreCellClick"
+        />
+        <view
+          wx:if="{{selectedStore}}"
+          style="padding: 0 32rpx 20rpx 32rpx; color: #666; font-size: 26rpx; background: #fff"
+        >
+          <view>地址: {{selectedStore.address}}</view>
+          <view>电话: {{selectedStore.phone}}</view>
+          <view>营业时间: {{selectedStore.businessHours}}</view>
+        </view>
+        <t-input
+          label="提货人"
+          value="{{pickupName}}"
+          placeholder="请输入姓名"
+          bind:change="handleContactName"
+        />
+        <t-input
+          label="手机号"
+          value="{{pickupPhone}}"
+          type="number"
+          placeholder="请输入手机号"
+          bind:change="handleContactPhone"
+          bordered="{{false}}"
+        />
+        <view class="top-line"></view>
+      </view>
+    </t-tab-panel>
+  </t-tabs>
+
+  <!-- 商品列表 - 简化：直接展示商品，不分店铺 -->
+  <view class="order-wrapper">
+    <view class="goods-list">
+      <view wx:for="{{goodsList}}" wx:for-item="goods" wx:key="spuId" class="goods-wrapper">
+        <t-image src="{{goods.thumb}}" t-class="goods-image" mode="aspectFill" />
+        <view class="goods-content">
+          <view class="goods-title">{{goods.title}}</view>
+          <view class="goods-specs">{{goods.specs}}</view>
+        </view>
+        <view class="goods-right">
+          <price
+            wr-class="goods-price"
+            price="{{goods.price}}"
+            priceUnit="yuan"
+            fill="{{true}}"
+            decimalSmaller
+          />
+          <view class="goods-num">x{{goods.quantity}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 费用明细 -->
+  <view class="pay-detail">
+    <view class="pay-item">
+      <text>商品总额</text>
+      <price
+        fill
+        decimalSmaller
+        priceUnit="yuan"
+        wr-class="pay-item__right font-bold"
+        price="{{orderSummary.totalSalePrice || '0'}}"
+      />
+    </view>
+
+    <view class="pay-item">
+      <text>运费</text>
+      <view class="pay-item__right font-bold">
+        <block wx:if="{{orderSummary.deliveryFee && orderSummary.deliveryFee != 0}}">
+          +<price fill decimalSmaller priceUnit="yuan" price="{{orderSummary.deliveryFee}}" />
+        </block>
+        <text wx:else>免运费</text>
+      </view>
+    </view>
+
+    <view class="pay-item" wx:if="{{orderSummary.invoiceSupport}}">
+      <text>发票</text>
+      <view class="pay-item__right" catchtap="handleInvoiceClick">
+        <text>{{invoiceDesc}}</text>
+        <t-icon name="chevron-right" size="32rpx" color="#BBBBBB" />
+      </view>
+    </view>
+
+    <view class="pay-item">
+      <text>订单备注</text>
+      <view class="pay-item__right" catchtap="handleOpenNotes">
+        <text class="pay-remark">{{orderRemark || '选填，建议先和商家沟通确认'}}</text>
+        <t-icon name="chevron-right" size="32rpx" color="#BBBBBB" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 总计金额 -->
+  <view class="amount-wrapper">
+    <view class="pay-amount">
+      <text class="order-num">共{{orderSummary.totalGoodsCount}}件</text>
+      <text>小计</text>
+      <price
+        priceUnit="yuan"
+        class="total-price"
+        price="{{orderSummary.totalPayAmount}}"
+        fill="{{false}}"
+        decimalSmaller
+      />
+    </view>
+  </view>
+
+  <!-- 提交订单 -->
+  <view class="wx-pay-cover">
+    <view class="wx-pay">
+      <price
+        decimalSmaller
+        fill
+        priceUnit="yuan"
+        class="price"
+        price="{{orderSummary.totalPayAmount || '0'}}"
+      />
+      <view class="submit-btn {{canSubmit ? '' : 'btn-gray'}}" bindtap="handleSubmitOrderCloud">
+        提交订单
+      </view>
+    </view>
+  </view>
+
+  <!-- 备注弹窗 -->
+  <t-dialog
+    t-class="add-notes"
+    title="填写备注信息"
+    visible="{{dialogShow}}"
+    confirm-btn="确认"
+    cancel-btn="取消"
+    t-class-content="add-notes__content"
+    t-class-confirm="dialog__button-confirm"
+    t-class-cancel="dialog__button-cancel"
+    bindconfirm="handleNoteConfirm"
+    bindcancel="handleNoteCancel"
+  >
+    <t-textarea
+      slot="content"
+      focus="{{dialogShow}}"
+      class="notes"
+      t-class="add-notes__textarea"
+      value="{{orderRemark}}"
+      placeholder="备注信息"
+      t-class-textarea="add-notes__textarea__font"
+      bindfocus="handleNoteFocus"
+      bindblur="handleNoteBlur"
+      bindchange="handleNoteInput"
+      maxlength="{{50}}"
+    />
+  </t-dialog>
+
+  <!-- 库存不足提示弹窗 -->
+  <t-popup visible="{{popupShow}}" placement="bottom" bind:visible-change="handleGoodsPopupChange">
+    <view class="goods-fail">
+      <view class="title">商品库存不足或失效</view>
+      <view class="info">以下商品暂不可购买，请返回购物车重新选择商品。</view>
+      <scroll-view scroll-y class="goods-fail-list">
+        <view wx:for="{{goodsList}}" wx:key="spuId" class="goods-fail-item">
+          <t-image src="{{item.thumb}}" t-class="goods-fail-img" mode="aspectFill" />
+          <view class="goods-fail-content">
+            <view class="goods-fail-title">{{item.title}}</view>
+            <view class="goods-fail-specs">{{item.specs}}</view>
+          </view>
+          <view class="goods-fail-right">
+            <price
+              price="{{item.price}}"
+              fill
+              decimalSmaller
+              priceUnit="yuan"
+              class="goods-fail-price"
+            />
+            <view class="goods-fail-num">x{{item.quantity}}</view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="goods-fail-btns">
+        <view class="fail-btn" bindtap="handleReturnToCart">返回购物车</view>
+        <view class="fail-btn primary" bindtap="handleGoodsPopupConfirm">我知道了</view>
+      </view>
+    </view>
+  </t-popup>
+
+  <!-- 优惠券选择 -->
+
+  <!-- 门店列表弹窗 -->
+  <t-popup
+    wx:if="{{pickupEnabled}}"
+    visible="{{storePopupShow}}"
+    placement="bottom"
+    bind:visible-change="closeStorePopup"
+  >
+    <view
+      class="store-popup-header"
+      style="padding: 24rpx; text-align: center; font-weight: bold; border-bottom: 1rpx solid #eee"
+    >
+      选择门店
+    </view>
+    <scroll-view scroll-y style="max-height: 60vh">
+      <block wx:for="{{storeList}}" wx:key="_id">
+        <t-cell
+          title="{{item.name}}"
+          label="{{item.address}}"
+          hover
+          data-index="{{index}}"
+          bind:click="handleSelectStore"
+        >
+          <t-icon
+            slot="right-icon"
+            name="check"
+            wx:if="{{selectedStore._id === item._id}}"
+            color="#fa4126"
+          />
+        </t-cell>
+      </block>
+    </scroll-view>
+  </t-popup>
+</view>
+
+<t-toast id="t-toast" />
+<t-dialog id="t-dialog" />

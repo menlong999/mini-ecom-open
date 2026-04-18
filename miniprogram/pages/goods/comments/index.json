@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "全部评价",
+  "usingComponents": {
+    "t-rate": "tdesign-miniprogram/rate/rate",
+    "t-empty": "tdesign-miniprogram/empty/empty",
+    "t-toast": "tdesign-miniprogram/toast/toast",
+    "load-more": "/components/load-more/index"
+  }
+}

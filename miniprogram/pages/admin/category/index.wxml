@@ -1,0 +1,134 @@
+<view class="category-container">
+  <t-toast id="t-toast" />
+
+  <view class="status-tabs">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="key"
+      class="status-tab {{currentTab === item.key ? 'active' : ''}}"
+      bindtap="onTabTap"
+      data-key="{{item.key}}"
+    >
+      {{item.text}}
+    </view>
+  </view>
+
+  <view class="list-wrapper" wx:if="{{currentTab === 'category1'}}">
+    <block wx:for="{{displayList}}" wx:key="_id">
+      <view class="category-card">
+        <t-image
+          class="category-thumb"
+          src="{{item.thumbnailUrl}}"
+          mode="aspectFill"
+          width="96rpx"
+          height="96rpx"
+        />
+        <view class="category-info">
+          <view class="category-name">{{item.name}}</view>
+        </view>
+        <view class="category-actions">
+          <t-button size="small" theme="primary" bind:tap="onEditTap" data-id="{{item._id}}">
+            编辑
+          </t-button>
+          <t-button size="small" theme="danger" bind:tap="onDeleteTap" data-id="{{item._id}}">
+            删除
+          </t-button>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{!loading && displayList.length === 0}}" class="empty-tip">暂无分类</view>
+  </view>
+
+  <view class="group-list" wx:if="{{currentTab === 'category2'}}">
+    <block wx:for="{{category2Groups}}" wx:key="_id">
+      <view class="category-group">
+        <view class="group-header">
+          <text class="group-title">{{item.name}}</text>
+          <view class="group-action">
+            <t-button
+              class="group-add-btn"
+              size="small"
+              theme="default"
+              bind:tap="onAddCategory2Tap"
+              data-id="{{item._id}}"
+            >
+              添加
+            </t-button>
+          </view>
+        </view>
+        <view class="group-items" wx:if="{{item.children.length}}">
+          <view class="category-item" wx:for="{{item.children}}" wx:key="_id">
+            <t-image
+              class="category-thumb"
+              src="{{item.thumbnailUrl}}"
+              mode="aspectFill"
+              width="88rpx"
+              height="88rpx"
+            />
+            <view class="category-info">
+              <view class="category-name">{{item.name}}</view>
+            </view>
+            <view class="category-actions">
+              <t-button size="small" theme="primary" bind:tap="onEditTap" data-id="{{item._id}}">
+                编辑
+              </t-button>
+              <t-button size="small" theme="danger" bind:tap="onDeleteTap" data-id="{{item._id}}">
+                删除
+              </t-button>
+            </view>
+          </view>
+        </view>
+        <view class="empty-sub" wx:else>暂无二级分类</view>
+      </view>
+    </block>
+    <view wx:if="{{!loading && category2Groups.length === 0}}" class="empty-tip">暂无分类</view>
+  </view>
+
+  <t-dialog
+    visible="{{dialogVisible}}"
+    title="{{dialogTitle}}"
+    confirm-btn="保存"
+    cancel-btn="取消"
+    bind:confirm="onDialogConfirm"
+    bind:cancel="onDialogCancel"
+  >
+    <view slot="content" class="dialog-content">
+      <t-input placeholder="请输入分类名称" value="{{formName}}" bind:change="onNameChange" />
+
+      <view class="form-item" wx:if="{{currentTab === 'category2'}}">
+        <view class="form-label">所属一级分类</view>
+        <view class="form-picker" bindtap="onShowCategory1Picker">
+          <text class="form-picker-text">{{formCategory1Name || '请选择'}}</text>
+          <t-icon name="chevron-down" size="28rpx" />
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">分类缩略图（必填）</view>
+        <t-upload
+          mediaType="{{['image']}}"
+          max="1"
+          files="{{thumbFileList}}"
+          bind:success="onThumbSuccess"
+          bind:remove="onThumbRemove"
+        />
+      </view>
+    </view>
+  </t-dialog>
+
+  <t-picker
+    visible="{{showCategory1Picker}}"
+    value="{{[formCategory1Id]}}"
+    title="选择一级分类"
+    cancelBtn="取消"
+    confirmBtn="确认"
+    bind:confirm="onCategory1PickerChange"
+    bind:cancel="onCategory1PickerCancel"
+  >
+    <t-picker-item options="{{category1Options}}" />
+  </t-picker>
+
+  <view class="bottom-bar" wx:if="{{currentTab === 'category1'}}">
+    <t-button theme="primary" block bind:tap="onAddTap">新增一级分类</t-button>
+  </view>
+</view>

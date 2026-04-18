@@ -1,0 +1,14 @@
+{
+  "name": "adminManageDistributor",
+  "version": "1.0.0",
+  "description": "分销审核管理云函数",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Antigravity",
+  "license": "ISC",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

@@ -1,0 +1,141 @@
+page {
+  background-color: #f5f5f5;
+}
+
+.comments-page {
+  padding-bottom: 32rpx;
+}
+
+/* 筛选标签 */
+.comments-header {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 24rpx 24rpx 0;
+  background-color: #fff;
+  gap: 16rpx;
+}
+
+.filter-tag {
+  padding: 12rpx 24rpx;
+  font-size: 24rpx;
+  color: #333;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  border: 1rpx solid #f5f5f5;
+}
+
+.filter-tag-active {
+  background-color: #ffece9;
+  color: #fa4126;
+  border-color: #fa4126;
+}
+
+/* 评论列表 */
+.comments-list {
+  padding: 0 24rpx;
+}
+
+.comment-card {
+  background: #fff;
+  padding: 32rpx;
+  margin-top: 16rpx;
+  border-radius: 16rpx;
+}
+
+/* 用户信息行 */
+.comment-header {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+}
+
+.user-name {
+  font-size: 26rpx;
+  color: #333;
+  margin-left: 16rpx;
+  flex: 1;
+}
+
+.comment-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 评分和规格 */
+.comment-rating {
+  display: flex;
+  align-items: center;
+  margin-top: 16rpx;
+  gap: 16rpx;
+}
+
+.comment-spec {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 评论内容 */
+.comment-content {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
+  margin-top: 16rpx;
+  word-break: break-all;
+}
+
+/* 评论图片 */
+.comment-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 20rpx;
+}
+
+.comment-img {
+  border-radius: 8rpx;
+}
+
+.img-single {
+  width: 400rpx;
+  height: 400rpx;
+}
+
+.img-double {
+  width: 300rpx;
+  height: 300rpx;
+}
+
+.img-triple {
+  width: 196rpx;
+  height: 196rpx;
+}
+
+/* 商家回复 */
+.seller-reply {
+  background-color: #f5f5f5;
+  padding: 20rpx 16rpx;
+  margin-top: 20rpx;
+  border-radius: 8rpx;
+}
+
+.reply-prefix {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #666;
+}
+
+.reply-content {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 空状态 */
+.empty-state {
+  margin-top: 120rpx;
+  text-align: center;
+}

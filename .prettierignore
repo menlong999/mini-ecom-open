@@ -1,0 +1,14 @@
+node_modules
+miniprogram/node_modules
+miniprogram_npm
+.metadata
+miniprogram/.eslintcache
+project.config.json
+project.private.config.json
+miniprogram/app.json
+miniprogram/sitemap.json
+miniprogram/config/runtime.js
+cloudfunctions/**/config.private.js
+cloudfunctions/**/wxCloudClientSDK.umd.js
+miniprogram/utils/wxCloudClientSDK.umd.js
+tenants/deshan/**

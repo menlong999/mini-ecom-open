@@ -1,0 +1,63 @@
+.pay-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.pay-result .pay-status {
+  margin-top: 100rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+}
+
+.pay-result .pay-status-text {
+  font-size: 48rpx;
+  line-height: 72rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.pay-result .pay-money {
+  color: #666666;
+  font-size: 28rpx;
+  line-height: 48rpx;
+  margin-top: 60rpx;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.pay-result .pay-money .pay-money__price {
+  font-size: 56rpx;
+  line-height: 72rpx;
+  color: #fa4126;
+  font-weight: bold;
+}
+
+.pay-result .btn-wrapper {
+  margin-top: 80rpx;
+  padding: 0 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32rpx;
+  width: 100%;
+}
+
+.pay-result .btn-wrapper .status-btn {
+  width: 300rpx !important;
+  margin: 0 !important;
+  border-radius: 44rpx;
+  border: 2rpx solid #fa4126;
+  color: #fa4126;
+  font-weight: bold;
+  --td-button-default-bg-color: #fff;
+  --td-button-default-border-color: #fa4126;
+  --td-button-default-color: #fa4126;
+  --td-button-default-active-bg-color: #fff;
+  --td-button-default-active-border-color: #fa4126;
+}

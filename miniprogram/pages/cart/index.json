@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "购物车",
+  "usingComponents": {
+    "cart-empty": "./components/cart-empty/index",
+    "cart-bar": "./components/cart-bar/index",
+    "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell",
+    "t-image": "tdesign-miniprogram/image/image",
+    "t-stepper": "tdesign-miniprogram/stepper/stepper",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-button": "tdesign-miniprogram/button/button",
+    "price": "/components/price/index",
+    "t-toast": "tdesign-miniprogram/toast/toast",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog"
+  }
+}

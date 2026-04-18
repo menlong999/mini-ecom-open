@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "商品列表",
+  "usingComponents": {
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-empty": "tdesign-miniprogram/empty/empty",
+    "t-toast": "tdesign-miniprogram/toast/toast",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog",
+    "t-popup": "tdesign-miniprogram/popup/popup",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-image": "/components/webp-image/index",
+    "load-more": "/components/load-more/index"
+  }
+}

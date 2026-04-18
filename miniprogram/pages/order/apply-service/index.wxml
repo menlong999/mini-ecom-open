@@ -1,0 +1,233 @@
+<view class="select-service">
+  <view class="order-goods-card">
+    <view class="goods-select-title">请选择售后商品</view>
+    <view
+      class="goods-item"
+      wx:for="{{goodsList}}"
+      wx:key="skuId"
+      wx:for-item="goods"
+      wx:for-index="gIndex"
+    >
+      <t-checkbox
+        class="goods-checkbox"
+        checked="{{goods.selected}}"
+        color="#FA4126"
+        bind:change="handleGoodsSelectChange"
+        data-index="{{gIndex}}"
+      />
+      <t-image src="{{goods.thumb}}" t-class="goods-image" mode="aspectFill" />
+      <view class="goods-content">
+        <view class="goods-title">{{goods.title}}</view>
+        <view class="goods-specs">{{goods.specs}}</view>
+        <view class="goods-bottom">
+          <wr-price
+            wr-class="goods-price"
+            price="{{goods.price}}"
+            fill="{{true}}"
+            decimalSmaller
+            priceUnit="yuan"
+          />
+          <view class="goods-num">x{{goods.quantity}}</view>
+        </view>
+        <view class="goods-refund-qty">
+          <text class="goods-refund-label">退货数量</text>
+          <t-stepper
+            theme="filled"
+            min="1"
+            max="{{goods.quantity}}"
+            value="{{goods.refundQuantity}}"
+            disabled="{{!goods.selected}}"
+            bindchange="handleChangeReturnNum"
+            data-index="{{gIndex}}"
+          />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{!serviceRequireType}}" class="service-choice">
+    <t-cell-group>
+      <t-cell
+        title="申请退款（无需退货）"
+        arrow
+        description="没收到货，或与商家协商同意不用退货只退款"
+        bindtap="handleApplyOnlyRefund"
+      >
+        <t-icon
+          slot="left-icon"
+          prefix="wr"
+          class="t-cell__left__icon"
+          name="goods_refund"
+          size="48rpx"
+          color="#fa4126"
+        />
+      </t-cell>
+      <t-cell
+        wx:if="{{canApplyReturn}}"
+        title="退货退款"
+        description="已收到货，需要退还收到的商品"
+        arrow
+        bindtap="handleApplyReturnGoods"
+      >
+        <t-icon
+          slot="left-icon"
+          prefix="wr"
+          class="t-cell__left__icon"
+          name="goods_return"
+          size="48rpx"
+          color="#fa4126"
+        />
+      </t-cell>
+      <t-cell wx:else class="non-returnable" title="退货退款" description="该商品不支持退货">
+        <t-icon
+          slot="left-icon"
+          prefix="wr"
+          class="t-cell__left__icon"
+          name="goods_return"
+          size="48rpx"
+          color="#fa4126"
+        />
+      </t-cell>
+    </t-cell-group>
+  </view>
+  <!-- 售后表单 -->
+  <view wx:else class="service-form">
+    <view class="service-from-group">
+      <t-cell-group>
+        <t-cell
+          title="商品收货状态"
+          arrow
+          note="{{formData.logisticsStatus.desc || '请选择'}}"
+          bind:tap="handleApplyGoodsStatus"
+        />
+        <t-cell
+          bordered="{{false}}"
+          title="退款原因"
+          wx:if="{{canApplyReturn}}"
+          note="{{formData.reason.desc}}"
+          arrow
+          bindtap="handleApplyReturnGoodsStatus"
+        />
+      </t-cell-group>
+    </view>
+    <view class="service-from-group">
+      <t-cell-group>
+        <t-cell
+          title="退款金额"
+          t-class-description="refund-money__description"
+          description="{{amountTip}}"
+          bind:tap="handleAmountTap"
+        >
+          <view class="service-from-group__wrapper" slot="note">
+            <wr-price
+              price="{{formData.amount.current}}"
+              fill
+              wr-class="refund-money-price-class"
+              symbol-class="refund-money-price-symbol"
+              decimal-class="refund-money-price-decimal"
+              priceUnit="yuan"
+            />
+            <view class="service-from-group__price">
+              修改
+              <t-icon color="#bbb" name="chevron-right" size="30rpx" slot="left-icon" />
+            </view>
+          </view>
+        </t-cell>
+      </t-cell-group>
+    </view>
+    <view class="service-from-group__textarea">
+      <text class="textarea--label">退款说明</text>
+      <t-textarea
+        style="height: 220rpx"
+        value="{{formData.desc}}"
+        t-class="textarea--content"
+        maxlength="200"
+        indicator
+        placeholder="退款说明（选填）"
+        bind:change="handleRemarkChange"
+      />
+    </view>
+    <view class="service-from-group__grid">
+      <t-upload
+        media-type="{{['image','video']}}"
+        files="{{formData.images}}"
+        bind:remove="handleRemove"
+        bind:success="handleSuccess"
+        bind:complete="handleComplete"
+        bind:select-change="handleSelectChange"
+        gridConfig="{{uploadGridConfig}}"
+        max="3"
+      >
+        <view slot="add-content" class="upload-addcontent-slot">
+          <t-icon name="add" size="60rpx" />
+          <view class="upload-desc">
+            <text>上传凭证</text>
+            <text>（最多3张）</text>
+          </view>
+        </view>
+      </t-upload>
+    </view>
+    <view class="bottom-bar">
+      <t-button
+        t-class="bottom-bar__btn"
+        disabled="{{!validateRes.valid || uploading}}"
+        bindtap="handleSubmit"
+        loading="{{submitting}}"
+      >
+        提交
+      </t-button>
+    </view>
+  </view>
+</view>
+<!-- 收货状态选择 -->
+<t-popup
+  visible="{{showReceiptStatusDialog}}"
+  placement="bottom"
+  bindclose="handleReceiptStatusDialogConfirm"
+>
+  <view class="dialog--service-status" slot="content">
+    <view class="options">
+      <view
+        wx:for="{{receiptStatusList}}"
+        wx:key="status"
+        class="option"
+        hover-class="option--active"
+        bindtap="handleReceiptStatusDialogConfirm"
+        data-index="{{index}}"
+      >
+        {{item.desc}}
+      </view>
+    </view>
+    <view class="cancel" hover-class="cancel--active" bindtap="handleReceiptStatusDialogConfirm"
+      >取消</view
+    >
+  </view>
+</t-popup>
+<!-- 理由选择 -->
+<wr-reason-sheet id="wr-reason-sheet" />
+<!-- 金额填写 -->
+<t-dialog
+  id="input-dialog"
+  visible="{{inputDialogVisible}}"
+  class="{{formData.amount.focus ? 'amount-dialog--focus' : ''}}"
+  confirm-btn="确定"
+  bind:confirm="handleAmountBlur"
+>
+  <view class="input-dialog__title" slot="title">退款金额</view>
+  <view class="input-dialog__content" slot="content">
+    <t-input
+      t-class="input"
+      t-class-input="input-dialog__input"
+      t-class-label="input-dialog__label"
+      placeholder=""
+      value="{{formData.amount.temp}}"
+      type="digit"
+      focus="{{formData.amount.focus}}"
+      bind:change="handleAmountInput"
+      bindfocus="handleAmountFocus"
+      label="¥"
+    ></t-input>
+    <view class="tips">{{amountTip}}</view>
+  </view>
+</t-dialog>
+<t-dialog id="t-dialog" />
+<t-toast id="t-toast" />

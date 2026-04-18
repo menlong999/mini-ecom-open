@@ -1,0 +1,21 @@
+[
+  {
+    "searchPlaceholder": "搜索商品",
+    "swiper": [
+      {
+        "image": "cloud://<your-env-id>.example/home/swiper/banner-1.png",
+        "spuId": "<replace-with-spu-id>",
+        "linkType": "spu",
+        "poi": null
+      }
+    ],
+    "tabList": [
+      {
+        "text": "推荐",
+        "spuIds": ["<replace-with-spu-id-1>", "<replace-with-spu-id-2>"]
+      }
+    ],
+    "createdAt": 0,
+    "updatedAt": 0
+  }
+]

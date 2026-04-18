@@ -1,0 +1,86 @@
+<view class="order-list-container">
+  <t-toast id="t-toast" />
+
+  <view class="status-tabs">
+    <view
+      wx:for="{{statusTabs}}"
+      wx:key="key"
+      class="status-tab {{currentStatus === item.key ? 'active' : ''}}"
+      bindtap="onStatusTabTap"
+      data-key="{{item.key}}"
+    >
+      {{item.text}}
+    </view>
+  </view>
+
+  <view class="search-bar">
+    <t-input
+      placeholder="订单号搜索"
+      value="{{keyword}}"
+      bind:change="onKeywordChange"
+      borderless="{{true}}"
+      t-class="search-input"
+    />
+    <t-button size="small" theme="primary" bind:tap="onSearch">搜索</t-button>
+  </view>
+
+  <view class="list-wrapper">
+    <block wx:for="{{orderList}}" wx:key="_id">
+      <view class="order-card">
+        <view class="order-card__header">
+          <text class="order-no">订单号: {{item.orderNo}}</text>
+          <text class="order-status">{{item.statusDesc}}</text>
+        </view>
+        <view class="order-card__body">
+          <view class="order-goods-list">
+            <view
+              class="order-goods-item"
+              wx:for="{{item.goodsList}}"
+              wx:for-item="goods"
+              wx:for-index="index"
+              wx:key="index"
+            >
+              <view class="order-goods-main">
+                <view class="order-goods-title">{{goods.title}}</view>
+                <view class="order-goods-specs">规格: {{goods.specs || '-'}}</view>
+              </view>
+              <view class="order-goods-aside">
+                <text class="order-goods-price">¥{{goods.price}}</text>
+                <text class="order-goods-qty">x{{goods.quantity}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="order-total">
+            <text>商品总额: ¥{{item.totalSalePrice || item.totalPayAmount || '0'}}</text>
+            <text>运费: ¥{{item.deliveryFee || '0'}}</text>
+            <text>实付: ¥{{item.totalPayAmount || '0'}}</text>
+          </view>
+          <view class="order-meta">
+            <text>{{item.deliveryTypeText}}</text>
+          </view>
+          <view wx:if="{{item.logistics.logisticsNo}}" class="order-logistics">
+            物流: {{item.logistics.companyName}} {{item.logistics.logisticsNo}}
+          </view>
+          <view wx:if="{{item.operatorName || item.operatorTime}}" class="order-operator">
+            <view wx:if="{{item.operatorName}}">操作人: {{item.operatorName}}</view>
+            <view wx:if="{{item.operatorTime}}">操作时间: {{item.operatorTime}}</view>
+          </view>
+        </view>
+        <view class="order-card__actions">
+          <t-button
+            size="small"
+            theme="primary"
+            disabled="{{item.actionDisabled}}"
+            bind:tap="onShipTap"
+            data-id="{{item._id}}"
+            data-mode="{{item.actionMode}}"
+          >
+            {{item.actionText}}
+          </t-button>
+        </view>
+      </view>
+    </block>
+
+    <view wx:if="{{!loading && orderList.length === 0}}" class="empty-tip">暂无订单</view>
+  </view>
+</view>

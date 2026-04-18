@@ -1,0 +1,341 @@
+<view class="home-config-page">
+  <t-toast id="t-toast" />
+
+  <view wx:if="{{loading}}" class="loading-wrap">
+    <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
+  </view>
+
+  <view wx:else class="content">
+    <view class="section">
+      <view class="section-title">轮播图</view>
+      <view class="section-desc">轮播图支持跳商品详情或 POI 导航</view>
+
+      <view wx:if="{{swiperList.length === 0}}" class="empty-tip">暂无轮播图</view>
+
+      <movable-area
+        wx:if="{{swiperList.length > 0}}"
+        class="drag-area"
+        style="height: {{swiperList.length * swiperItemHeightPx}}px"
+      >
+        <movable-view
+          wx:for="{{swiperList}}"
+          wx:key="_key"
+          class="drag-item drag-item--swiper"
+          y="{{index * swiperItemHeightPx}}"
+          direction="vertical"
+          out-of-bounds="{{false}}"
+          damping="50"
+          bindchange="onSwiperDragChange"
+          bindtouchend="onSwiperDragEnd"
+          bindtouchcancel="onSwiperDragEnd"
+          data-index="{{index}}"
+        >
+          <view class="drag-row drag-row--swiper">
+            <view
+              class="drag-handle"
+              catchtap="onDragHandleTap"
+              aria-role="button"
+              aria-label="拖动排序"
+            >
+              <t-icon name="menu" size="36rpx" />
+            </view>
+
+            <view class="swiper-main">
+              <view class="swiper-preview" bindtap="onChooseSwiperImage" data-index="{{index}}">
+                <image
+                  wx:if="{{item.fileList.length}}"
+                  class="swiper-img"
+                  src="{{item.fileList[0].url}}"
+                  mode="aspectFill"
+                />
+                <view wx:else class="swiper-img-placeholder">
+                  <t-icon name="add" size="48rpx" />
+                  <text class="swiper-img-placeholder__text">选择图片</text>
+                </view>
+              </view>
+
+              <view class="swiper-link-type">
+                <view
+                  class="link-type-btn {{item.linkType !== 'poi' ? 'link-type-btn--active' : ''}}"
+                  bindtap="onSwiperLinkTypeChange"
+                  data-index="{{index}}"
+                  data-type="spu"
+                  >商品</view
+                >
+                <view
+                  class="link-type-btn {{item.linkType === 'poi' ? 'link-type-btn--active' : ''}}"
+                  bindtap="onSwiperLinkTypeChange"
+                  data-index="{{index}}"
+                  data-type="poi"
+                  >POI</view
+                >
+              </view>
+
+              <view
+                wx:if="{{item.linkType !== 'poi'}}"
+                class="swiper-select"
+                bindtap="onOpenGoodsPicker"
+                data-mode="swiper"
+                data-index="{{index}}"
+              >
+                <view class="swiper-select__text">
+                  {{(goodsMap[item.spuId] && goodsMap[item.spuId].title) || item.spuId ||
+                  '选择商品'}}
+                </view>
+                <t-icon name="chevron-down" size="32rpx" />
+              </view>
+
+              <view wx:if="{{item.linkType === 'poi'}}" class="poi-form">
+                <t-input
+                  placeholder="POI 名称"
+                  value="{{item.poi.name}}"
+                  bind:change="onSwiperPoiInput"
+                  data-index="{{index}}"
+                  data-field="name"
+                  t-class="poi-input"
+                  t-class-input="poi-input__inner"
+                />
+                <t-input
+                  placeholder="POI 地址"
+                  value="{{item.poi.address}}"
+                  bind:change="onSwiperPoiInput"
+                  data-index="{{index}}"
+                  data-field="address"
+                  t-class="poi-input"
+                  t-class-input="poi-input__inner"
+                />
+                <view class="poi-row">
+                  <t-input
+                    placeholder="纬度"
+                    type="number"
+                    value="{{item.poi.latitude}}"
+                    bind:change="onSwiperPoiInput"
+                    data-index="{{index}}"
+                    data-field="latitude"
+                    t-class="poi-input poi-input--half"
+                    t-class-input="poi-input__inner"
+                  />
+                  <t-input
+                    placeholder="经度"
+                    type="number"
+                    value="{{item.poi.longitude}}"
+                    bind:change="onSwiperPoiInput"
+                    data-index="{{index}}"
+                    data-field="longitude"
+                    t-class="poi-input poi-input--half"
+                    t-class-input="poi-input__inner"
+                  />
+                </view>
+              </view>
+            </view>
+
+            <view class="drag-actions">
+              <view
+                class="icon-delete"
+                catchtap="onRemoveSwiperTap"
+                data-index="{{index}}"
+                aria-role="button"
+                aria-label="删除"
+              >
+                <t-icon name="close" size="40rpx" color="#8C8C8C" />
+              </view>
+            </view>
+          </view>
+        </movable-view>
+      </movable-area>
+
+      <t-button theme="default" block bind:tap="addSwiper">新增轮播图</t-button>
+    </view>
+
+    <view class="section">
+      <view class="section-title">首页 Tab</view>
+      <view class="section-desc">Tab 标题用于展示；每个 Tab 维护一个 SPU 列表，按顺序展示</view>
+
+      <view wx:if="{{tabList.length === 0}}" class="empty-tip">暂无 Tab</view>
+
+      <movable-area
+        wx:if="{{tabList.length > 0}}"
+        class="drag-area"
+        style="height: {{tabList.length * tabItemHeightPx}}px"
+      >
+        <movable-view
+          wx:for="{{tabList}}"
+          wx:key="_key"
+          class="drag-item drag-item--tab"
+          y="{{index * tabItemHeightPx}}"
+          direction="vertical"
+          out-of-bounds="{{false}}"
+          damping="50"
+          bindchange="onTabDragChange"
+          bindtouchend="onTabDragEnd"
+          bindtouchcancel="onTabDragEnd"
+          data-index="{{index}}"
+        >
+          <view class="drag-row drag-row--tab">
+            <view class="drag-handle" aria-role="button" aria-label="拖动排序">
+              <t-icon name="menu" size="36rpx" />
+            </view>
+
+            <view class="tab-main">
+              <t-input
+                placeholder="例如：精选推荐"
+                value="{{item.text}}"
+                bind:change="onTabTextChange"
+                data-index="{{index}}"
+                borderless="{{true}}"
+                t-class="tab-title-input"
+                t-class-input="tab-title-input__inner"
+              />
+              <view
+                class="tab-select"
+                bindtap="onOpenGoodsPicker"
+                data-mode="tab"
+                data-index="{{index}}"
+              >
+                <view class="tab-select__text">已选商品：{{item.spuIds.length}} 个</view>
+                <t-icon name="chevron-down" size="32rpx" />
+              </view>
+            </view>
+
+            <view class="drag-actions">
+              <view
+                class="icon-delete"
+                bindtap="onRemoveTabTap"
+                data-index="{{index}}"
+                aria-role="button"
+                aria-label="删除"
+              >
+                <t-icon name="close" size="40rpx" color="#8C8C8C" />
+              </view>
+            </view>
+          </view>
+        </movable-view>
+      </movable-area>
+
+      <t-button theme="default" block bind:tap="addTab">新增 Tab</t-button>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <t-button theme="primary" block loading="{{saving}}" disabled="{{saving}}" bind:tap="onSave">
+      保存配置
+    </t-button>
+  </view>
+
+  <t-popup
+    visible="{{goodsPickerVisible}}"
+    placement="bottom"
+    bind:visible-change="onGoodsPickerVisibleChange"
+  >
+    <view class="picker">
+      <view class="picker-header">
+        <view class="picker-title">
+          {{goodsPickerMode === 'tab' ? '选择商品（多选）' : '选择商品'}}
+        </view>
+        <view class="picker-close" bind:tap="closeGoodsPicker">
+          <t-icon name="close" size="32rpx" />
+        </view>
+      </view>
+
+      <view class="picker-search">
+        <t-input
+          placeholder="搜索商品标题"
+          value="{{goodsKeyword}}"
+          bind:change="onGoodsKeywordChange"
+        />
+        <t-button size="small" theme="primary" bind:tap="searchGoods">搜索</t-button>
+      </view>
+
+      <view class="picker-body">
+        <view wx:if="{{goodsSearchLoading}}" class="picker-loading">
+          <t-loading theme="circular" size="40rpx" />
+        </view>
+        <view wx:else>
+          <view wx:if="{{goodsSearchList.length === 0}}" class="empty-tip">暂无商品</view>
+          <block wx:if="{{goodsPickerMode === 'tab'}}">
+            <view class="picker-selected">
+              <view class="picker-selected-title">已选商品（可拖动排序）</view>
+              <view wx:if="{{tabEditingSpuIds.length === 0}}" class="empty-sub">未选择商品</view>
+              <movable-area
+                wx:if="{{tabEditingSpuIds.length > 0}}"
+                class="drag-area drag-area--compact"
+                style="height: {{tabEditingSpuIds.length * tabSpuItemHeightPx}}px"
+              >
+                <movable-view
+                  wx:for="{{tabEditingSpuIds}}"
+                  wx:for-item="spuId"
+                  wx:for-index="spuIndex"
+                  wx:key="spuId"
+                  class="drag-item drag-item--compact"
+                  y="{{spuIndex * tabSpuItemHeightPx}}"
+                  direction="vertical"
+                  out-of-bounds="{{false}}"
+                  damping="50"
+                  bindchange="onTabSpuDragChange"
+                  bindtouchend="onTabSpuDragEnd"
+                  bindtouchcancel="onTabSpuDragEnd"
+                  data-index="{{spuIndex}}"
+                >
+                  <view class="drag-row drag-row--compact">
+                    <view class="drag-handle" aria-role="button" aria-label="拖动排序">
+                      <t-icon name="menu" size="32rpx" />
+                    </view>
+                    <view class="compact-title">
+                      {{(goodsMap[spuId] && goodsMap[spuId].title) || spuId}}
+                    </view>
+                    <view class="drag-actions">
+                      <t-button
+                        size="small"
+                        theme="danger"
+                        bind:tap="removeEditingSpu"
+                        data-index="{{spuIndex}}"
+                      >
+                        删除
+                      </t-button>
+                    </view>
+                  </view>
+                </movable-view>
+              </movable-area>
+            </view>
+
+            <view class="picker-results-title">搜索结果</view>
+            <view wx:for="{{goodsSearchList}}" wx:key="_id" class="picker-item picker-item--check">
+              <t-checkbox
+                class="picker-checkbox"
+                checked="{{tabEditingSpuIdMap[item._id]}}"
+                color="#FF5F15"
+                bind:change="onTabGoodsCheckChange"
+                data-id="{{item._id}}"
+              />
+              <t-image src="{{item.primaryImage}}" mode="aspectFill" width="96rpx" height="96rpx" />
+              <view class="picker-info">
+                <view class="picker-title-text">{{item.title}}</view>
+                <view class="picker-sub">¥{{item.minSalePrice}}</view>
+              </view>
+            </view>
+
+            <view class="picker-footer">
+              <t-button theme="primary" block bind:tap="confirmTabGoods">确定</t-button>
+            </view>
+          </block>
+
+          <block wx:else>
+            <view
+              wx:for="{{goodsSearchList}}"
+              wx:key="_id"
+              class="picker-item"
+              bindtap="onSelectGoods"
+              data-id="{{item._id}}"
+            >
+              <t-image src="{{item.primaryImage}}" mode="aspectFill" width="96rpx" height="96rpx" />
+              <view class="picker-info">
+                <view class="picker-title-text">{{item.title}}</view>
+                <view class="picker-sub">¥{{item.minSalePrice}}</view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </t-popup>
+</view>

@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "商品管理",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-image": "tdesign-miniprogram/image/image",
+    "t-tag": "tdesign-miniprogram/tag/tag",
+    "t-fab": "tdesign-miniprogram/fab/fab",
+    "t-picker": "tdesign-miniprogram/picker/picker",
+    "t-picker-item": "tdesign-miniprogram/picker-item/picker-item",
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-toast": "tdesign-miniprogram/toast/toast"
+  }
+}

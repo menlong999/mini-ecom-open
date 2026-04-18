@@ -1,0 +1,210 @@
+<view class="detail-container">
+  <t-toast id="t-toast" />
+
+  <view class="card">
+    <view class="card-title">售后信息</view>
+    <t-cell-group>
+      <t-cell title="售后单号" note="{{service.rightsNo || '-'}}" bordered="{{false}}" />
+      <t-cell title="订单号" note="{{service.orderNo || '-'}}" bordered="{{false}}" />
+      <t-cell title="类型" note="{{service.typeDesc}}" bordered="{{false}}" />
+      <t-cell title="状态" note="{{service.statusDesc}}" bordered="{{false}}" />
+      <t-cell
+        title="申请金额"
+        note="¥{{service.applyAmount || service.amount || '0'}}"
+        bordered="{{false}}"
+      />
+      <view wx:if="{{actionState.canApprove}}">
+        <t-input
+          class="right-input"
+          label="审核金额"
+          placeholder="请输入审核金额"
+          type="number"
+          value="{{approvedAmount}}"
+          bind:change="onApprovedAmountChange"
+        />
+        <view class="tips">如与申请金额不一致，请在处理备注里说明原因</view>
+      </view>
+      <t-cell
+        wx:else
+        title="审核金额"
+        note="¥{{service.approvedAmount || '-'}}"
+        bordered="{{false}}"
+      />
+      <t-cell title="最终金额" note="¥{{service.amount || '0'}}" bordered="{{false}}" />
+      <t-cell title="申请时间" note="{{service.createdAtText}}" bordered="{{false}}" />
+    </t-cell-group>
+  </view>
+
+  <view class="card">
+    <view class="card-title">商品信息</view>
+    <view
+      class="goods-item"
+      wx:for="{{service.goodsList}}"
+      wx:for-item="goods"
+      wx:for-index="index"
+      wx:key="index"
+    >
+      <view class="goods-main">
+        <view class="goods-title">{{goods.title}}</view>
+        <view class="goods-specs">规格: {{goods.specs || '-'}}</view>
+      </view>
+      <view class="goods-aside">
+        <text class="goods-price">¥{{goods.price}}</text>
+        <text class="goods-qty">x{{goods.quantity}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">申请信息</view>
+    <view class="info-line">原因: {{service.reason || '-'}}</view>
+    <view class="info-line">说明: {{service.desc || '-'}}</view>
+    <view class="info-line">数量: {{service.quantity || 0}}</view>
+    <view class="proofs" wx:if="{{service.images.length}}">
+      <t-image
+        wx:for="{{service.images}}"
+        wx:key="index"
+        wx:for-item="img"
+        src="{{img}}"
+        mode="aspectFill"
+        t-class="proof-image"
+      />
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{service.logistics.logisticsNo || service.logistics.companyName}}">
+    <view class="card-title">物流信息</view>
+    <t-cell-group>
+      <t-cell
+        title="物流公司"
+        note="{{service.logistics.companyName || '-'}}"
+        bordered="{{false}}"
+      />
+      <t-cell
+        title="物流单号"
+        note="{{service.logistics.logisticsNo || '-'}}"
+        bordered="{{false}}"
+      />
+      <t-cell title="备注" note="{{service.logistics.remark || '-'}}" bordered="{{false}}" />
+      <t-cell title="更新时间" note="{{service.logisticsUpdatedAt || '-'}}" bordered="{{false}}" />
+    </t-cell-group>
+  </view>
+
+  <view class="card" wx:if="{{service.auditTimeText || service.audit.reply}}">
+    <view class="card-title">审核信息</view>
+    <t-cell-group>
+      <t-cell title="审核人" note="{{service.audit.operator || '-'}}" bordered="{{false}}" />
+      <t-cell title="审核时间" note="{{service.auditTimeText || '-'}}" bordered="{{false}}" />
+      <t-cell title="审核说明" note="{{service.audit.reply || '-'}}" bordered="{{false}}" />
+    </t-cell-group>
+  </view>
+
+  <view class="card" wx:if="{{service.refundTimeText}}">
+    <view class="card-title">退款信息</view>
+    <t-cell-group>
+      <t-cell title="退款金额" note="¥{{service.refund.amount || '0'}}" bordered="{{false}}" />
+      <t-cell title="流水号" note="{{service.refund.traceNo || '-'}}" bordered="{{false}}" />
+      <t-cell title="退款时间" note="{{service.refundTimeText}}" bordered="{{false}}" />
+    </t-cell-group>
+  </view>
+
+  <view class="card" wx:if="{{service.historyList && service.historyList.length}}">
+    <view class="card-title">历史记录</view>
+    <view
+      class="history-item"
+      wx:for="{{service.historyList}}"
+      wx:for-item="item"
+      wx:for-index="index"
+      wx:key="index"
+    >
+      <view class="history-row">
+        <text class="history-status">{{item.statusDesc}}</text>
+        <text class="history-time">{{item.timeText}}</text>
+      </view>
+      <view class="history-row secondary">
+        <text class="history-operator">操作人：{{item.operator}}</text>
+        <text class="history-remark">{{item.remark || '-'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">处理备注</view>
+    <t-textarea
+      placeholder="原因说明（可选）"
+      value="{{actionRemark}}"
+      bind:change="onRemarkChange"
+      t-class="t-textarea-wrapper"
+    />
+    <view class="tips" wx:if="{{actionState.needLogistics}}">等待用户寄回商品后才能确认收货</view>
+  </view>
+
+  <view class="card" wx:if="{{actionState.canRefund}}">
+    <view class="card-title">退款处理</view>
+    <t-input
+      class="right-input"
+      label="退款金额"
+      placeholder="请输入退款金额"
+      value="{{refundAmount}}"
+      bind:change="onRefundAmountChange"
+    />
+    <t-input
+      class="right-input"
+      label="退款流水号"
+      placeholder="可选"
+      value="{{refundTraceNo}}"
+      bind:change="onRefundTraceChange"
+    />
+  </view>
+
+  <view class="action-bar">
+    <t-button
+      wx:if="{{actionState.canApprove}}"
+      theme="primary"
+      loading="{{actionLoading}}"
+      disabled="{{actionLoading}}"
+      bind:tap="handleApprove"
+      >同意售后</t-button
+    >
+    <t-button
+      wx:if="{{actionState.canReject}}"
+      theme="default"
+      loading="{{actionLoading}}"
+      disabled="{{actionLoading}}"
+      bind:tap="handleReject"
+      >拒绝售后</t-button
+    >
+    <t-button
+      wx:if="{{actionState.canConfirmReceive}}"
+      theme="primary"
+      loading="{{actionLoading}}"
+      disabled="{{actionLoading}}"
+      bind:tap="handleConfirmReceive"
+      >确认收货</t-button
+    >
+    <t-button
+      wx:if="{{actionState.canMarkAbnormal}}"
+      theme="default"
+      loading="{{actionLoading}}"
+      disabled="{{actionLoading}}"
+      bind:tap="handleMarkAbnormal"
+      >收货异常</t-button
+    >
+    <t-button
+      wx:if="{{actionState.canRefund}}"
+      theme="primary"
+      loading="{{actionLoading}}"
+      disabled="{{actionLoading}}"
+      bind:tap="handleRefund"
+      >确认退款</t-button
+    >
+    <t-button
+      wx:if="{{actionState.canClose}}"
+      theme="default"
+      loading="{{actionLoading}}"
+      disabled="{{actionLoading}}"
+      bind:tap="handleClose"
+      >关闭售后</t-button
+    >
+  </view>
+</view>

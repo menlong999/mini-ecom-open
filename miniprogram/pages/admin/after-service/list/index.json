@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "售后管理",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "t-toast": "tdesign-miniprogram/toast/toast",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-button": "tdesign-miniprogram/button/button"
+  }
+}

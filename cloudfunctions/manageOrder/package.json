@@ -1,0 +1,11 @@
+{
+    "name": "manageOrder",
+    "version": "1.0.0",
+    "description": "Order Status management cloud function",
+    "main": "index.js",
+    "dependencies": {
+        "wx-server-sdk": "latest"
+    },
+    "author": "",
+    "license": "ISC"
+}

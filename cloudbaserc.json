@@ -1,0 +1,18 @@
+{
+  "envId": "{{env.ENV_ID}}",
+  "functionRoot": "./cloudfunctions",
+  "functions": [],
+  "ai": {
+    "defaultAgent": "{{env.AI_DEFAULT_AGENT}}",
+    "agents": {
+      "codebuddy": {
+        "type": "none"
+      },
+      "codex": {
+        "type": "cloudbase",
+        "provider": "kimi-exp",
+        "model": "kimi-k2-instruct-local"
+      }
+    }
+  }
+}

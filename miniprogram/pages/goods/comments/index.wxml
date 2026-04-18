@@ -1,0 +1,98 @@
+<view class="comments-page">
+  <!-- 筛选标签 -->
+  <view class="comments-header">
+    <view
+      class="filter-tag {{currentTab === 'all' ? 'filter-tag-active' : ''}}"
+      data-commenttype="all"
+      bindtap="handleTagChange"
+      >全部({{countObj.commentCount}})</view
+    >
+    <view
+      class="filter-tag {{currentTab === 'good' ? 'filter-tag-active' : ''}}"
+      data-commenttype="good"
+      bindtap="handleTagChange"
+      >好评({{countObj.goodCount}})</view
+    >
+    <view
+      class="filter-tag {{currentTab === 'middle' ? 'filter-tag-active' : ''}}"
+      data-commenttype="middle"
+      bindtap="handleTagChange"
+      >中评({{countObj.middleCount}})</view
+    >
+    <view
+      class="filter-tag {{currentTab === 'bad' ? 'filter-tag-active' : ''}}"
+      data-commenttype="bad"
+      bindtap="handleTagChange"
+      >差评({{countObj.badCount}})</view
+    >
+    <view
+      class="filter-tag {{currentTab === 'image' ? 'filter-tag-active' : ''}}"
+      data-commenttype="image"
+      bindtap="handleTagChange"
+      >带图({{countObj.hasImageCount}})</view
+    >
+  </view>
+
+  <!-- 评论列表 -->
+  <view class="comments-list">
+    <view class="comment-card" wx:for="{{commentList}}" wx:key="uindex">
+      <!-- 用户信息行 -->
+      <view class="comment-header">
+        <image class="user-avatar" src="{{item.userHeadUrl}}" mode="aspectFill" />
+        <view class="user-name">{{item.userName}}</view>
+        <view class="comment-time">{{item.commentTime}}</view>
+      </view>
+
+      <!-- 评分和规格 -->
+      <view class="comment-rating">
+        <t-rate
+          value="{{item.commentScore}}"
+          size="14"
+          gap="2"
+          color="{{['#ffc51c', '#ddd']}}"
+          allow-half
+          disabled
+        />
+        <view class="comment-spec" wx:if="{{item.specs}}">{{item.specs}}</view>
+      </view>
+
+      <!-- 评论内容 -->
+      <view class="comment-content">{{item.commentContent}}</view>
+
+      <!-- 评论图片 -->
+      <view class="comment-images" wx:if="{{item.commentResources.length > 0}}">
+        <image
+          wx:for="{{item.commentResources}}"
+          wx:for-item="res"
+          wx:key="src"
+          class="comment-img {{item.commentResources.length === 1 ? 'img-single' : item.commentResources.length === 2 ? 'img-double' : 'img-triple'}}"
+          src="{{res.src || res.coverSrc}}"
+          mode="aspectFill"
+          data-src="{{res.src || res.coverSrc}}"
+          data-uindex="{{item.commentId}}"
+          bindtap="handleImagePreview"
+        />
+      </view>
+
+      <!-- 商家回复 -->
+      <view class="seller-reply" wx:if="{{item.sellerReply}}">
+        <text class="reply-prefix">店家回复：</text>
+        <text class="reply-content">{{item.sellerReply}}</text>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{commentList.length === 0 && hasLoaded}}">
+      <t-empty description="暂无评论" />
+    </view>
+
+    <!-- 加载更多 -->
+    <load-more
+      wx:if="{{commentList.length > 0}}"
+      status="{{loadMoreStatus}}"
+      no-more-text="没有更多了"
+    />
+  </view>
+</view>
+
+<t-toast id="t-toast" />

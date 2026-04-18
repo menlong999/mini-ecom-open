@@ -1,0 +1,409 @@
+:host {
+  background-color: #f5f5f5;
+}
+
+.select-service .service-form .service-from-group {
+  margin-top: 20rpx;
+}
+
+.select-service .service-form {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 80rpx);
+}
+
+.order-goods-card-footer {
+  display: flex;
+  width: calc(100% - 190rpx);
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  left: 190rpx;
+}
+
+.order-goods-card-footer-num {
+  color: #999;
+}
+
+.select-service .order-goods-card-footer .order-goods-card-footer-price-class {
+  font-size: 36rpx;
+  color: #333;
+  font-family: DIN Alternate;
+}
+
+.select-service .order-goods-card-footer .order-goods-card-footer-price-decimal {
+  font-size: 28rpx;
+  color: #333;
+  font-family: DIN Alternate;
+}
+
+.select-service .order-goods-card-footer .order-goods-card-footer-price-symbol {
+  color: #333;
+  font-size: 24rpx;
+  font-family: DIN Alternate;
+}
+
+.select-service .remark {
+  min-height: 110rpx;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  background-color: #f5f5f5;
+}
+
+.select-service .remark::after {
+  border: none;
+}
+
+.select-service .special-cell .special-cell-note {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-service .special-cell .wr-cell__title {
+  margin-right: 100rpx;
+}
+
+.select-service .special-cell .special-cell-note-price-class {
+  font-size: 36rpx;
+  color: #fa4126;
+  font-family: DIN Alternate;
+}
+
+.select-service .special-cell .special-cell-note-price-decimal {
+  font-size: 28rpx;
+  color: #fa4126;
+  font-family: DIN Alternate;
+}
+
+.select-service .special-cell .special-cell-note-price-symbol {
+  color: #fa4126;
+  font-size: 24rpx;
+  font-family: DIN Alternate;
+}
+
+.select-service .bottom-bar__btn {
+  width: 686rpx;
+  background-color: #fa4126;
+  color: white;
+  font-size: 32rpx;
+  border-radius: 48rpx;
+  position: absolute;
+  left: 50%;
+  top: 20rpx;
+  transform: translateX(-50%);
+}
+
+.select-service .bottom-bar__btn::after {
+  border: none;
+}
+
+.select-service .bottom-bar__btn.disabled::after {
+  border: none;
+}
+
+.select-service .order-goods-card .wr-goods-card {
+  padding: 0 30rpx;
+}
+
+.order-goods-card-footer {
+  display: flex;
+  width: calc(100% - 190rpx);
+  justify-content: space-between;
+  position: absolute;
+  bottom: 20rpx;
+  left: 190rpx;
+}
+
+.order-goods-card-footer-num {
+  color: #999;
+  line-height: 40rpx;
+}
+
+.order-goods-card-title-class {
+  width: 10rpx !important;
+}
+
+.input-dialog__content .input-dialog__input {
+  font-size: 72rpx !important;
+  height: 64rpx;
+}
+
+.t-input__label {
+  margin-right: 0 !important;
+}
+
+.input-dialog__label {
+  font-size: 48rpx;
+  color: #333;
+}
+
+.input-dialog__content .input-dialog__input,
+.input-dialog__label {
+  height: 64rpx;
+  line-height: 64rpx !important;
+}
+
+.input-dialog__content .input {
+  font-size: 48rpx;
+  padding-left: 0;
+  padding-right: 0;
+  --td-input-border-left-space: 0;
+}
+
+.input-dialog__content .tips {
+  margin-top: 24rpx;
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.t-input__name {
+  width: 10rpx !important;
+}
+
+.input-dialog__title {
+  color: #333;
+  font-size: 32rpx;
+  font-weight: normal;
+}
+
+.dialog--service-status {
+  background-color: #f3f4f5;
+  overflow: hidden;
+}
+
+.dialog--service-status .options .option {
+  color: #333333;
+  font-size: 30rpx;
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: white;
+}
+
+.dialog--service-status .options .option:not(:last-child) {
+  border-bottom: 1rpx solid #e6e6e6;
+}
+
+.dialog--service-status .options .option--active {
+  opacity: 0.5;
+}
+
+.dialog--service-status .options .option.main {
+  color: #fa4126;
+}
+
+.dialog--service-status .cancel {
+  color: #333333;
+  font-size: 30rpx;
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: white;
+  margin-top: 20rpx;
+}
+
+.dialog--service-status .cancel--active {
+  opacity: 0.5;
+}
+
+.amount-dialog--focus .popup__content--center,
+.remark-dialog--focus .popup__content--center {
+  top: 100rpx;
+  transform: translate(-50%, 0);
+}
+
+.dialog .dialog__button-confirm {
+  color: #fa4126;
+  color: var(--color-primary, #fa4126);
+}
+
+.select-service .bottom-bar {
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 158rpx;
+  z-index: 3;
+}
+
+.order-goods-card {
+  background: #fff;
+  margin-bottom: 24rpx;
+}
+
+.goods-select-title {
+  padding: 24rpx 32rpx 0;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.service-from-group__wrapper {
+  display: flex;
+  flex-direction: column;
+  font-family: DIN Alternate;
+  font-weight: bold;
+  font-size: 36rpx;
+  text-align: right;
+  color: #fa4126;
+}
+
+.service-from-group__price {
+  display: flex;
+  align-items: center;
+  color: #bbb;
+  font-size: 24rpx;
+  position: relative;
+  left: 30rpx;
+}
+
+
+
+.service-from-group__textarea {
+  margin-top: 20rpx;
+  background-color: #fff;
+  padding: 32rpx 32rpx 24rpx;
+}
+
+.textarea--content {
+  margin-top: 32rpx;
+  background: #f5f5f5 !important;
+  border-radius: 16rpx;
+}
+
+.service-from-group__textarea .t-textarea__wrapper .t-textarea__wrapper-textarea {
+  height: 136rpx;
+  box-sizing: border-box;
+}
+
+.service-from-group__grid {
+  padding: 0 32rpx 48rpx;
+  background: #fff;
+  margin-bottom: 148rpx;
+}
+
+.upload-addcontent-slot {
+  background-color: #f5f5f5;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.refund-money__description {
+  font-size: 24rpx !important;
+}
+
+.upload-desc {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.t-cell__left__icon {
+  margin-right: 18rpx;
+}
+
+.service-choice .t-cell__title-text {
+  color: #333;
+  font-weight: bold;
+}
+
+.service-form .service-from-group .service-from-group__wrapper .refund-money-price-class {
+  font-size: 36rpx;
+  font-family: DIN Alternate;
+}
+
+.service-form .service-from-group .service-from-group__wrapper .refund-money-price-decimal {
+  font-size: 28rpx;
+  font-family: DIN Alternate;
+}
+
+.service-form .service-from-group .service-from-group__wrapper .refund-money-price-symbol {
+  font-size: 24rpx;
+  font-family: DIN Alternate;
+}
+
+.t-button {
+  --td-button-default-color: #000;
+  --td-button-primary-text-color: #fa4126;
+}
+
+/* Copied from order-list for manual goods card rendering */
+.goods-item {
+  display: flex;
+  padding: 24rpx 32rpx;
+  background: #fff;
+  align-items: flex-start;
+}
+
+.goods-checkbox {
+  margin-right: 16rpx;
+  margin-top: 12rpx;
+  flex-shrink: 0;
+}
+
+.goods-image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 16rpx;
+  flex-shrink: 0;
+  margin-right: 24rpx;
+  background-color: #f5f5f5;
+  overflow: hidden;
+}
+
+.goods-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.goods-title {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 36rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.goods-specs {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.goods-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 16rpx;
+}
+
+.goods-refund-qty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12rpx;
+}
+
+.goods-refund-label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.goods-price {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.goods-num {
+  font-size: 24rpx;
+  color: #999;
+}

@@ -1,0 +1,95 @@
+<view class="page-container">
+  <block wx:for="{{goodsList}}" wx:key="skuId" wx:for-index="index">
+    <view class="comment-card">
+      <view class="goods-info-container">
+        <view class="goods-image-container">
+          <t-image t-class="goods-image" src="{{item.thumb}}" />
+        </view>
+        <view class="goods-title-container">
+          <view class="goods-title">{{item.title}}</view>
+          <view class="goods-detail">{{item.specs}}</view>
+        </view>
+      </view>
+      <view class="rate-container">
+        <text class="rate-title">商品评价</text>
+        <view class="rate">
+          <t-rate
+            value="{{item.goodRateValue}}"
+            bind:change="handleRateChange"
+            size="26"
+            gap="6"
+            color="{{['#ffc51c', '#ddd']}}"
+            data-item="goodRateValue"
+            data-index="{{index}}"
+          />
+        </view>
+      </view>
+      <view class="textarea-container">
+        <t-textarea
+          t-class="textarea"
+          maxlength="{{500}}"
+          indicator
+          placeholder="对商品满意吗？评论一下"
+          bind:change="handleTextAreaChange"
+          data-index="{{index}}"
+        />
+      </view>
+      <view class="upload-container">
+        <t-upload
+          media-type="{{['image','video']}}"
+          files="{{item.uploadFiles}}"
+          bind:remove="handleRemove"
+          bind:success="handleSuccess"
+          data-index="{{index}}"
+          gridConfig="{{gridConfig}}"
+          imageProps="{{imageProps}}"
+        />
+      </view>
+
+      <view class="anonymous-box">
+        <t-checkbox bind:change="handleAnonymousChange" checked="{{isAnonymous}}" color="#FA4126" />
+        <view class="name">匿名评价</view>
+      </view>
+    </view>
+  </block>
+</view>
+<view class="comment-card convey-card">
+  <view class="convey-comment-title">物流服务评价</view>
+  <view class="rate-container">
+    <text class="rate-title">物流评价</text>
+    <view class="rate">
+      <t-rate
+        value="{{conveyRateValue}}"
+        bind:change="handleRateChange"
+        variant="filled"
+        size="26"
+        gap="6"
+        color="{{['#ffc51c', '#ddd']}}"
+        data-item="conveyRateValue"
+      />
+    </view>
+  </view>
+  <view class="rate-container">
+    <text class="rate-title">服务评价</text>
+    <view class="rate">
+      <t-rate
+        value="{{serviceRateValue}}"
+        bind:change="handleRateChange"
+        size="26"
+        gap="6"
+        color="{{['#ffc51c', '#ddd']}}"
+        data-item="serviceRateValue"
+      />
+    </view>
+  </view>
+</view>
+<view class="submit-button-container">
+  <t-button
+    content="提交"
+    block
+    shape="round"
+    t-class="submit-button{{isAllowedSubmit ? '' : '-disabled'}}"
+    bind:tap="handleSubmit"
+  />
+</view>
+<t-toast id="t-toast" />

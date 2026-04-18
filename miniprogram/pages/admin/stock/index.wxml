@@ -1,0 +1,114 @@
+<view class="stock-container">
+  <t-toast id="t-toast" />
+
+  <view class="filter-bar">
+    <view class="filter-item" bindtap="onShowCategory1Picker">
+      <text>{{selectedCategory1Name || '一级分类'}}</text>
+      <t-icon name="chevron-down" size="32rpx" />
+    </view>
+    <view class="filter-item" bindtap="onShowCategory2Picker">
+      <text>{{selectedCategory2Name || '二级分类'}}</text>
+      <t-icon name="chevron-down" size="32rpx" />
+    </view>
+    <view class="filter-input">
+      <t-input placeholder="商品名称" value="{{keyword}}" bind:change="onKeywordChange" clearable />
+    </view>
+    <t-button size="small" theme="primary" bind:tap="onSearch">筛选</t-button>
+    <view
+      class="filter-clear"
+      wx:if="{{selectedCategory1Id || selectedCategory2Id || keyword}}"
+      bindtap="onClearFilter"
+    >
+      <t-icon name="close-circle" size="36rpx" />
+    </view>
+  </view>
+
+  <t-picker
+    visible="{{showCategory1Picker}}"
+    value="{{[selectedCategory1Id]}}"
+    title="选择一级分类"
+    cancelBtn="取消"
+    confirmBtn="确认"
+    bind:confirm="onCategory1PickerChange"
+    bind:cancel="onCategory1PickerCancel"
+  >
+    <t-picker-item options="{{category1List}}" />
+  </t-picker>
+
+  <t-picker
+    visible="{{showCategory2Picker}}"
+    value="{{[selectedCategory2Id]}}"
+    title="选择二级分类"
+    cancelBtn="取消"
+    confirmBtn="确认"
+    bind:confirm="onCategory2PickerChange"
+    bind:cancel="onCategory2PickerCancel"
+  >
+    <t-picker-item options="{{filteredCategory2List}}" />
+  </t-picker>
+
+  <view class="list-wrapper">
+    <block wx:for="{{list}}" wx:key="_id">
+      <view class="spu-card">
+        <view class="spu-header">
+          <view class="spu-title">{{item.title}}</view>
+          <view class="spu-stock">总库存：{{item.spuStockQuantity || 0}}</view>
+        </view>
+
+        <view wx:if="{{!item.skuList || item.skuList.length === 0}}" class="empty-tip"
+          >暂无规格</view
+        >
+
+        <view
+          wx:for="{{item.skuList}}"
+          wx:for-item="sku"
+          wx:for-index="skuIndex"
+          wx:key="skuId"
+          class="sku-row"
+        >
+          <view class="sku-spec">规格：{{sku.specText}}</view>
+          <view class="sku-right">
+            <view class="sku-stock">
+              <text>库存：{{sku.stock}}</text>
+              <text class="stock-warning" wx:if="{{sku.stock < 5}}">库存不多</text>
+            </view>
+            <view
+              class="stock-add-btn"
+              bindtap="openStockPopup"
+              data-spu-index="{{index}}"
+              data-sku-index="{{skuIndex}}"
+            >
+              <t-icon name="add" size="28rpx" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view wx:if="{{list.length === 0 && !loading}}" class="empty-tip">暂无商品</view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading-wrap">
+    <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
+  </view>
+</view>
+
+<t-popup
+  visible="{{stockPopupVisible}}"
+  placement="bottom"
+  bind:visible-change="onStockPopupVisibleChange"
+>
+  <view class="stock-popup">
+    <view class="stock-popup-title">增加库存</view>
+    <t-input
+      type="number"
+      placeholder="输入增加数量"
+      value="{{stockInput}}"
+      bind:change="onStockInputChange"
+    />
+    <view class="stock-popup-actions">
+      <t-button theme="default" bind:tap="closeStockPopup">取消</t-button>
+      <t-button theme="primary" bind:tap="confirmAddStock">确认</t-button>
+    </view>
+  </view>
+</t-popup>

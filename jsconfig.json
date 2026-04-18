@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "module": "CommonJS",
+    "target": "ES6",
+    "allowSyntheticDefaultImports": true,
+    "checkJs": false,
+    "noEmit": true
+  },
+  "include": [
+    "miniprogram/**/*",
+    "cloudfunctions/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "miniprogram/miniprogram_npm",
+    "**/*.test.js",
+    "**/*.spec.js"
+  ]
+}

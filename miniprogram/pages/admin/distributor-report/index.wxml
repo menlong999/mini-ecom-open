@@ -1,0 +1,99 @@
+<view class="page">
+  <t-toast id="t-toast" />
+
+  <view class="section">
+    <view class="section-title">分销订单</view>
+    <view class="selector" bindtap="openDistributorPopup">
+      <view class="selector-label">分销人员</view>
+      <view class="selector-value"> {{selectedDistributor.nickName || '请选择分销人员'}} </view>
+      <view class="selector-arrow">▾</view>
+    </view>
+
+    <view wx:if="{{selectedDistributor}}" class="summary-bar">
+      <view class="summary-item">
+        <text class="summary-label">总单数</text>
+        <text class="summary-value">{{orderSummary.totalCount}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-label">总金额</text>
+        <text class="summary-value">¥{{orderSummary.totalAmount}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{selectedDistributor && orderLoading}}" class="order-loading">
+      <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
+    </view>
+
+    <view
+      wx:if="{{selectedDistributor && !orderLoading && distributorOrders.length === 0}}"
+      class="empty"
+      >暂无订单</view
+    >
+
+    <view wx:for="{{distributorOrders}}" wx:key="_id" class="order-card">
+      <view class="order-header">
+        <text class="order-no">订单号：{{item.orderNo || '-'}}</text>
+        <text class="order-amount">¥{{item.totalAmount}}</text>
+      </view>
+      <view class="order-meta">
+        <text>配送：{{item.deliveryTypeText}}</text>
+        <text wx:if="{{item.createdAtText}}">下单：{{item.createdAtText}}</text>
+      </view>
+
+      <view wx:if="{{item.deliveryType === 1}}" class="order-address">
+        <view class="order-address-row">{{item.addressName}} {{item.addressPhoneMasked}}</view>
+        <view class="order-address-detail">{{item.addressDetail}}</view>
+      </view>
+
+      <view class="order-goods-list">
+        <view
+          wx:for="{{item.goodsList}}"
+          wx:for-item="goods"
+          wx:key="index"
+          class="order-goods-item"
+        >
+          <view class="goods-title">{{goods.title}}</view>
+          <view class="goods-specs">规格：{{goods.specsText}}</view>
+          <view class="goods-meta">¥{{goods.price}} x{{goods.quantity}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<t-popup
+  visible="{{distributorPopupVisible}}"
+  placement="bottom"
+  bind:visible-change="onDistributorPopupChange"
+>
+  <view class="popup-panel">
+    <view class="popup-header">
+      <text>选择分销人员</text>
+      <text class="popup-close" bindtap="closeDistributorPopup">×</text>
+    </view>
+    <view class="popup-search">
+      <t-input
+        placeholder="输入昵称搜索"
+        value="{{distributorKeyword}}"
+        bind:change="onDistributorKeywordChange"
+      />
+      <t-button size="small" theme="primary" bind:tap="onSearchDistributor">搜索</t-button>
+    </view>
+    <view wx:if="{{distributorLoading}}" class="popup-loading">
+      <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
+    </view>
+    <view wx:else class="popup-list">
+      <view wx:if="{{distributorOptions.length === 0}}" class="popup-empty">暂无分销人员</view>
+      <view
+        wx:for="{{distributorOptions}}"
+        wx:key="_openid"
+        class="popup-item"
+        bindtap="selectDistributor"
+        data-item="{{item}}"
+      >
+        <view class="popup-name">{{item.nickName || '未命名用户'}}</view>
+        <view class="popup-id">{{item._openid}}</view>
+      </view>
+    </view>
+  </view>
+</t-popup>

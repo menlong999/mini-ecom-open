@@ -1,0 +1,108 @@
+<view class="goods-list-container">
+  <!-- 过滤栏 -->
+  <view class="filter-bar">
+    <view
+      class="filter-item {{filter.isOverallSort ? 'filter-active' : ''}}"
+      bindtap="handleOverallSort"
+    >
+      综合
+    </view>
+    <view
+      class="filter-item {{filter.priceSortDirection ? 'filter-active' : ''}}"
+      bindtap="handlePriceSort"
+    >
+      <text>价格</text>
+      <view class="filter-arrows">
+        <view
+          class="wr wr-arrow_drop_up"
+          style="font-size: 18rpx; color: {{filter.priceSortDirection === 'asc' ? '#FA4126' : '#bbb'}}"
+        ></view>
+        <view
+          class="wr wr-arrow_drop_down"
+          style="font-size: 18rpx; color: {{filter.priceSortDirection === 'desc' ? '#FA4126' : '#bbb'}}"
+        ></view>
+      </view>
+    </view>
+    <view class="filter-item" bindtap="openFilterPopup">
+      筛选
+      <t-icon name="filter" prefix="wr" color="#333" size="32rpx" />
+    </view>
+  </view>
+
+  <!-- 价格筛选弹窗 -->
+  <t-popup
+    visible="{{showFilterPopup}}"
+    placement="right"
+    bind:visible-change="handleFilterPopupChange"
+  >
+    <view class="price-container">
+      <view class="price-header">价格区间</view>
+      <view class="price-ipts-wrap">
+        <t-input
+          align="center"
+          type="number"
+          t-class="price-ipt"
+          placeholder="最低价"
+          value="{{minVal}}"
+          bindchange="handleMinPriceInput"
+        />
+        <view class="price-divided">-</view>
+        <t-input
+          align="center"
+          type="number"
+          t-class="price-ipt"
+          placeholder="最高价"
+          value="{{maxVal}}"
+          bindchange="handleMaxPriceInput"
+        />
+      </view>
+      <view class="filter-btns">
+        <t-button theme="light" size="medium" bindtap="handleFilterReset">重置</t-button>
+        <t-button theme="primary" size="medium" bindtap="handleFilterConfirm">确认</t-button>
+      </view>
+    </view>
+  </t-popup>
+
+  <!-- 空状态 -->
+  <view class="empty-wrap" wx:if="{{goodsList.length === 0 && hasLoaded}}">
+    <t-empty t-class="empty-tips" size="240rpx" description="暂无相关商品" />
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="goods-list" wx:if="{{goodsList.length}}">
+    <view
+      class="goods-card"
+      wx:for="{{goodsList}}"
+      wx:key="spuId"
+      data-index="{{index}}"
+      bindtap="navigateToGoodsDetail"
+    >
+      <image class="goods-thumb" src="{{item.thumb}}" mode="aspectFill" lazy-load />
+      <view class="goods-info">
+        <view class="goods-title">{{item.title}}</view>
+        <view class="goods-tags" wx:if="{{item.tags.length}}">
+          <text class="goods-tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this"
+            >{{tag}}</text
+          >
+        </view>
+        <view class="goods-price-row">
+          <text class="goods-price">¥{{item.price}}</text>
+          <text class="goods-origin-price" wx:if="{{item.originPrice}}">¥{{item.originPrice}}</text>
+          <view class="goods-cart-btn" catchtap="handleAddCart" data-index="{{index}}">
+            <t-icon prefix="wr" name="cartAdd" size="48rpx" color="#FA550F" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <load-more
+    wx:if="{{goodsList.length > 0}}"
+    status="{{loadMoreStatus}}"
+    no-more-text="没有更多了"
+  />
+</view>
+
+<t-toast id="t-toast" />
+<t-dialog id="t-dialog" />

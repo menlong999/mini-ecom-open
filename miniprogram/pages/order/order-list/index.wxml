@@ -1,0 +1,118 @@
+<view class="page-container">
+  <view class="tab-bar">
+    <view class="tab-bar__placeholder" />
+    <t-tabs
+      t-class="tab-bar__inner"
+      t-class-active="tab-bar__active"
+      t-class-track="t-tabs-track"
+      bind:change="handleTabChange"
+      value="{{currentStatus}}"
+      style="position: fixed; top: 0; left: 0; z-index: 100"
+    >
+      <t-tab-panel
+        wx:for="{{tabs}}"
+        wx:for-index="index"
+        wx:for-item="item"
+        wx:key="index"
+        label="{{item.text}}"
+        value="{{item.key}}"
+        badge-props="{{ { count: item.info, offset: ['2px', '-2px'] } }}"
+      />
+    </t-tabs>
+  </view>
+
+  <t-pull-down-refresh
+    id="pull-down-refresh"
+    normal-bar-height="{{200}}"
+    max-bar-height="{{272}}"
+    refreshTimeout="{{3000}}"
+    background="#f5f5f5"
+    use-loading-slot
+    loading-size="60rpx"
+    bindrefresh="handlePullDownRefresh"
+    t-class-indicator="t-class-indicator"
+  >
+    <!-- 订单列表 -->
+    <view class="order-list-content">
+      <view
+        class="order-card"
+        wx:for="{{orderList}}"
+        wx:key="orderId"
+        wx:for-item="order"
+        data-order="{{order}}"
+        bindtap="handleOrderCardTap"
+      >
+        <!-- 头部：订单号与状态 -->
+        <view class="header">
+          <view class="order-no">订单号：{{order.orderNo}}</view>
+          <view class="order-status"> {{order.statusDesc}} </view>
+        </view>
+
+        <!-- 商品列表（简化，不折叠） -->
+        <view class="goods-list">
+          <view class="goods-item" wx:for="{{order.goodsList}}" wx:for-item="goods" wx:key="spuId">
+            <t-image src="{{goods.thumb}}" t-class="goods-image" mode="aspectFill" />
+            <view class="goods-content">
+              <view class="goods-title">{{goods.title}}</view>
+              <view class="goods-specs">{{goods.specs}}</view>
+              <view class="goods-bottom">
+                <price
+                  wr-class="goods-price"
+                  price="{{goods.price}}"
+                  fill="{{true}}"
+                  decimalSmaller
+                  priceUnit="yuan"
+                />
+                <view class="goods-num">x{{goods.quantity}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 底部：总价与操作 -->
+        <view class="footer">
+          <view class="price-total">
+            <text>共{{order.goodsList.length}}件商品，</text>
+            <text class="bold-price" decode="{{true}}">实付&nbsp;</text>
+            <price
+              fill
+              class="real-pay"
+              price="{{order.totalPayAmount + ''}}"
+              decimalSmaller
+              priceUnit="yuan"
+            />
+          </view>
+          <!-- 订单按钮栏 -->
+          <order-button-bar
+            order="{{order}}"
+            bindrefresh="handleRefresh"
+            bind:onPayOrder="handlePay"
+            bind:onCancelOrder="handleCancel"
+            bind:onDeleteOrder="handleDelete"
+            bind:onConfirmReceipt="handleConfirmReceipt"
+            data-order="{{order}}"
+          />
+        </view>
+      </view>
+    </view>
+
+    <!-- 列表加载中/已全部加载 -->
+    <load-more
+      wx:if="{{!pullDownRefreshing}}"
+      list-is-empty="{{!orderList.length}}"
+      status="{{listLoading}}"
+      bindretry="handleRetryLoad"
+    >
+      <view slot="empty" class="empty-wrapper">
+        <t-empty
+          t-class="empty-cls"
+          t-class-image="t-empty__image"
+          image="{{emptyImg}}"
+          description="暂无相关订单"
+        />
+      </view>
+    </load-more>
+  </t-pull-down-refresh>
+</view>
+<t-toast id="t-toast" />
+<t-dialog id="t-dialog" />

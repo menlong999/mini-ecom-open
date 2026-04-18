@@ -1,0 +1,14 @@
+{
+    "name": "confirmReceiptTimer",
+    "version": "1.0.0",
+    "description": "Auto confirm receipt for shipped orders",
+    "main": "index.js",
+    "dependencies": {
+        "wx-server-sdk": "latest"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC"
+}

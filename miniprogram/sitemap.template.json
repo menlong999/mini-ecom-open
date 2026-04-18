@@ -1,0 +1,9 @@
+{
+  "desc": "极简电商",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "*"
+    }
+  ]
+}

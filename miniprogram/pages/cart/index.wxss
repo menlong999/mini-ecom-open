@@ -1,0 +1,163 @@
+:host {
+  padding-bottom: 100rpx;
+  background-color: #f5f5f5;
+}
+
+.gap {
+  height: 100rpx;
+  width: 100%;
+}
+
+/* 列表容器 */
+.cart-list-wrap {
+  margin: 24rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+/* 单个商品项 */
+.cart-item {
+  display: flex;
+  padding: 24rpx;
+  background-color: #fff;
+  border-bottom: 1rpx solid #f9f9f9;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+/* 选中按钮 */
+.check-wrap {
+  display: flex;
+  align-items: center;
+  margin-right: 24rpx;
+}
+
+/* 内容区域 */
+.content-wrap {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.goods-image {
+  border-radius: 8rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* 信息区域 */
+.info-wrap {
+  flex: 1;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 40rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.specs-wrap {
+  margin-top: 8rpx;
+}
+
+.specs-text {
+  display: inline-block;
+  font-size: 24rpx;
+  color: #999;
+  background-color: #f5f5f5;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bottom-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 16rpx;
+}
+
+.price-class {
+  color: #fa4126;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+/* 删除按钮 */
+.delete-btn {
+  height: 100%;
+  width: 144rpx;
+  background-color: #fa4126;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+}
+
+/* 失效商品部分 */
+.invalid-goods-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 40rpx;
+  font-size: 28rpx;
+  background-color: #f5f5f5;
+}
+
+.invalid-title {
+  color: #333;
+  font-weight: bold;
+}
+
+.clear-invalid {
+  color: #fa4126;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.margin-top-sm {
+  margin-top: 10rpx;
+}
+
+/* 空/登录提示 */
+.empty-login-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 200rpx;
+}
+
+.prompt-image {
+  width: 240rpx;
+  height: 240rpx;
+}
+
+.prompt-text {
+  font-size: 28rpx;
+  color: #999;
+  margin: 32rpx 0 48rpx;
+}
+
+.t-button {
+  --td-button-default-color: #000;
+  --td-button-primary-text-color: #fa4126;
+}

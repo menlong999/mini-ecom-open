@@ -1,0 +1,11 @@
+{
+    "name": "manageAddress",
+    "version": "1.0.0",
+    "description": "Address management cloud function",
+    "main": "index.js",
+    "dependencies": {
+        "wx-server-sdk": "latest"
+    },
+    "author": "",
+    "license": "ISC"
+}

@@ -1,0 +1,80 @@
+<view class="ship-container">
+  <t-toast id="t-toast" />
+
+  <view class="card">
+    <view class="card-title">订单信息</view>
+    <t-cell-group>
+      <t-cell title="订单号" note="{{order.orderNo || '-'}}" bordered="{{false}}" />
+      <t-cell title="订单状态" note="{{order.statusDesc || '-'}}" bordered="{{false}}" />
+      <t-cell title="配送方式" note="{{deliveryTypeText}}" bordered="{{false}}" />
+      <t-cell
+        wx:if="{{operatorText}}"
+        title="操作人"
+        note="{{operatorText}}"
+        bordered="{{false}}"
+      />
+    </t-cell-group>
+  </view>
+
+  <view class="card" wx:if="{{!isPickup}}">
+    <view class="card-title">物流信息</view>
+    <t-cell
+      title="物流公司"
+      arrow
+      note="{{deliveryCompany.name || '请选择'}}"
+      bindtap="onCompanyTap"
+    />
+    <t-input
+      label="运单号"
+      placeholder="请输入运单号"
+      value="{{logisticsNo}}"
+      bind:change="onInputChange"
+      data-field="logisticsNo"
+    />
+    <view class="textarea-label">备注信息</view>
+    <t-textarea
+      placeholder="可选"
+      value="{{remark}}"
+      bind:change="onInputChange"
+      data-field="remark"
+      t-class="t-textarea-wrapper"
+    />
+  </view>
+
+  <view class="card" wx:if="{{isPickup}}">
+    <view class="card-title">提货确认</view>
+    <view class="textarea-label">备注信息</view>
+    <t-textarea
+      placeholder="可选"
+      value="{{remark}}"
+      bind:change="onInputChange"
+      data-field="remark"
+      t-class="t-textarea-wrapper"
+    />
+  </view>
+
+  <view class="footer-btn">
+    <t-button
+      theme="primary"
+      block
+      loading="{{submitting}}"
+      disabled="{{submitting}}"
+      bind:tap="onSubmit"
+    >
+      {{submitText}}
+    </t-button>
+  </view>
+
+  <t-picker
+    wx:if="{{!isPickup}}"
+    visible="{{showCompanyPicker}}"
+    value="{{[deliveryCompanyCode]}}"
+    title="选择物流公司"
+    cancelBtn="取消"
+    confirmBtn="确认"
+    bind:confirm="onCompanyPickerChange"
+    bind:cancel="onCompanyPickerCancel"
+  >
+    <t-picker-item options="{{companyOptions}}" />
+  </t-picker>
+</view>

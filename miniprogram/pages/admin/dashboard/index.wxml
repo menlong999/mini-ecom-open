@@ -1,0 +1,31 @@
+<view class="dashboard-container">
+  <view class="dashboard-section" wx:if="{{reportList.length}}">
+    <view class="dashboard-title">业务管理</view>
+    <t-grid class="dashboard-grid" column="{{3}}" theme="card">
+      <t-grid-item
+        wx:for="{{menuList}}"
+        wx:key="index"
+        text="{{item.title}}"
+        icon="{{item.icon}}"
+        bindtap="onMenuTap"
+        data-url="{{item.url}}"
+        data-disabled="{{item.disabled}}"
+      />
+    </t-grid>
+  </view>
+
+  <view class="dashboard-section">
+    <view class="dashboard-title">报表</view>
+    <t-grid class="dashboard-grid" column="{{3}}" theme="card">
+      <t-grid-item
+        wx:for="{{reportList}}"
+        wx:key="index"
+        text="{{item.title}}"
+        icon="{{item.icon}}"
+        bindtap="onMenuTap"
+        data-url="{{item.url}}"
+        data-disabled="{{item.disabled}}"
+      />
+    </t-grid>
+  </view>
+</view>
