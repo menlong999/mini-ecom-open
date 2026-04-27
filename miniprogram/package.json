@@ -13,12 +13,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/menlong999/deshan.git"
+    "url": "git+https://github.com/menlong999/mini-ecom-open.git"
   },
   "bugs": {
-    "url": "https://github.com/menlong999/deshan/issues"
+    "url": "https://github.com/menlong999/mini-ecom-open/issues"
   },
-  "homepage": "https://github.com/menlong999/deshan#readme",
+  "homepage": "https://github.com/menlong999/mini-ecom-open#readme",
   "engines": {
     "node": ">=18",
     "npm": ">=9"
