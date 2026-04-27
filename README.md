@@ -2,6 +2,8 @@
 
 本项目是一个基于微信小程序与 CloudBase 的轻量电商内核。项目使用 TDesign Mini Program 作为组件库，但视觉系统、租户配置、云函数边界和数据模型约束都由本仓库维护，适合开源复用与私有租户定制。
 
+项目最早参考过 Tencent 的 `tdesign-miniprogram-starter-retail` 启动，但当前仓库以现有实现为准维护。前端结构、CloudBase 数据流、数据模型、租户化配置、质量检查脚本和仓库治理配置均按当前版本独立演进；即使仍有极少数页面结构或组件影子残留，README 也只描述当前能力与当前实现。
+
 ## :books: 文档导航
 
 - [文档索引](./docs/README.md)
@@ -75,12 +77,13 @@ cd miniprogram && npm run sync:tenant -- <your-brand>
 - `npm run service-boundary:check` 会校验 `app.js` 和 `pages/` 不直接触碰 CloudBase 读写 API
 - 售后退货地址属于 tenant 稳定配置，首页配置与门店数据属于 CloudBase 运营数据
 
-## :sparkles: 核心优化
+## :sparkles: 当前特性
 
-- **代码精简**：移除所有冗余的自定义组件（如 `filter`, `goods-list`, `order-card` 等），全面切换为「TDesign 原生组件 + 小程序原生 WXML/WXSS」的组合，降低了代码复杂性。
-- **功能增强**：在保留商品展示、购物车、订单结算、售后流程等核心功能的基础上，优化了地址管理、物流追踪、商品评论、门店自提等业务逻辑。
-- **架构升级**：完全移除了 Mock 分支，采用云开发（CloudBase）进行数据管理。通过对 Data Model 的深度优化，实现了更轻量级的接口交互。
-- **体验提升**：优化了商品详情页的交互体验，支持图片防盗链处理（webp-image），完善了库存预警弹窗等细节。
+- **完整零售链路**：覆盖商品展示、购物车、下单、支付回调、订单流转、售后、地址管理、评论、物流轨迹、门店自提等常见电商场景。
+- **CloudBase 实现**：围绕 CloudBase 云函数、FlexDB 与工作流组织业务逻辑，并提供 `docs/schemas/` 与 `DATA_MODELS.md` 维护数据结构说明。
+- **多租户 overlay**：通过 `tenants/default`、`tenants/example` 与 `sync:tenant` 脚本支持品牌差异化配置，公共内核与私有租户配置分离。
+- **前端实现方式**：以 TDesign Mini Program + 原生 WXML/WXSS 为主，页面、服务层与云端边界清晰，支持 `webp-image` 等业务组件能力。
+- **质量与治理**：仓库内置 tenant/style/service/cloudfunctions 边界检查、husky 防误提交、Issue/PR 模板、Release workflow 与开源文档体系。
 
 ## :building_construction: 架构与规范
 
@@ -135,7 +138,7 @@ cd miniprogram && npm run sync:tenant -- <your-brand>
 
 ## :sparkles: Vibe Coding 与 AI 协同开发
 
-本项目是 **Vibe Coding**（氛围编程）理念的深度实践。我们不再纠结于每一行样板代码的编写，而是通过 AI 代理高度自动化地完成系统构建、重构与质量治理。
+本项目是 **Vibe Coding**（氛围编程）理念的深度实践。我们不再纠结于每一行样板代码的编写，而是通过 AI 代理高度自动化地完成系统构建、实现与质量治理。
 
 ### 1. 强大的 MCP 扩展 (Model Context Protocol)
 
@@ -154,14 +157,14 @@ cd miniprogram && npm run sync:tenant -- <your-brand>
   - **语言契约**：统一使用中文进行技术交流与文档沉淀。
   - **架构一致性**：通过 `spec-workflow` 引导 AI 严格遵守三层架构设计，防止代码腐化。
 
-### 3. Vibe Coding 带来的变革
+### 3. Vibe Coding 在本项目中的使用方式
 
-在本项目中，Vibe Coding 协助我们完成了多项复杂任务：
+在本项目中，Vibe Coding 主要用于提高实现效率与治理一致性：
 
-- **激进的重构**：如一键将数十个冗余的自定义组件（`order-card`, `noGoods` 等）替换为高性能的原生 WXML 结构。
-- **业务迁移**：平滑地将传统 Mock 数据逻辑迁移至基于云函数的分布式架构。
-- **设计升维**：AI 根据 `ui-design` 技能自动优化了支付结果页、商品详情页等关键路径的视觉体验，确保其达到“Premium”级别的质感。
-- **文档自动化**：通过读取云端模型架构，自动生成了如 `DATA_MODELS.md` 等高度准确的技术文档。
+- **前端落地**：协助组织页面结构、组件调用与样式 token，使实现保持在 TDesign + 原生小程序能力这一主路径上。
+- **云开发实现**：协助梳理订单、支付、售后、物流等业务链路对应的 service、云函数与数据模型。
+- **设计与文档产出**：根据现有实现补齐设计系统、数据模型说明、FAQ、TROUBLESHOOTING 等文档。
+- **质量守护**：维护边界检查脚本、仓库治理配置与提交前校验，减少回归与误提交。
 
 ## :database: 数据模型 (Data Models)
 
