@@ -34,5 +34,6 @@
 
 - `home_config` 和 `store` 属于运营数据，保留在数据库，不进入 tenant 本地配置
 - 这套 `mock` 数据的关系字段使用固定 `_id`，便于直接导入后跑通前端
-- `mock` 数据里的图片默认引用 `miniprogram/assets/mock/` 下的本地资源，方便你立刻截图；如果你的 FlexDB / Data Model 控制台要求图片字段必须是 `cloud://` 文件 ID，可将同名文件上传到 CloudBase 存储后统一替换路径
+- mock 图片源码位于 `miniprogram/assets/mock/`，建议统一上传到 CloudBase 云存储目录 `mock/retail-demo/`
+- `*.mock.json` 中的图片字段统一写成 `cloud://<your-env-id>.<your-bucket>/mock/retail-demo/<filename>`；导入前全局替换 `<your-env-id>.<your-bucket>` 即可
 - 商品、分类、SKU、管理员用户等数据，在真实商用前仍需要按你的业务单独初始化

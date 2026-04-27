@@ -3,13 +3,13 @@
     "searchPlaceholder": "搜索冷萃、挂耳、贝果、礼盒",
     "swiper": [
       {
-        "image": "/assets/mock/banner-coffee.png",
+        "image": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/banner-coffee.png",
         "spuId": "mock-spu-coldbrew",
         "linkType": "spu",
         "poi": null
       },
       {
-        "image": "/assets/mock/banner-gift.png",
+        "image": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/banner-gift.png",
         "spuId": "mock-spu-gift",
         "linkType": "spu",
         "poi": null

@@ -3,14 +3,14 @@
     "_id": "mock-spu-coldbrew",
     "spuId": "MOCK-SPU-COFFEE-01",
     "title": "冷萃美式双瓶装",
-    "primaryImage": "/assets/mock/goods-coldbrew.png",
+    "primaryImage": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-coldbrew.png",
     "images": [
-      "/assets/mock/goods-coldbrew.png",
-      "/assets/mock/detail-coffee-1.png"
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-coldbrew.png",
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-coffee-1.png"
     ],
     "desc": [
-      "/assets/mock/detail-coffee-1.png",
-      "/assets/mock/detail-coffee-2.png"
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-coffee-1.png",
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-coffee-2.png"
     ],
     "minSalePrice": 2990,
     "maxLinePrice": 3990,
@@ -28,14 +28,14 @@
     "_id": "mock-spu-beans",
     "spuId": "MOCK-SPU-COFFEE-02",
     "title": "耶加雪菲挂耳 10 袋装",
-    "primaryImage": "/assets/mock/goods-beans.png",
+    "primaryImage": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-beans.png",
     "images": [
-      "/assets/mock/goods-beans.png",
-      "/assets/mock/detail-coffee-1.png"
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-beans.png",
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-coffee-1.png"
     ],
     "desc": [
-      "/assets/mock/detail-coffee-1.png",
-      "/assets/mock/detail-coffee-2.png"
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-coffee-1.png",
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-coffee-2.png"
     ],
     "minSalePrice": 4590,
     "maxLinePrice": 5990,
@@ -53,13 +53,13 @@
     "_id": "mock-spu-bagel",
     "spuId": "MOCK-SPU-FOOD-01",
     "title": "芝士贝果早餐组合",
-    "primaryImage": "/assets/mock/goods-bagel.png",
+    "primaryImage": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-bagel.png",
     "images": [
-      "/assets/mock/goods-bagel.png",
-      "/assets/mock/detail-bagel-1.png"
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-bagel.png",
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-bagel-1.png"
     ],
     "desc": [
-      "/assets/mock/detail-bagel-1.png"
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-bagel-1.png"
     ],
     "minSalePrice": 2690,
     "maxLinePrice": 3290,
@@ -77,13 +77,13 @@
     "_id": "mock-spu-gift",
     "spuId": "MOCK-SPU-GIFT-01",
     "title": "办公室咖啡零食礼盒",
-    "primaryImage": "/assets/mock/goods-gift.png",
+    "primaryImage": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-gift.png",
     "images": [
-      "/assets/mock/goods-gift.png",
-      "/assets/mock/detail-gift-1.png"
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-gift.png",
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-gift-1.png"
     ],
     "desc": [
-      "/assets/mock/detail-gift-1.png"
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-gift-1.png"
     ],
     "minSalePrice": 6990,
     "maxLinePrice": 8990,

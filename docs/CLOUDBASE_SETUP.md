@@ -182,8 +182,11 @@ npm run sync:tenant -- <tenant>
 
 补充说明：
 
-- 这套 `mock` 数据默认引用 [miniprogram/assets/mock/](../miniprogram/assets/mock/) 下的本地图片，目的是让新用户不依赖 CloudBase 存储也能先把首页、分类、详情、评论链路跑起来并截图
-- 如果你的 FlexDB / Data Model 控制台对图片字段校验较严格，要求必须使用 `cloud://` 文件 ID，那么把这些图片先上传到 CloudBase 存储，再将 JSON 里的 `/assets/mock/...` 统一替换为真实文件 ID 即可
+- mock 图片源码保存在 [miniprogram/assets/mock/](../miniprogram/assets/mock/)
+- 建议先把这些文件统一上传到 CloudBase 云存储目录 `mock/retail-demo/`
+- `*.mock.json` 中的图片字段统一使用 `cloud://<your-env-id>.<your-bucket>/mock/retail-demo/<filename>` 占位格式
+- 导入前只需全局替换 `<your-env-id>.<your-bucket>`，即可得到可导入的演示数据文件
+- 这套路径设计的目的，是让演示数据、README 截图和后续发文素材保持同一套稳定资源目录
 
 ## 环境文件
 

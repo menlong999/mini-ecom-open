@@ -2,7 +2,7 @@
 
 本项目是一个基于微信小程序与 CloudBase 的轻量电商内核。项目使用 TDesign Mini Program 作为组件库，但视觉系统、租户配置、云函数边界和数据模型约束都由本仓库维护，适合开源复用与私有租户定制。
 
-项目最早参考过 Tencent 的 `tdesign-miniprogram-starter-retail` 启动，但当前仓库以现有实现为准维护。前端结构、CloudBase 数据流、数据模型、租户化配置、质量检查脚本和仓库治理配置均按当前版本独立演进；即使仍有极少数页面结构或组件影子残留，README 也只描述当前能力与当前实现。
+当前仓库已经包含完整的前台零售链路、CloudBase 数据模型快照、云函数实现、多租户 overlay 配置、边界检查脚本、开源治理配置，以及一套可导入的默认演示数据。按文档初始化 CloudBase 环境后，可以直接跑通首页、分类、详情、评论、门店自提等核心路径。
 
 ## :books: 文档导航
 
@@ -20,7 +20,8 @@
 仓库内已经补了一套可直接用于体验和截图的默认演示数据，位于 [cloudbase/bootstrap/](./cloudbase/bootstrap/)。
 
 - 可直接导入：`category1.mock.json`、`category2.mock.json`、`goods_spu.mock.json`、`goods_spec.mock.json`、`goods_sku.mock.json`、`comments.mock.json`、`home_config.mock.json`、`store.mock.json`
-- 默认图片资源：`miniprogram/assets/mock/`，用于首页 banner、分类缩略图、商品主图、详情图和评论头像
+- 默认图片资源来源：`miniprogram/assets/mock/`；导入前请先上传到 CloudBase 云存储目录 `mock/retail-demo/`
+- 图片字段占位格式：`cloud://<your-env-id>.<your-bucket>/mock/retail-demo/<filename>`
 - 推荐导入顺序：`category1 -> category2 -> goods_spu -> goods_spec -> goods_sku -> comments -> home_config -> store`
 
 导入后，你可以很快截出 4 组最关键的图：
@@ -378,85 +379,10 @@ miniprogram/
 - **组件使用**：优先使用 TDesign 提供的标准组件，对于简单的样式展示，推荐直接使用原生 WXML 结构配合全局公共样式，避免过度封装导致系统复杂。
 - **数据交互**：业务逻辑统一封装在 `services/` 目录下，页面逻辑仅负责数据绑定。
 - **代码校验**：项目配置了 Git pre-commit 钩子，代码提交前会进行 ESLint 检查，请确保代码符合规范。
+- **基础库兼容**：小程序端代码按 ES2020 编写；若目标基础库不支持可选链等语法，请避免直接使用，或在接入前自行完成转译。
 
 ## :page_with_curl: 协议
 
 本项目遵循 [MIT 协议](LICENSE)。
 
-## :memo: 会话摘要（供新会话快速接入）
-
-以下为当前会话中的核心实现逻辑、约定与已完成改动，便于后续继续开发时快速恢复上下文：
-
-### 1) 订单与售后核心约定
-
-- **订单状态流转**：支付成功 → `PENDING_DELIVERY`；管理员发货/自提确认 → `PENDING_RECEIPT`；用户确认收货或超时自动收货 → `COMPLETE`。
-- **售后约定**：**单订单仅允许一条售后记录**，但可在一个售后中选择多个 SKU。
-- **售后金额字段**：
-  - `after-service.applyAmount`：用户申请金额
-  - `after-service.audit.approvedAmount`：管理员审核金额
-  - `after-service.amount`：最终金额（退款使用）
-  - `history` 备注写入申请/审核金额和原因说明
-- **金额单位**：项目内金额为“元”，微信支付/退款为“分”，调用工作流时需要 **元 → 分** 转换并校验上限。
-
-### 2) 退款实现（工作流）
-
-- 退款由管理端操作触发，云函数 `adminManageAfterService.refund` 会：
-  - 读取 `order.wechatPayInfo.transactionId` 与 `totalFee`（分）
-  - 将 `after-service.amount`（元）转为分并校验不超过 `totalFee`
-  - 调用退款工作流（`cloudbase_module`）
-- 退款工作流名称由 `tenants/<tenant>/tenant.config.js` 提供，经 `npm run sync:tenant -- <tenant>` 生成到 `cloudfunctions/adminManageAfterService/config.private.js`
-
-### 3) 售后申请（多 SKU）
-
-- 入口统一跳转至 `/pages/order/apply-service/index`
-- 支持选择多个 SKU + 退货数量；提交后生成 1 条售后记录（`after-service.goods[]`）
-- 订单 `goodsList[]` 会同步写入 `afterServiceStatus/afterServiceId/rightsNo`
-
-### 4) 管理端权限
-
-- 所有管理端云函数必须校验管理员权限（`user_info.role === 'admin'`）
-- 已覆盖：`adminManageOrder` / `adminManageAfterService` / `adminManageGoods`
-
-### 5) 关键改动文件清单（本次会话）
-
-云函数：
-
-- `cloudfunctions/adminManageAfterService/index.js`：审核金额、退款工作流、金额校验
-- `cloudfunctions/manageAfterService/index.js`：多 SKU 申请、撤销申请、回填售后物流
-- `cloudfunctions/createOrder/index.js`：服务端重算商品金额、运费和应付金额
-- `cloudfunctions/unifiedOrder/index.js`：从订单记录读取支付金额，不信任前端 `totalFee`
-- `cloudfunctions/manageOrder/index.js`：补 `const _ = db.command`
-- `cloudfunctions/adminManageGoods/index.js`：管理员权限校验
-
-用户端：
-
-- `miniprogram/pages/order/apply-service/index.*`：多 SKU 选择与数量
-- `miniprogram/pages/order/after-service-list/index.js`：适配 `goods[]`
-- `miniprogram/pages/order/after-service-detail/index.*`：展示申请/审核金额
-- `miniprogram/services/order/afterService.js`：用户侧售后列表/详情读取改为前端直读本人数据
-- `miniprogram/services/order/logistics.js`：物流公司列表来自 tenant 配置，物流轨迹通过 `getLogisticsTrack`
-- `miniprogram/pages/order/components/order-button-bar/index.js`：统一跳转申请页
-- `miniprogram/pages/goods/details/components/goods-specs-popup/index.js`：数量变更同步
-
-管理端：
-
-- `miniprogram/pages/admin/after-service/detail/index.*`：审核金额可编辑
-
-### 6) 已知注意事项
-
-- ESLint 解析器已升级至 ES2020，若小程序基础库不支持可选链，需避免在小程序端使用该语法。
-
-### 7) 已知问题 / 待办
-
-- 每个租户都需要在 `tenants/<tenant>/tenant.config.js` 中填写自己的支付/退款工作流名称，否则对应云函数会拒绝执行。
-- 如需查询物流轨迹，每个租户都需要先在微信物流助手后台绑定物流公司，并让 `logistics.companies[].code` 与绑定后的 `deliveryId` 一致。
-- 退款金额校验依赖 `order.wechatPayInfo.totalFee`（分）；若支付回调未写入该字段，退款会失败。
-- 售后规则目前为“单订单仅一条售后”，如需支持关闭后再次申请，需调整 `manageAfterService.apply` 的重复校验逻辑。
-
-### 8) 关键配置与版本约定
-
-- **支付/退款工作流**：由 `tenants/<tenant>/tenant.config.js` 定义，并通过 sync 脚本生成到对应云函数私有配置。
-- **支付回调字段**：`order.wechatPayInfo` 包含 `transactionId / timeEnd / totalFee / cashFee`（均为分）。
-- **金额单位**：业务层统一使用“元”，对接微信支付/退款时转换为“分”。
-- **ESLint 版本**：`miniprogram/.eslintrc.js` 已设置 `ecmaVersion: 2020`，允许可选链语法。
-- **基础库版本**：若小程序基础库低于可选链支持版本，应避免在小程序端使用可选链，或引入转译。
+参考说明：项目最早参考过 [Tencent/tdesign-miniprogram-starter-retail](https://github.com/Tencent/tdesign-miniprogram-starter-retail) 启动，但当前仓库按现有实现独立维护。

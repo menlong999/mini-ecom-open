@@ -7,12 +7,12 @@
     "commentContent": "开箱后直接冰镇就能喝，酸度很干净，适合做首页示意图和详情页评论演示。",
     "commentScore": 5,
     "userName": "晨会采购",
-    "userHeadUrl": "/assets/mock/avatar-1.png",
+    "userHeadUrl": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/avatar-1.png",
     "commentResources": [
       {
         "type": "image",
-        "src": "/assets/mock/goods-coldbrew.png",
-        "coverSrc": "/assets/mock/goods-coldbrew.png"
+        "src": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-coldbrew.png",
+        "coverSrc": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-coldbrew.png"
       }
     ],
     "isAnonymity": false,
@@ -20,7 +20,7 @@
     "sellerReply": "感谢反馈，冷萃系列建议到货即冷藏。",
     "goods": {
       "title": "冷萃美式双瓶装",
-      "thumb": "/assets/mock/goods-coldbrew.png",
+      "thumb": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-coldbrew.png",
       "specInfo": [
         {
           "specId": "MOCK-SPEC-CB",
@@ -41,14 +41,14 @@
     "commentContent": "挂耳包风味很稳定，花香明显，办公室常备。",
     "commentScore": 4,
     "userName": "产品经理阿北",
-    "userHeadUrl": "/assets/mock/avatar-2.png",
+    "userHeadUrl": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/avatar-2.png",
     "commentResources": [],
     "isAnonymity": false,
     "isAutoComment": false,
     "sellerReply": "谢谢喜欢，后续会补更多烘焙度选择。",
     "goods": {
       "title": "耶加雪菲挂耳 10 袋装",
-      "thumb": "/assets/mock/goods-beans.png",
+      "thumb": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-beans.png",
       "specInfo": [
         {
           "specId": "MOCK-SPEC-BEANS",
@@ -69,12 +69,12 @@
     "commentContent": "适合做早餐场景截图，烤箱加热 5 分钟就能出片。",
     "commentScore": 5,
     "userName": "早八打工人",
-    "userHeadUrl": "/assets/mock/avatar-1.png",
+    "userHeadUrl": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/avatar-1.png",
     "commentResources": [
       {
         "type": "image",
-        "src": "/assets/mock/goods-bagel.png",
-        "coverSrc": "/assets/mock/goods-bagel.png"
+        "src": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-bagel.png",
+        "coverSrc": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-bagel.png"
       }
     ],
     "isAnonymity": false,
@@ -82,7 +82,7 @@
     "sellerReply": "欢迎继续补图，贝果系列后续会上新品。",
     "goods": {
       "title": "芝士贝果早餐组合",
-      "thumb": "/assets/mock/goods-bagel.png",
+      "thumb": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-bagel.png",
       "specInfo": [
         {
           "specId": "MOCK-SPEC-BAGEL",
