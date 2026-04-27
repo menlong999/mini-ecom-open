@@ -94,4 +94,4 @@
 - 复现步骤
 - 控制台 / 云函数日志截图
 
-去 [GitHub Issues](https://github.com/menlong999/deshan/issues) 报。
+去 [GitHub Issues](https://github.com/menlong999/mini-ecom-open/issues) 报。
