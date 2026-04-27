@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   quality:
-    name: Lint, Format, and Tenant Validation
+    name: quality
     runs-on: ubuntu-latest
     defaults:
       run:
