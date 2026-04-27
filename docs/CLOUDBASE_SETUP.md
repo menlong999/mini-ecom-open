@@ -156,7 +156,34 @@ npm run sync:tenant -- <tenant>
 - [cloudbase/bootstrap/home_config.example.json](../cloudbase/bootstrap/home_config.example.json)
 - [cloudbase/bootstrap/store.example.json](../cloudbase/bootstrap/store.example.json)
 
+仓库内也提供了一套可直接跑前台页面的默认演示数据：
+
+- [cloudbase/bootstrap/category1.mock.json](../cloudbase/bootstrap/category1.mock.json)
+- [cloudbase/bootstrap/category2.mock.json](../cloudbase/bootstrap/category2.mock.json)
+- [cloudbase/bootstrap/goods_spu.mock.json](../cloudbase/bootstrap/goods_spu.mock.json)
+- [cloudbase/bootstrap/goods_spec.mock.json](../cloudbase/bootstrap/goods_spec.mock.json)
+- [cloudbase/bootstrap/goods_sku.mock.json](../cloudbase/bootstrap/goods_sku.mock.json)
+- [cloudbase/bootstrap/comments.mock.json](../cloudbase/bootstrap/comments.mock.json)
+- [cloudbase/bootstrap/home_config.mock.json](../cloudbase/bootstrap/home_config.mock.json)
+- [cloudbase/bootstrap/store.mock.json](../cloudbase/bootstrap/store.mock.json)
+
 这些文件适合导入新环境后再按租户实际业务修改。
+
+推荐导入顺序：
+
+1. `category1`
+2. `category2`
+3. `goods_spu`
+4. `goods_spec`
+5. `goods_sku`
+6. `comments`
+7. `home_config`
+8. `store`
+
+补充说明：
+
+- 这套 `mock` 数据默认引用 [miniprogram/assets/mock/](../miniprogram/assets/mock/) 下的本地图片，目的是让新用户不依赖 CloudBase 存储也能先把首页、分类、详情、评论链路跑起来并截图
+- 如果你的 FlexDB / Data Model 控制台对图片字段校验较严格，要求必须使用 `cloud://` 文件 ID，那么把这些图片先上传到 CloudBase 存储，再将 JSON 里的 `/assets/mock/...` 统一替换为真实文件 ID 即可
 
 ## 环境文件
 

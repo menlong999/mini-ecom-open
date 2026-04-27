@@ -15,6 +15,23 @@
 - [贡献指南](./CONTRIBUTING.md)
 - [安全策略](./SECURITY.md) · [行为准则](./CODE_OF_CONDUCT.md) · [更新日志](./CHANGELOG.md)
 
+## :rocket: 五分钟跑通演示数据
+
+仓库内已经补了一套可直接用于体验和截图的默认演示数据，位于 [cloudbase/bootstrap/](./cloudbase/bootstrap/)。
+
+- 可直接导入：`category1.mock.json`、`category2.mock.json`、`goods_spu.mock.json`、`goods_spec.mock.json`、`goods_sku.mock.json`、`comments.mock.json`、`home_config.mock.json`、`store.mock.json`
+- 默认图片资源：`miniprogram/assets/mock/`，用于首页 banner、分类缩略图、商品主图、详情图和评论头像
+- 推荐导入顺序：`category1 -> category2 -> goods_spu -> goods_spec -> goods_sku -> comments -> home_config -> store`
+
+导入后，你可以很快截出 4 组最关键的图：
+
+- 首页：banner + tab 商品卡片
+- 分类页：一级/二级分类网格
+- 商品详情页：轮播图 + 规格弹层 + 评论摘要
+- 门店/自提相关页：用于展示线下履约能力
+
+更完整的导入说明见 [docs/CLOUDBASE_SETUP.md](./docs/CLOUDBASE_SETUP.md) 与 [cloudbase/bootstrap/README.md](./cloudbase/bootstrap/README.md)。
+
 ## :handshake: 商业服务（部署 / 二开 / 运维）
 
 本项目采用 MIT 协议开源，**代码本身永久免费**，欢迎自行 fork 部署。

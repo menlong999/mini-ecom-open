@@ -1,0 +1,35 @@
+[
+  {
+    "searchPlaceholder": "搜索冷萃、挂耳、贝果、礼盒",
+    "swiper": [
+      {
+        "image": "/assets/mock/banner-coffee.png",
+        "spuId": "mock-spu-coldbrew",
+        "linkType": "spu",
+        "poi": null
+      },
+      {
+        "image": "/assets/mock/banner-gift.png",
+        "spuId": "mock-spu-gift",
+        "linkType": "spu",
+        "poi": null
+      }
+    ],
+    "tabList": [
+      {
+        "text": "新品推荐",
+        "spuIds": ["mock-spu-coldbrew", "mock-spu-beans"]
+      },
+      {
+        "text": "早餐轻食",
+        "spuIds": ["mock-spu-bagel"]
+      },
+      {
+        "text": "企业送礼",
+        "spuIds": ["mock-spu-gift"]
+      }
+    ],
+    "createdAt": 1714000010000,
+    "updatedAt": 1714000010000
+  }
+]
