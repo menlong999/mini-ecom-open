@@ -292,7 +292,7 @@ Page({
       title: '删除确认',
       content,
       confirmText: '删除',
-      confirmColor: '#fa4126',
+      confirmColor: '#B84A42',
       success: async (res) => {
         if (!res.confirm) return;
         try {

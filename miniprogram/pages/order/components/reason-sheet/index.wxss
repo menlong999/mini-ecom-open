@@ -1,6 +1,6 @@
 .popup-content {
   background-color: white;
-  color: #222427;
+  color: var(--color-text);
   border-radius: 20rpx 20rpx 0 0;
   overflow: hidden;
 }
@@ -25,7 +25,7 @@
   height: 100rpx;
   align-items: center;
   font-size: 30rpx;
-  color: #333333;
+  color: var(--color-text);
 }
 
 .popup-content .button-bar {
@@ -40,7 +40,7 @@
 
 .popup-content .button-bar .btn {
   width: 100%;
-  background: #fa4126;
+  background: var(--color-primary);
   color: #fff;
   border-radius: 48rpx;
 }

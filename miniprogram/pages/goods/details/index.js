@@ -4,23 +4,10 @@ import {
   getGoodsDetailsCommentsList,
   getGoodsDetailsCommentsCount,
 } from '../../../services/good/fetchGoodsDetailsComments';
-import { cdnBase } from '../../../config/index';
 import { addCart } from '../../../services/cart/cart';
 import { dispatchLogin } from '../../../services/common/login';
 
 import Dialog from 'tdesign-miniprogram/dialog/index';
-
-const imgPrefix = `${cdnBase}/`;
-const recLeftImg = `${imgPrefix}common/rec-left.png`;
-const recRightImg = `${imgPrefix}common/rec-right.png`;
-
-const obj2Params = (obj = {}, encode = false) => {
-  const result = [];
-  Object.keys(obj).forEach((key) =>
-    result.push(`${key}=${encode ? encodeURIComponent(obj[key]) : obj[key]}`)
-  );
-  return result.join('&');
-};
 
 Page({
   data: {
@@ -34,8 +21,6 @@ Page({
       middleCount: 0,
     },
 
-    recLeftImg,
-    recRightImg,
     details: {},
     goodsTabArray: [
       { name: '商品', value: '' },
@@ -424,9 +409,8 @@ Page({
           userName: item.userName || '',
           commentScore: item.commentScore,
           commentContent: item.commentContent || '用户未填写评价',
-          userHeadUrl: item.isAnonymity
-            ? this.anonymityAvatar
-            : item.userHeadUrl || this.anonymityAvatar,
+          userHeadUrl: item.isAnonymity ? '' : item.userHeadUrl || '',
+          avatarText: (item.userName || '匿').slice(0, 1),
         })),
       });
     } catch (error) {

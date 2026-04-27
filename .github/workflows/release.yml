@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: miniprogram/package-lock.json
+
+      - name: Install dependencies
+        working-directory: miniprogram
+        run: npm ci
+
+      - name: Quality gate
+        working-directory: miniprogram
+        run: npm run check
+
+      - name: Extract changelog for tag
+        id: changelog
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          VERSION="${TAG#v}"
+          awk "/^## \\[${VERSION}\\]/{flag=1; next} /^## \\[/{flag=0} flag" CHANGELOG.md > .release-notes.md || true
+          if [ ! -s .release-notes.md ]; then
+            echo "（本版本未在 CHANGELOG.md 中找到对应章节，使用 git log）" > .release-notes.md
+            git log --pretty=format:'- %s (%h)' "$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null)..HEAD" >> .release-notes.md || true
+          fi
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: .release-notes.md
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}

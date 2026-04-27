@@ -1,5 +1,9 @@
 <wxs module="isUrl">
-  var isUrl = function(item) { return item.indexOf('http') > -1; } module.exports = { isUrl: isUrl,
+  var isUrl = function(item) {
+    return item.indexOf('http') > -1;
+  }
+  module.exports = {
+    isUrl: isUrl,
   }
 </wxs>
 
@@ -68,7 +72,7 @@
           slot="icon"
           size="32rpx"
           prefix="wr"
-          color="{{index === 0 ? '#ef5433' : '#bbb'}}"
+          color="{{index === 0 ? '#b84a42' : '#9aa19a'}}"
           name="{{item.icon}}"
         />
       </block>

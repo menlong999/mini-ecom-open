@@ -11,7 +11,7 @@
   right: 30rpx;
   top: 30rpx;
   z-index: 9;
-  color: #999999;
+  color: var(--color-text-muted);
 }
 
 .popup-sku-header {
@@ -23,7 +23,7 @@
   width: 176rpx;
   height: 176rpx;
   border-radius: 8rpx;
-  background: #d8d8d8;
+  background: var(--color-page);
   margin-right: 24rpx;
 }
 
@@ -46,7 +46,7 @@
 
 .popup-sku-header .popup-sku-header__goods-info .popup-sku__selected-spec {
   display: flex;
-  color: #333333;
+  color: var(--color-text);
   font-size: 26rpx;
   line-height: 36rpx;
 }
@@ -67,7 +67,7 @@
 
 .popup-sku-body .popup-sku-group-container .popup-sku-row {
   padding: 32rpx 0;
-  border-bottom: 1rpx solid #f5f5f5;
+  border-bottom: 1rpx solid var(--color-page);
 }
 
 .popup-sku-body
@@ -75,17 +75,17 @@
   .popup-sku-row
   .popup-sku-row__title {
   font-size: 26rpx;
-  color: #333;
+  color: var(--color-text);
 }
 
 .popup-sku-body .popup-sku-group-container .popup-sku-row .popup-sku-row__item {
   font-size: 24rpx;
-  color: #333;
+  color: var(--color-text);
   min-width: 128rpx;
   height: 56rpx;
-  background-color: #f5f5f5;
+  background-color: var(--color-page);
   border-radius: 8rpx;
-  border: 2rpx solid #f5f5f5;
+  border: 2rpx solid var(--color-page);
   margin: 19rpx 26rpx 0 0;
   padding: 0 16rpx;
   display: inline-flex;
@@ -97,17 +97,17 @@
   .popup-sku-group-container
   .popup-sku-row
   .popup-sku-row__item.popup-sku-row__item--active {
-  border: 2rpx solid #fa4126;
-  color: #fa4126;
-  background: rgba(255, 95, 21, 0.04);
+  border: 2rpx solid var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .popup-sku-body
   .popup-sku-group-container
   .popup-sku-row
   .disabled-sku-selected {
-  background: #f5f5f5 !important;
-  color: #cccccc;
+  background: var(--color-page) !important;
+  color: var(--color-border);
 }
 
 .popup-sku-body .popup-sku-stepper-stock .popup-sku-stepper-container {
@@ -123,7 +123,7 @@
   .popup-sku__stepper-title {
   display: flex;
   font-size: 26rpx;
-  color: #333;
+  color: var(--color-text);
 }
 
 .popup-sku-body
@@ -132,7 +132,7 @@
   .popup-sku__stepper-title
   .limit-text {
   margin-left: 10rpx;
-  color: #999999;
+  color: var(--color-text-muted);
 }
 
 .popup-sku-body
@@ -160,7 +160,7 @@
   position: relative;
   height: 100%;
   text-align: center;
-  background-color: #f5f5f5;
+  background-color: var(--color-page);
   border-radius: 4rpx;
 }
 
@@ -169,7 +169,7 @@
   .popup-sku-stepper-container
   .popup-stepper
   .input-num-wrap {
-  color: #282828;
+  color: var(--color-text);
   display: flex;
   max-width: 76rpx;
   align-items: center;
@@ -203,7 +203,7 @@
   .popup-stepper__minus {
   margin-right: 4rpx;
   border-radius: 4rpx;
-  color: #9a979b;
+  color: var(--color-text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,7 +216,7 @@
   .popup-stepper__plus {
   margin-left: 4rpx;
   border-radius: 4rpx;
-  color: #9a979b;
+  color: var(--color-text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -229,7 +229,7 @@
   .popup-stepper__plus::after {
   width: 24rpx;
   height: 3rpx;
-  background-color: #999999;
+  background-color: var(--color-text-muted);
 }
 
 .popup-sku-body
@@ -239,7 +239,7 @@
   .popup-stepper__plus::before {
   width: 3rpx;
   height: 24rpx;
-  background-color: #999999;
+  background-color: var(--color-text-muted);
 }
 
 .popup-sku-actions {
@@ -258,24 +258,24 @@
 }
 
 .popup-sku-actions .sku-operate .sku-operate-addCart {
-  background-color: #ffece9;
-  color: #fa4126;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
   border-radius: 48rpx 0 0 48rpx;
 }
 
 .popup-sku-actions .sku-operate .sku-operate-addCart.disabled {
-  background: rgb(221, 221, 221);
+  background: var(--color-text-disabled);
   color: #fff;
 }
 
 .popup-sku-actions .sku-operate .sku-operate-buyNow {
-  background-color: #fa4126;
+  background-color: var(--color-primary);
   border-radius: 0 48rpx 48rpx 0;
 }
 
 .popup-sku-actions .sku-operate .sku-operate-buyNow.disabled {
   color: #fff;
-  background: rgb(198, 198, 198);
+  background: var(--color-text-disabled);
 }
 
 .popup-sku-actions .sku-operate .selected-sku-btn {
@@ -290,11 +290,11 @@
   height: 80rpx;
   text-align: center;
   line-height: 88rpx;
-  background-color: #fa4126;
+  background-color: var(--color-primary);
 }
 
 .popup-container .single-confirm-btn.disabled {
   font-size: 32rpx;
   color: #fff;
-  background-color: #dddddd;
+  background-color: var(--color-border);
 }

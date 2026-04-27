@@ -20,7 +20,7 @@
           <t-icon
             name="check-circle-filled"
             size="36rpx"
-            color="#fa4126"
+            color="#4F6F64"
             wx:if="{{item.checked}}"
           />
           <t-icon name="circle" size="36rpx" color="#C7C7C7" wx:else />

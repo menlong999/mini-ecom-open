@@ -38,7 +38,13 @@
     <view class="comment-card" wx:for="{{commentList}}" wx:key="uindex">
       <!-- 用户信息行 -->
       <view class="comment-header">
-        <image class="user-avatar" src="{{item.userHeadUrl}}" mode="aspectFill" />
+        <image
+          wx:if="{{item.userHeadUrl}}"
+          class="user-avatar"
+          src="{{item.userHeadUrl}}"
+          mode="aspectFill"
+        />
+        <view wx:else class="user-avatar user-avatar-placeholder">{{item.avatarText || '匿'}}</view>
         <view class="user-name">{{item.userName}}</view>
         <view class="comment-time">{{item.commentTime}}</view>
       </view>

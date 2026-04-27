@@ -1,5 +1,5 @@
 page {
-  background-color: #f5f5f5;
+  background-color: var(--color-page);
 }
 
 .page-container .comment-card {
@@ -30,7 +30,7 @@ page {
 .comment-card .goods-info-container .goods-detail {
   font-size: 24rpx;
   font-weight: normal;
-  color: #999999;
+  color: var(--color-text-muted);
   margin-top: 16rpx;
 }
 
@@ -52,7 +52,7 @@ page {
 
 .comment-card .textarea-container .textarea {
   height: 294rpx;
-  background-color: #f5f5f5;
+  background-color: var(--color-page);
   border-radius: 16rpx;
   font-size: 28rpx;
   font-weight: normal;
@@ -71,7 +71,7 @@ page {
 .page-container .anonymous-box .name {
   font-size: 28rpx;
   font-weight: normal;
-  color: #999999;
+  color: var(--color-text-muted);
   padding-left: 28rpx;
 }
 
@@ -118,16 +118,16 @@ page {
 
 .submit-button-container .submit-button {
   --td-button-default-color: #fff;
-  --td-button-default-bg-color: #fa4126;
-  --td-button-default-border-color: #fa4126;
-  --td-button-default-active-bg-color: #fa42269c;
+  --td-button-default-bg-color: var(--color-primary);
+  --td-button-default-border-color: var(--color-primary);
+  --td-button-default-active-bg-color: rgba(79, 111, 100, 0.72);
 }
 
 .submit-button-container .submit-button-disabled {
   --td-button-default-color: #fff;
-  --td-button-default-bg-color: #ccc;
-  --td-button-default-border-color: #ccc;
-  --td-button-default-active-bg-color: rgba(204, 204, 204, 0.789);
+  --td-button-default-bg-color: var(--color-border);
+  --td-button-default-border-color: var(--color-border);
+  --td-button-default-active-bg-color: var(--color-text-disabled);
 }
 
 .page-container .upload-container {
@@ -157,7 +157,7 @@ page {
 }
 
 .page-container .t-upload__close-btn {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: var(--color-mask);
   border-bottom-left-radius: 8rpx;
   width: 36rpx;
   height: 36rpx;

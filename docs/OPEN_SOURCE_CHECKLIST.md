@@ -4,10 +4,11 @@
 
 - 租户私有配置与开源主干解耦
 - 本地生成文件加入 `.gitignore`
-- 支付、退款、二维码配置已抽到 tenant 配置
+- 支付、退款、二维码、发票、售后原因配置已抽到 tenant 配置
 - 首页配置与自提门店保留在各 tenant 的 CloudBase 数据库
 - 默认 tenant 与示例 tenant 已拆分
 - GitHub Actions 已接入 lint、format、tenant 校验
+- 私有 AppID、云环境、工作流 ID 与旧模板 CDN 已接入边界检查
 - commitlint 已接入本地 `commit-msg` hook
 - CloudBase 初始化与二开边界文档已补齐
 - 微信平台能力的开通前置条件已纳入文档说明

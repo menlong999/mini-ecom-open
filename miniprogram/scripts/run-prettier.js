@@ -37,14 +37,7 @@ const targets = [
   '../cloudfunctions/**/*.js',
 ];
 
-const wxmlTargets = ['pages/**/*.wxml'];
-
 execFileSync(process.execPath, [...commonArgs, ...targets], {
-  cwd: path.resolve(__dirname, '..'),
-  stdio: 'inherit',
-});
-
-execFileSync(process.execPath, [...commonArgs, '--parser', 'html', ...wxmlTargets], {
   cwd: path.resolve(__dirname, '..'),
   stdio: 'inherit',
 });

@@ -10,7 +10,7 @@
   overflow: hidden;
 }
 .goods-category-class {
-  background-color: #f6f6f6 !important;
+  background-color: var(--color-page) !important;
   height: 100%;
 }
 .goods-category-class .goods-category-normal-item-container-item {

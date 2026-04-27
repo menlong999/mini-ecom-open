@@ -1,7 +1,7 @@
 .category-container {
   padding: 24rpx;
   padding-bottom: 160rpx;
-  background: #f5f5f5;
+  background: var(--color-page);
   min-height: 100vh;
 }
 
@@ -16,12 +16,12 @@
   background: #fff;
   border-radius: 999rpx;
   font-size: 24rpx;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .status-tab.active {
-  color: #0052d9;
-  background: #e6eefb;
+  color: var(--admin-primary);
+  background: var(--admin-primary-light);
 }
 
 .toolbar {
@@ -58,7 +58,7 @@
 
 .group-title {
   font-size: 28rpx;
-  color: #333;
+  color: var(--color-text);
   font-weight: 600;
 }
 
@@ -68,9 +68,9 @@
 
 .group-add-btn {
   --td-button-default-color: #fff;
-  --td-button-default-bg-color: #07c160;
-  --td-button-default-border-color: #07c160;
-  --td-button-default-active-bg-color: rgba(7, 193, 96, 0.85);
+  --td-button-default-bg-color: var(--color-success);
+  --td-button-default-border-color: var(--color-success);
+  --td-button-default-active-bg-color: var(--color-primary-pressed);
 }
 
 .group-items {
@@ -85,12 +85,12 @@
   gap: 16rpx;
   padding: 12rpx;
   border-radius: 12rpx;
-  background: #f9f9f9;
+  background: var(--color-page);
 }
 
 .empty-sub {
   font-size: 24rpx;
-  color: #999;
+  color: var(--color-text-muted);
   padding: 8rpx 0 4rpx;
 }
 
@@ -114,13 +114,13 @@
 
 .category-name {
   font-size: 28rpx;
-  color: #333;
+  color: var(--color-text);
   font-weight: 600;
 }
 
 .category-meta {
   font-size: 22rpx;
-  color: #999;
+  color: var(--color-text-muted);
   margin-top: 6rpx;
 }
 
@@ -131,7 +131,7 @@
 
 .empty-tip {
   text-align: center;
-  color: #999;
+  color: var(--color-text-muted);
   font-size: 24rpx;
   padding: 40rpx 0;
 }
@@ -142,8 +142,8 @@
   right: 0;
   bottom: 0;
   padding: 16rpx 24rpx calc(24rpx + env(safe-area-inset-bottom));
-  background: #f5f5f5;
-  box-shadow: 0 -8rpx 20rpx rgba(0, 0, 0, 0.04);
+  background: var(--color-page);
+  box-shadow: var(--shadow-bar);
 }
 
 .dialog-content {
@@ -160,19 +160,19 @@
 
 .form-label {
   font-size: 24rpx;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .form-picker {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f7f7f7;
+  background: var(--color-page);
   padding: 16rpx;
   border-radius: 12rpx;
 }
 
 .form-picker-text {
   font-size: 26rpx;
-  color: #333;
+  color: var(--color-text);
 }

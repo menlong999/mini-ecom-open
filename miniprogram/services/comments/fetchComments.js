@@ -1,5 +1,3 @@
-import { config } from '../../config/index';
-
 /** 获取商品评论 */
 /** 获取商品评论 */
 export async function fetchComments(params) {

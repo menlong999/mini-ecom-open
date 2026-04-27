@@ -11,7 +11,7 @@
       <t-checkbox
         class="goods-checkbox"
         checked="{{goods.selected}}"
-        color="#FA4126"
+        color="#4F6F64"
         bind:change="handleGoodsSelectChange"
         data-index="{{gIndex}}"
       />
@@ -58,7 +58,7 @@
           class="t-cell__left__icon"
           name="goods_refund"
           size="48rpx"
-          color="#fa4126"
+          color="#4F6F64"
         />
       </t-cell>
       <t-cell
@@ -74,7 +74,7 @@
           class="t-cell__left__icon"
           name="goods_return"
           size="48rpx"
-          color="#fa4126"
+          color="#4F6F64"
         />
       </t-cell>
       <t-cell wx:else class="non-returnable" title="退货退款" description="该商品不支持退货">
@@ -84,7 +84,7 @@
           class="t-cell__left__icon"
           name="goods_return"
           size="48rpx"
-          color="#fa4126"
+          color="#4F6F64"
         />
       </t-cell>
     </t-cell-group>
@@ -128,7 +128,7 @@
             />
             <view class="service-from-group__price">
               修改
-              <t-icon color="#bbb" name="chevron-right" size="30rpx" slot="left-icon" />
+              <t-icon color="#9aa19a" name="chevron-right" size="30rpx" slot="left-icon" />
             </view>
           </view>
         </t-cell>

@@ -1,13 +1,13 @@
 .home-config-page {
   min-height: 100vh;
-  background: #f7f8fa;
+  background: var(--color-page);
   padding-bottom: calc(env(safe-area-inset-bottom) + 140rpx);
 }
 
 .loading-wrap {
   padding: 48rpx 0;
   text-align: center;
-  color: #b9b9b9;
+  color: var(--color-text-muted);
 }
 
 .content {
@@ -24,13 +24,13 @@
 .section-title {
   font-size: 30rpx;
   font-weight: 700;
-  color: #1f1f1f;
+  color: var(--color-text);
   margin-bottom: 8rpx;
 }
 
 .section-desc {
   font-size: 24rpx;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 16rpx;
 }
 
@@ -40,13 +40,13 @@
 
 .empty-tip {
   text-align: center;
-  color: #999;
+  color: var(--color-text-muted);
   font-size: 26rpx;
   padding: 20rpx 0;
 }
 
 .empty-sub {
-  color: #999;
+  color: var(--color-text-muted);
   font-size: 26rpx;
   padding: 8rpx 0 12rpx;
 }
@@ -58,7 +58,7 @@
   bottom: 0;
   background: #fff;
   padding: 16rpx 24rpx calc(env(safe-area-inset-bottom) + 16rpx);
-  border-top: 1rpx solid #e5e6eb;
+  border-top: 1rpx solid var(--color-border);
 }
 
 .picker {
@@ -75,13 +75,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 18rpx 20rpx;
-  border-bottom: 1rpx solid #e5e6eb;
+  border-bottom: 1rpx solid var(--color-border);
 }
 
 .picker-title {
   font-size: 30rpx;
   font-weight: 700;
-  color: #1f1f1f;
+  color: var(--color-text);
 }
 
 .picker-close {
@@ -92,7 +92,7 @@
   display: flex;
   gap: 12rpx;
   padding: 16rpx 20rpx;
-  border-bottom: 1rpx solid #e5e6eb;
+  border-bottom: 1rpx solid var(--color-border);
 }
 
 .picker-body {
@@ -122,7 +122,7 @@
 }
 
 .picker-item + .picker-item {
-  border-top: 1rpx solid #f0f0f0;
+  border-top: 1rpx solid var(--color-border);
 }
 
 .picker-info {
@@ -134,7 +134,7 @@
 
 .picker-title-text {
   font-size: 28rpx;
-  color: #1f1f1f;
+  color: var(--color-text);
   line-height: 38rpx;
   max-height: 76rpx;
   overflow: hidden;
@@ -145,7 +145,7 @@
 
 .picker-sub {
   font-size: 24rpx;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-top: 6rpx;
 }
 
@@ -155,7 +155,7 @@
 
 .picker-selected-title {
   font-size: 26rpx;
-  color: #1f1f1f;
+  color: var(--color-text);
   font-weight: 700;
   margin: 10rpx 0 12rpx;
 }
@@ -163,7 +163,7 @@
 .picker-results-title {
   padding: 8rpx 20rpx 6rpx;
   font-size: 26rpx;
-  color: #1f1f1f;
+  color: var(--color-text);
   font-weight: 700;
 }
 
@@ -202,7 +202,7 @@
   width: 100%;
   height: 100%;
   background: #fff;
-  border: 1rpx solid #e5e6eb;
+  border: 1rpx solid var(--color-border);
   border-radius: 14rpx;
   box-sizing: border-box;
   display: flex;
@@ -230,11 +230,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #999;
+  color: var(--color-text-muted);
   align-self: stretch;
   border-radius: 10rpx;
-  background: #f7f8fa;
-  border: 1rpx solid #e5e6eb;
+  background: var(--color-page);
+  border: 1rpx solid var(--color-border);
   position: relative;
   overflow: hidden;
 }
@@ -253,12 +253,12 @@
   align-items: center;
   justify-content: center;
   border-radius: 12rpx;
-  border: 1rpx solid #e5e6eb;
+  border: 1rpx solid var(--color-border);
   background: #fff;
 }
 
 .icon-delete:active {
-  background: #f7f8fa;
+  background: var(--color-page);
 }
 
 .icon-handle {
@@ -268,7 +268,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 12rpx;
-  border: 1rpx solid #e5e6eb;
+  border: 1rpx solid var(--color-border);
   background: rgba(255, 255, 255, 0.92);
 }
 
@@ -278,17 +278,11 @@
 
 .drag-handle::before {
   content: '';
-  width: 24rpx;
-  height: 120rpx;
-  border-radius: 8rpx;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    #cfcfcf 0,
-    #cfcfcf 6rpx,
-    transparent 6rpx,
-    transparent 14rpx
-  );
-  opacity: 0.7;
+  width: 8rpx;
+  height: 96rpx;
+  border-radius: 4rpx;
+  background: var(--admin-border);
+  opacity: 0.9;
 }
 
 .swiper-main {
@@ -302,7 +296,7 @@
   width: 100%;
   height: 420rpx;
   border-radius: 10rpx;
-  background: #f7f8fa;
+  background: var(--color-page);
 }
 
 .swiper-img {
@@ -318,7 +312,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #999;
+  color: var(--color-text-muted);
   gap: 8rpx;
 }
 
@@ -332,8 +326,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 12rpx;
-  background: #f7f8fa;
-  border: 1rpx solid #e5e6eb;
+  background: var(--color-page);
+  border: 1rpx solid var(--color-border);
   border-radius: 12rpx;
   padding: 12rpx 14rpx;
 }
@@ -341,7 +335,7 @@
 .swiper-select__text {
   flex: 1;
   font-size: 28rpx;
-  color: #1f1f1f;
+  color: var(--color-text);
   line-height: 36rpx;
   max-height: 72rpx;
   overflow: hidden;
@@ -361,16 +355,16 @@
   text-align: center;
   padding: 10rpx 0;
   border-radius: 12rpx;
-  border: 1rpx solid #e5e6eb;
+  border: 1rpx solid var(--color-border);
   font-size: 24rpx;
-  color: #666;
-  background: #fafafa;
+  color: var(--color-text-secondary);
+  background: var(--color-page);
 }
 
 .link-type-btn--active {
-  color: #ff5f15;
-  border-color: #ffb999;
-  background: #fff4ee;
+  color: var(--color-warning);
+  border-color: var(--color-warning);
+  background: var(--color-primary-light);
 }
 
 .poi-form {
@@ -386,7 +380,7 @@
 }
 
 .poi-input {
-  border: 1rpx solid #e5e6eb;
+  border: 1rpx solid var(--color-border);
   border-radius: 12rpx;
   padding: 6rpx 0;
   background: #fff;
@@ -411,7 +405,7 @@
   --td-input-vertical-padding: 0rpx;
   padding: 0 !important;
   background: transparent !important;
-  border-bottom: 1rpx solid #e5e6eb;
+  border-bottom: 1rpx solid var(--color-border);
   border-radius: 0 !important;
 }
 
@@ -421,7 +415,7 @@
   line-height: 44rpx;
   font-size: 30rpx;
   font-weight: 700;
-  color: #1f1f1f;
+  color: var(--color-text);
 }
 
 .tab-select {
@@ -429,8 +423,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 12rpx;
-  background: #f7f8fa;
-  border: 1rpx solid #e5e6eb;
+  background: var(--color-page);
+  border: 1rpx solid var(--color-border);
   border-radius: 12rpx;
   padding: 10rpx 14rpx;
 }
@@ -438,14 +432,14 @@
 .tab-select__text {
   flex: 1;
   font-size: 24rpx;
-  color: #666;
+  color: var(--color-text-secondary);
   line-height: 34rpx;
 }
 
 .compact-title {
   flex: 1;
   font-size: 26rpx;
-  color: #1f1f1f;
+  color: var(--color-text);
   line-height: 34rpx;
   max-height: 68rpx;
   overflow: hidden;

@@ -1,15 +1,53 @@
 # 极简电商小程序
 
-本项目是基于 [TDesign 零售行业模版](https://github.com/Tencent/tdesign-miniprogram-starter-retail) 进行二次开发的电商小程序。通过对原模版的深度重构与优化，移除了冗余的 Mock 逻辑，精简了目录结构，并接入了高效的云开发（CloudBase）能力，打造了一个结构清晰、性能卓越、易于扩展的完整电商解决方案。
+本项目是一个基于微信小程序与 CloudBase 的轻量电商内核。项目使用 TDesign Mini Program 作为组件库，但视觉系统、租户配置、云函数边界和数据模型约束都由本仓库维护，适合开源复用与私有租户定制。
 
 ## :books: 文档导航
 
 - [文档索引](./docs/README.md)
 - [架构说明](./docs/ARCHITECTURE.md)
 - [CloudBase 接入与初始化](./docs/CLOUDBASE_SETUP.md)
+- [设计系统](./docs/DESIGN_SYSTEM.md)
 - [二次开发约束](./docs/SECONDARY_DEVELOPMENT.md)
 - [开源准备清单](./docs/OPEN_SOURCE_CHECKLIST.md)
 - [贡献指南](./CONTRIBUTING.md)
+- [安全策略](./SECURITY.md) · [行为准则](./CODE_OF_CONDUCT.md) · [更新日志](./CHANGELOG.md)
+
+## :handshake: 商业服务（部署 / 二开 / 运维）
+
+本项目采用 MIT 协议开源，**代码本身永久免费**，欢迎自行 fork 部署。
+
+如果你是商家或团队，**没有研发能力或不想自己折腾**，需要以下任一服务，欢迎联系作者：
+
+- **整套部署**：CloudBase 环境开通、小程序后台配置、云函数发布、域名/支付/物流接入，交付一个可直接上线运营的小程序
+- **品牌定制**：按你的品牌色 / Logo / 文案 / 业务流程定制，租户级 overlay 不污染主干
+- **二开外包**：在内核上扩展专属页面、云函数、对接自有 ERP / CRM / 第三方接口
+- **长期运维**：版本升级、故障响应、数据备份、性能优化
+
+**联系方式**：微信 `adroplv`，添加时**请注明「开源电商 + 来意（如：部署 / 二开 / 咨询）」**，否则可能不予通过。
+
+<!-- 把二维码图片放到 docs/assets/wechat-qr.jpg 后即可显示；未放置时下面这行会显示破图，可以先注释掉。 -->
+<p>
+  <img src="./docs/assets/wechat-qr.jpg" alt="作者微信二维码" width="200" />
+</p>
+
+> 提 GitHub Issue 仅处理 bug 与功能讨论；商业合作请走微信。
+
+## :lock: 私有租户管理（重要）
+
+本仓库以"**开源内核 + 私有 overlay**"模式运作。除 `tenants/default/` 与 `tenants/example/` 外，所有 `tenants/*/` 目录都被 `.gitignore` 忽略，且 husky pre-commit 会拒绝任何私有租户文件入库，**生产敏感配置不会进入版本控制**。
+
+新建一个租户：
+
+```bash
+cp -R tenants/example tenants/<your-brand>
+$EDITOR tenants/<your-brand>/tenant.config.js   # 仅写差异项
+cd miniprogram && npm run sync:tenant -- <your-brand>
+```
+
+完整步骤与配置字段说明见 [tenants/example/README.md](./tenants/example/README.md)。
+
+> ⚠️ 严禁把真实的 `envId`、`appId`、手机号、商户号、收件地址写入 `tenants/example/` 或主仓任何文件。需要差异化时优先选择：① 配置项 → ②UI 覆盖点 → ③ 行为钩子 → ④fork（最后手段）。详见 [docs/SECONDARY_DEVELOPMENT.md](./docs/SECONDARY_DEVELOPMENT.md)。
 
 ## :gear: 租户化配置
 

@@ -2,7 +2,6 @@ import Dialog from 'tdesign-miniprogram/dialog/index';
 import Toast from 'tdesign-miniprogram/toast/index';
 import {
   fetchCartList,
-  addCart,
   selectGoods,
   selectAllGoods,
   changeQuantity,
@@ -188,7 +187,7 @@ Page({
     try {
       const goods = e.currentTarget.dataset.goods;
 
-      const confirmResult = await Dialog.confirm({
+      await Dialog.confirm({
         content: '确认删除该商品吗?',
         confirmBtn: '确定',
         cancelBtn: '取消',
@@ -227,7 +226,7 @@ Page({
         return;
       }
 
-      const confirmResult = await Dialog.confirm({
+      await Dialog.confirm({
         content: '确认清空所有失效商品吗?',
         confirmBtn: '确定',
         cancelBtn: '取消',

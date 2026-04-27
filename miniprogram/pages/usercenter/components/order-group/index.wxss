@@ -39,7 +39,7 @@
 }
 .order-group__item__title {
   font-size: 24rpx;
-  color: #666;
+  color: var(--color-text-secondary);
   line-height: 32rpx;
 }
 .order-group__item__icon {

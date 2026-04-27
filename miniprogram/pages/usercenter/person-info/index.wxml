@@ -5,11 +5,13 @@
     <view style="position: relative">
       <t-cell title="头像" center="{{true}}" arrow t-class-left="order-group__left">
         <t-image
+          wx:if="{{personInfo.avatarUrl}}"
           slot="note"
-          src="{{personInfo.avatarUrl || 'https://tdesign.gtimg.com/miniprogram/template/retail/usercenter/icon-user-center-avatar@2x.png'}}"
+          src="{{personInfo.avatarUrl}}"
           t-class="avatarUrl"
           mode="aspectFill"
         />
+        <view wx:else slot="note" class="avatarUrl avatar-placeholder">头像</view>
       </t-cell>
       <button
         class="avatar-wrapper-btn"

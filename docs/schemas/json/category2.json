@@ -1,0 +1,255 @@
+{
+    "x-primary-column": "category2Name",
+    "x-kind": "tcb",
+    "x-defaultMethods": [
+        "wedaCreate",
+        "wedaUpdate",
+        "wedaDelete",
+        "wedaGetItem",
+        "wedaGetRecords",
+        "wedaGetList",
+        "wedaBatchCreate",
+        "wedaBatchUpdate",
+        "wedaBatchDelete"
+    ],
+    "type": "object",
+    "x-relatedType": "exist",
+    "x-viewId": "view-7n8dk27gv4",
+    "required": [
+        "category2Name"
+    ],
+    "properties": {
+        "owner": {
+            "default": "",
+            "x-system": true,
+            "x-id": "f57f39e",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "所有人",
+            "x-index": 4,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "_mainDep": {
+            "x-system": true,
+            "x-id": "7665d7c",
+            "format": "father-son",
+            "x-hidden": true,
+            "type": "string",
+            "title": "所属主管部门",
+            "x-index": 7,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_department"
+            }
+        },
+        "thumbnail": {
+            "x-image-size": 5242880,
+            "x-required": false,
+            "x-keyPath": "",
+            "x-id": "af125d53",
+            "format": "x-image",
+            "description": "图片",
+            "type": "string",
+            "x-index": 49,
+            "title": "thumbnail",
+            "x-storage-type": "cloudID",
+            "x-unique": false
+        },
+        "data_spu_catL2_id_list": {
+            "maxItems": 500,
+            "x-logical": true,
+            "x-id": "8bddd9e",
+            "format": "one-many",
+            "name": "data_spu_catL2_id_list",
+            "deleteWay": "doNothing",
+            "title": "data_spu_catL2_id",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "name": "_id",
+                        "title": "数据标识",
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [],
+            "x-parent": {
+                "parentFieldKey": "categoryId",
+                "parentFieldTitle": "categoryId",
+                "parentDataSourceName": "goods_spu"
+            }
+        },
+        "category2Id": {
+            "x-required": false,
+            "x-keyPath": "",
+            "x-autonumber": {
+                "start": 1000,
+                "type": "prefix-string",
+                "value": "C2-{SEQNUM:4}"
+            },
+            "x-id": "77c6357f",
+            "format": "x-autonumber",
+            "description": "二级分类 ID",
+            "type": "string",
+            "x-index": 2,
+            "title": "category2Id",
+            "x-unique": true,
+            "maxLength": 128
+        },
+        "category1Id": {
+            "x-keyPath": "",
+            "x-logical": false,
+            "x-id": "5bb51e4a",
+            "format": "many-one",
+            "description": "",
+            "type": "object",
+            "x-index": 47,
+            "title": "category1Id",
+            "x-unique": false,
+            "required": [],
+            "x-parent": {
+                "parentFieldKey": "category2Id_list",
+                "parentFieldTitle": "category1Id",
+                "parentDataSourceName": "category1"
+            },
+            "x-required": false,
+            "name": "category1Id",
+            "deleteWay": "doNothing",
+            "properties": {
+                "_id": {
+                    "name": "_id",
+                    "title": "数据标识",
+                    "type": "string"
+                }
+            }
+        },
+        "createdAt": {
+            "default": 0,
+            "x-system": true,
+            "x-id": "a4a2202",
+            "format": "datetime",
+            "type": "number",
+            "title": "创建时间",
+            "x-index": 2,
+            "x-unique": false
+        },
+        "createBy": {
+            "default": "",
+            "x-system": true,
+            "x-id": "76a4876",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "创建人",
+            "x-index": 5,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "category2Id_goods_list": {
+            "maxItems": 500,
+            "x-logical": true,
+            "x-id": "67p6cd8q",
+            "format": "one-many",
+            "name": "category2Id_goods_list",
+            "deleteWay": "doNothing",
+            "title": "category2Id",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "name": "_id",
+                        "title": "数据标识",
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [],
+            "x-parent": {
+                "parentFieldKey": "categoryId",
+                "parentFieldTitle": "categoryId",
+                "parentDataSourceName": "goods"
+            }
+        },
+        "updateBy": {
+            "default": "",
+            "x-system": true,
+            "x-id": "93a079a",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "修改人",
+            "x-index": 6,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "_openid": {
+            "default": "",
+            "x-system": true,
+            "x-id": "f30f65e",
+            "format": "",
+            "pattern": "",
+            "description": "仅微信云开发下使用",
+            "type": "string",
+            "title": "记录创建者",
+            "x-index": 45,
+            "x-unique": false
+        },
+        "category2Name": {
+            "x-required": true,
+            "x-keyPath": "",
+            "x-id": "9fffd332",
+            "format": "",
+            "description": "二级分类名称",
+            "isEnum": false,
+            "fixed": "left",
+            "type": "string",
+            "x-index": 4,
+            "title": "category2Name",
+            "x-unique": false,
+            "maxLength": 256
+        },
+        "_id": {
+            "x-system": true,
+            "x-id": "817ddee",
+            "format": "",
+            "x-hidden": false,
+            "type": "string",
+            "title": "数据标识",
+            "x-index": 1,
+            "x-unique": true
+        },
+        "updatedAt": {
+            "default": 0,
+            "x-system": true,
+            "x-id": "421c796",
+            "format": "datetime",
+            "type": "number",
+            "title": "更新时间",
+            "x-index": 3,
+            "x-unique": false
+        }
+    },
+    "title": "category2"
+}

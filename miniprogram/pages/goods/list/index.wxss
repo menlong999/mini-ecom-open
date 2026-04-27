@@ -1,5 +1,5 @@
 page {
-  background-color: #f5f5f5;
+  background-color: var(--color-page);
 }
 
 .goods-list-container {
@@ -24,11 +24,11 @@ page {
   align-items: center;
   margin-right: 48rpx;
   font-size: 28rpx;
-  color: #333;
+  color: var(--color-text);
 }
 
 .filter-item.filter-active {
-  color: #FA4126;
+  color: var(--color-primary);
 }
 
 .filter-arrows {
@@ -49,14 +49,14 @@ page {
 .price-header {
   font-size: 28rpx;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text);
   margin-bottom: 24rpx;
 }
 
 .price-ipts-wrap {
   display: flex;
   align-items: center;
-  --td-input-bg-color: #f5f5f5;
+  --td-input-bg-color: var(--color-page);
   --td-input-vertical-padding: 16rpx;
   --td-input-border-color: transparent;
 }
@@ -69,7 +69,7 @@ page {
 .price-divided {
   width: 32rpx;
   text-align: center;
-  color: #333;
+  color: var(--color-text);
 }
 
 .filter-btns {
@@ -116,7 +116,7 @@ page {
 
 .goods-title {
   font-size: 28rpx;
-  color: #333;
+  color: var(--color-text);
   line-height: 36rpx;
   height: 72rpx;
   display: -webkit-box;
@@ -133,9 +133,9 @@ page {
 }
 
 .goods-tag {
-  color: #fa4126;
+  color: var(--color-primary);
   font-size: 20rpx;
-  border: 1rpx solid #fa4126;
+  border: 1rpx solid var(--color-primary);
   padding: 0 8rpx;
   border-radius: 16rpx;
   line-height: 30rpx;
@@ -152,13 +152,13 @@ page {
 
 .goods-price {
   font-size: 36rpx;
-  color: #fa4126;
+  color: var(--color-price);
   font-weight: bold;
 }
 
 .goods-origin-price {
   font-size: 24rpx;
-  color: #999;
+  color: var(--color-text-muted);
   text-decoration: line-through;
   margin-left: 12rpx;
 }

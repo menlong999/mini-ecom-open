@@ -71,6 +71,7 @@ Page({
         commentTime: item.commentTime
           ? dayjs(Number(item.commentTime)).format('YYYY/MM/DD HH:mm')
           : '',
+        avatarText: (item.userName || '匿').slice(0, 1),
         uindex: `${item._id || ''}_${page}_${idx}`,
       }));
 

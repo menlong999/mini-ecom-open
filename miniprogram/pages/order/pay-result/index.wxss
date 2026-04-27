@@ -3,61 +3,115 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 120rpx 32rpx 56rpx;
+  background: var(--color-page);
 }
 
-.pay-result .pay-status {
-  margin-top: 100rpx;
+.pay-result-card {
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12rpx;
+  padding: 72rpx 32rpx 64rpx;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1rpx solid var(--color-border);
+}
+
+.pay-status-icon {
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-light);
+  margin-bottom: 28rpx;
 }
 
 .pay-result .pay-status-text {
-  font-size: 48rpx;
-  line-height: 72rpx;
-  font-weight: bold;
-  color: #333333;
+  font-size: 40rpx;
+  line-height: 56rpx;
+  font-weight: 600;
+  color: var(--color-text);
 }
 
-.pay-result .pay-money {
-  color: #666666;
+.pay-status-desc {
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  line-height: 38rpx;
+  color: var(--color-text-secondary);
+}
+
+.pay-summary {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 24rpx;
+  padding: 28rpx 32rpx;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1rpx solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pay-summary-label {
+  color: var(--color-text-secondary);
   font-size: 28rpx;
-  line-height: 48rpx;
-  margin-top: 60rpx;
+  line-height: 40rpx;
+}
+
+.pay-summary-amount {
   display: flex;
   align-items: baseline;
-  justify-content: center;
+  justify-content: flex-end;
+  color: var(--color-price);
+  font-size: 40rpx;
+  font-weight: 600;
 }
 
 .pay-result .pay-money .pay-money__price {
-  font-size: 56rpx;
-  line-height: 72rpx;
-  color: #fa4126;
-  font-weight: bold;
+  font-size: 44rpx;
+  line-height: 56rpx;
+  color: var(--color-price);
+  font-weight: 600;
 }
 
 .pay-result .btn-wrapper {
-  margin-top: 80rpx;
-  padding: 0 48rpx;
+  margin-top: 40rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32rpx;
+  gap: 20rpx;
   width: 100%;
 }
 
 .pay-result .btn-wrapper .status-btn {
-  width: 300rpx !important;
+  flex: 1;
+  height: 88rpx !important;
   margin: 0 !important;
-  border-radius: 44rpx;
-  border: 2rpx solid #fa4126;
-  color: #fa4126;
-  font-weight: bold;
-  --td-button-default-bg-color: #fff;
-  --td-button-default-border-color: #fa4126;
-  --td-button-default-color: #fa4126;
-  --td-button-default-active-bg-color: #fff;
-  --td-button-default-active-border-color: #fa4126;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+}
+
+.pay-result .btn-wrapper .status-btn-primary {
+  --td-button-primary-bg-color: var(--color-primary);
+  --td-button-primary-border-color: var(--color-primary);
+  --td-button-primary-active-bg-color: var(--color-primary-pressed);
+  --td-button-primary-active-border-color: var(--color-primary-pressed);
+}
+
+.pay-result .btn-wrapper .status-btn-secondary {
+  border: 1rpx solid var(--color-border);
+  color: var(--color-text);
+  --td-button-default-bg-color: var(--color-surface);
+  --td-button-default-border-color: var(--color-primary);
+  --td-button-default-color: var(--color-text);
+  --td-button-default-active-bg-color: var(--color-primary-light);
+  --td-button-default-active-border-color: var(--color-primary);
 }

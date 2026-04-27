@@ -1,5 +1,6 @@
 <view class="cart-empty">
-  <t-image t-class="cart-img" src="{{imgUrl}}" />
+  <t-image wx:if="{{imgUrl}}" t-class="cart-img" src="{{imgUrl}}" />
+  <view wx:else class="cart-img cart-img-placeholder">空</view>
   <view class="tip">{{tip}}</view>
   <view class="btn" bind:tap="handleClick">{{btnText}}</view>
 </view>

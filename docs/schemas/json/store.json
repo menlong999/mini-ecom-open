@@ -1,0 +1,236 @@
+{
+    "x-primary-column": "_id",
+    "x-kind": "tcb",
+    "x-defaultMethods": [
+        "wedaCreate",
+        "wedaUpdate",
+        "wedaDelete",
+        "wedaGetItem",
+        "wedaGetRecords",
+        "wedaGetList",
+        "wedaBatchCreate",
+        "wedaBatchUpdate",
+        "wedaBatchDelete"
+    ],
+    "type": "object",
+    "x-relatedType": "exist",
+    "x-viewId": "view-7ougczeqio",
+    "required": [],
+    "properties": {
+        "owner": {
+            "default": "",
+            "x-system": true,
+            "x-id": "9358c9f",
+            "name": "owner",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "所有人",
+            "x-index": 4,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "_mainDep": {
+            "x-system": true,
+            "x-id": "674373f",
+            "name": "_mainDep",
+            "format": "father-son",
+            "x-hidden": true,
+            "type": "string",
+            "title": "所属主管部门",
+            "x-index": 7,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_department"
+            }
+        },
+        "businessHours": {
+            "x-required": false,
+            "x-keyPath": "",
+            "x-id": "b9jksear",
+            "format": "",
+            "name": "businessHours",
+            "description": "",
+            "type": "string",
+            "x-index": 13,
+            "title": "businessHours",
+            "x-unique": false,
+            "maxLength": 256
+        },
+        "geoLoc": {
+            "x-required": false,
+            "x-keyPath": "",
+            "x-id": "585838e4",
+            "format": "x-location",
+            "description": "",
+            "type": "object",
+            "x-index": 21,
+            "title": "geoLoc",
+            "x-unique": false,
+            "properties": {
+                "address": {
+                    "x-required": true,
+                    "name": "address",
+                    "title": "地点",
+                    "type": "string"
+                },
+                "geopoint": {
+                    "x-required": true,
+                    "name": "geopoint",
+                    "title": "经纬度",
+                    "type": "object",
+                    "required": [
+                        "coordinates",
+                        "type"
+                    ],
+                    "properties": {
+                        "coordinates": {
+                            "x-required": true,
+                            "type": "array",
+                            "items": {
+                                "minItems": 2,
+                                "maxItems": 2,
+                                "type": "number"
+                            }
+                        },
+                        "type": {
+                            "x-required": true,
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "address",
+                "geopoint"
+            ]
+        },
+        "createdAt": {
+            "default": 0,
+            "x-system": true,
+            "x-id": "cb0b476",
+            "format": "datetime",
+            "type": "number",
+            "title": "创建时间",
+            "x-index": 2,
+            "x-unique": false
+        },
+        "createBy": {
+            "default": "",
+            "x-system": true,
+            "x-id": "c48d888",
+            "name": "createBy",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "创建人",
+            "x-index": 5,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "phone": {
+            "x-required": false,
+            "x-keyPath": "",
+            "x-id": "krxynfk3",
+            "format": "phone",
+            "name": "phone",
+            "description": "",
+            "type": "string",
+            "x-index": 18,
+            "title": "phone",
+            "x-unique": false,
+            "maxLength": 32
+        },
+        "updateBy": {
+            "default": "",
+            "x-system": true,
+            "x-id": "93a079a",
+            "name": "updateBy",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "修改人",
+            "x-index": 6,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "_openid": {
+            "default": "",
+            "x-system": true,
+            "x-id": "130944c",
+            "name": "_openid",
+            "format": "",
+            "pattern": "",
+            "description": "仅微信云开发下使用",
+            "type": "string",
+            "title": "记录创建者",
+            "x-index": 45,
+            "x-unique": false
+        },
+        "name": {
+            "x-required": false,
+            "x-keyPath": "",
+            "x-id": "vqpuhgi1",
+            "format": "",
+            "name": "name",
+            "description": "",
+            "type": "string",
+            "x-index": 17,
+            "title": "name",
+            "x-unique": false,
+            "maxLength": 256
+        },
+        "_id": {
+            "x-system": true,
+            "x-id": "0291d26",
+            "format": "",
+            "type": "string",
+            "title": "数据标识",
+            "x-index": 1,
+            "x-unique": true
+        },
+        "updatedAt": {
+            "default": 0,
+            "x-system": true,
+            "x-id": "1f50f88",
+            "format": "datetime",
+            "type": "number",
+            "title": "更新时间",
+            "x-index": 3,
+            "x-unique": false
+        },
+        "status": {
+            "x-keyPath": "",
+            "x-id": "578dec9f",
+            "format": "",
+            "numberCount": 0,
+            "description": "1：开\n0：闭店",
+            "type": "number",
+            "x-index": 47,
+            "title": "status",
+            "x-unique": false,
+            "x-required": false,
+            "default": 1,
+            "maximum": 1,
+            "minimum": 0
+        }
+    },
+    "title": "store"
+}

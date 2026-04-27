@@ -1,4 +1,4 @@
-<view style="text-align: center; color: #b9b9b9" wx:if="{{pageLoading}}">
+<view style="text-align: center; color: var(--color-text-muted)" wx:if="{{pageLoading}}">
   <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
 </view>
 <view class="home-page-header">
@@ -60,7 +60,7 @@
             >¥{{item.minLinePrice}}</text
           >
           <view class="goods-cart-btn" catchtap="handleAddCart" data-index="{{index}}">
-            <t-icon prefix="wr" name="cartAdd" size="48rpx" color="#FA550F" />
+            <t-icon prefix="wr" name="cartAdd" size="48rpx" color="#4F6F64" />
           </view>
         </view>
       </view>

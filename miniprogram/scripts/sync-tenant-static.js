@@ -58,6 +58,7 @@ function pickRuntimeConfig(value) {
     afterService: value.afterService,
     customerService: value.customerService,
     features: value.features,
+    invoice: value.invoice,
     logistics: value.logistics,
     order: value.order,
   };

@@ -1,7 +1,12 @@
-import { cdnBase } from '../../config/index';
-const imgPrefix = cdnBase;
+import { runtimeConfig } from '../../config/index';
 
-const defaultDesc = [`${imgPrefix}/goods/details-1.png`];
+const defaultDesc = runtimeConfig.assets?.defaultGoodsDescImages || [];
+
+function normalizeDesc(desc) {
+  if (Array.isArray(desc)) return desc.filter(Boolean);
+  if (desc) return [desc];
+  return defaultDesc;
+}
 
 /** 获取商品详情（聚合 spu/spec/sku） */
 export async function fetchGood(spuId) {
@@ -53,7 +58,7 @@ function assembleGoods(spu, specs, skus) {
     title: spu.title,
     primaryImage: spu.primaryImage,
     images: spu.images || [spu.primaryImage],
-    desc: spu.desc || defaultDesc,
+    desc: normalizeDesc(spu.desc),
     minSalePrice: spu.minSalePrice || 0,
     maxSalePrice: maxSalePrice,
     maxLinePrice: spu.maxLinePrice || 0,

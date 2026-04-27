@@ -1,0 +1,309 @@
+{
+    "x-primary-column": "title",
+    "x-kind": "tcb",
+    "x-defaultMethods": [
+        "wedaCreate",
+        "wedaUpdate",
+        "wedaDelete",
+        "wedaGetItem",
+        "wedaGetRecords",
+        "wedaGetList",
+        "wedaBatchCreate",
+        "wedaBatchUpdate",
+        "wedaBatchDelete"
+    ],
+    "type": "object",
+    "x-relatedType": "exist",
+    "x-viewId": "view-7nk4cl6nhc",
+    "required": [
+        "values",
+        "title"
+    ],
+    "properties": {
+        "specId": {
+            "x-required": false,
+            "x-keyPath": "",
+            "x-autonumber": {
+                "start": 1000,
+                "type": "prefix-string",
+                "value": "GSPEC-{SEQNUM:4}"
+            },
+            "x-id": "78858474",
+            "format": "x-autonumber",
+            "description": "Spec ID",
+            "type": "string",
+            "x-index": 2,
+            "title": "specId",
+            "x-unique": true,
+            "maxLength": 128
+        },
+        "owner": {
+            "default": "",
+            "x-system": true,
+            "x-id": "ab7dc50",
+            "name": "owner",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "所有人",
+            "x-index": 4,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "_mainDep": {
+            "x-system": true,
+            "x-id": "11be564",
+            "name": "_mainDep",
+            "format": "father-son",
+            "x-hidden": true,
+            "type": "string",
+            "title": "所属主管部门",
+            "x-index": 7,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_department"
+            }
+        },
+        "values": {
+            "x-required": true,
+            "x-keyPath": "",
+            "x-id": "212d7ac2",
+            "format": "",
+            "description": "spec 值列表",
+            "type": "array",
+            "x-index": 21,
+            "title": "values",
+            "list": [
+                {
+                    "x-required": false,
+                    "x-keyPath": "",
+                    "x-autonumber": {
+                        "start": 1000,
+                        "type": "prefix-string",
+                        "value": "SPEC-VAL-ID-{SEQNUM:4}"
+                    },
+                    "x-id": "a5f5d333",
+                    "format": "x-autonumber",
+                    "name": "valueId",
+                    "description": "",
+                    "pId": "212d7ac2",
+                    "type": "string",
+                    "x-index": 6,
+                    "title": "valueId",
+                    "x-unique": false
+                },
+                {
+                    "x-required": true,
+                    "x-keyPath": "",
+                    "x-id": "8e79fdcd",
+                    "format": "",
+                    "name": "value",
+                    "description": "",
+                    "pId": "212d7ac2",
+                    "type": "string",
+                    "x-index": 4,
+                    "title": "value",
+                    "x-unique": false
+                }
+            ],
+            "items": {
+                "format": "",
+                "type": "object",
+                "properties": {
+                    "valueId": {
+                        "x-required": false,
+                        "x-keyPath": "",
+                        "x-autonumber": {
+                            "start": 1000,
+                            "type": "prefix-string",
+                            "value": "SPEC-VAL-ID-{SEQNUM:4}"
+                        },
+                        "x-id": "a5f5d333",
+                        "format": "x-autonumber",
+                        "name": "valueId",
+                        "description": "",
+                        "pId": "212d7ac2",
+                        "type": "string",
+                        "x-index": 6,
+                        "title": "valueId",
+                        "x-unique": false
+                    },
+                    "value": {
+                        "x-required": true,
+                        "x-keyPath": "",
+                        "x-id": "8e79fdcd",
+                        "format": "",
+                        "name": "value",
+                        "description": "",
+                        "pId": "212d7ac2",
+                        "type": "string",
+                        "x-index": 4,
+                        "title": "value",
+                        "x-unique": false
+                    }
+                }
+            },
+            "x-unique": false,
+            "required": [
+                "value"
+            ]
+        },
+        "title": {
+            "x-required": true,
+            "x-keyPath": "",
+            "x-id": "7c9daa3f",
+            "format": "",
+            "description": "spec 名称",
+            "type": "string",
+            "x-index": 6,
+            "title": "title",
+            "x-unique": false,
+            "maxLength": 256
+        },
+        "createdAt": {
+            "default": 0,
+            "x-system": true,
+            "x-id": "087c457",
+            "format": "datetime",
+            "type": "number",
+            "title": "创建时间",
+            "x-index": 2,
+            "x-unique": false
+        },
+        "createBy": {
+            "default": "",
+            "x-system": true,
+            "x-id": "2c4e144",
+            "name": "createBy",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "创建人",
+            "x-index": 5,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "updateBy": {
+            "default": "",
+            "x-system": true,
+            "x-id": "93a079a",
+            "name": "updateBy",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "修改人",
+            "x-index": 6,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "sortOrder": {
+            "x-keyPath": "",
+            "x-id": "53c553c4",
+            "format": "",
+            "numberCount": 0,
+            "description": "展示顺序，按从小到大",
+            "type": "number",
+            "x-index": 8,
+            "title": "sortOrder",
+            "x-unique": false,
+            "x-required": false,
+            "default": 1,
+            "maximum": 100,
+            "minimum": 1
+        },
+        "_openid": {
+            "default": "",
+            "x-system": true,
+            "x-id": "3c7027d",
+            "name": "_openid",
+            "format": "",
+            "pattern": "",
+            "description": "仅微信云开发下使用",
+            "type": "string",
+            "title": "记录创建者",
+            "x-index": 45,
+            "x-unique": false
+        },
+        "spuId": {
+            "x-keyPath": "",
+            "x-logical": false,
+            "x-id": "2dc41dd4",
+            "format": "many-one",
+            "description": "关联的 spu",
+            "type": "object",
+            "x-index": 47,
+            "title": "spuId",
+            "list": [
+                {
+                    "x-id": "2dc41dd4_parent_ds",
+                    "name": "goods_spu",
+                    "pId": "2dc41dd4",
+                    "x-middle-info": true,
+                    "title": "关联模型标识",
+                    "type": "string"
+                },
+                {
+                    "x-id": "8dhfha90",
+                    "name": "_id",
+                    "pId": "2dc41dd4",
+                    "title": "数据标识",
+                    "type": "string"
+                }
+            ],
+            "x-unique": false,
+            "required": [],
+            "x-parent": {
+                "parentFieldKey": "goods_spec_spu_id_list",
+                "parentFieldTitle": "goods_spec_spu_id",
+                "parentDataSourceName": "goods_spu"
+            },
+            "x-required": true,
+            "name": "spuId",
+            "deleteWay": "doNothing",
+            "properties": {
+                "_id": {
+                    "name": "_id",
+                    "title": "数据标识",
+                    "type": "string"
+                }
+            }
+        },
+        "_id": {
+            "x-system": true,
+            "x-id": "0013ff3",
+            "format": "",
+            "type": "string",
+            "title": "数据标识",
+            "x-index": 1,
+            "x-unique": true
+        },
+        "updatedAt": {
+            "default": 0,
+            "x-system": true,
+            "x-id": "386e979",
+            "format": "datetime",
+            "type": "number",
+            "title": "更新时间",
+            "x-index": 3,
+            "x-unique": false
+        }
+    },
+    "title": "goods_spec"
+}

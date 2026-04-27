@@ -46,6 +46,13 @@ cp tenants/example/tenant.config.js tenants/<tenant>/tenant.config.js
 - `payment.refundWorkflowName`
 - `afterService.returnAddress`
 
+按租户实际情况调整以下可选配置：
+
+- `features.invoice`：是否开放发票入口
+- `invoice.notice` / `invoice.taxCodeNotice`：发票须知文案
+- `afterService.reasonList`：售后申请原因
+- `assets.defaultGoodsDescImages`：商品未配置详情图时的兜底图
+
 3. 生成本地运行文件：
 
 ```bash

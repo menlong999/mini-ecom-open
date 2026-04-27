@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 讨论与提问
+    url: https://github.com/discussions
+    about: 一般性问题、使用咨询、最佳实践讨论请发到 Discussions
+  - name: 🔒 安全漏洞
+    url: ../SECURITY.md
+    about: 安全相关问题请勿公开 issue，请参见 SECURITY.md
+  - name: 🤝 部署 / 二开 / 运维（商业服务）
+    url: https://github.com/menlong999/deshan#handshake-商业服务部署--二开--运维
+    about: 没有研发能力或不想自己折腾？联系作者微信，提供整套部署、品牌定制、二开外包与长期运维服务。

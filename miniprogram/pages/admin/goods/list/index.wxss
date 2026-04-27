@@ -1,5 +1,5 @@
 .goods-list-container {
-    background-color: #f5f5f5;
+    background-color: var(--color-page);
     min-height: 100vh;
     padding-bottom: 100rpx;
 }
@@ -20,9 +20,9 @@
     padding: 10rpx 16rpx;
     background: #fff;
     border-radius: 999rpx;
-    border: 1rpx solid #e5e6eb;
+    border: 1rpx solid var(--color-border);
     font-size: 24rpx;
-    color: #333;
+    color: var(--color-text);
 }
 
 .filter-item text {
@@ -31,7 +31,7 @@
 
 .filter-clear {
     padding: 4rpx;
-    color: #999;
+    color: var(--color-text-muted);
 }
 
 .list-wrapper {
@@ -50,7 +50,7 @@
     width: 160rpx;
     height: 160rpx;
     border-radius: 8rpx;
-    background-color: #eee;
+    background-color: var(--color-border);
     margin-right: 24rpx;
 }
 
@@ -63,7 +63,7 @@
 
 .goods-title {
     font-size: 28rpx;
-    color: #333;
+    color: var(--color-text);
     font-weight: bold;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -79,17 +79,17 @@
 }
 
 .goods-price {
-    color: #fa4126;
+    color: var(--color-price);
     font-size: 32rpx;
     font-weight: bold;
 }
 
 .goods-stock {
-    color: #999;
+    color: var(--color-text-muted);
 }
 
 .empty-tip {
     text-align: center;
-    color: #999;
+    color: var(--color-text-muted);
     margin-top: 100rpx;
 }

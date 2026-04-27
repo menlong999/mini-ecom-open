@@ -68,5 +68,7 @@
 - 新租户：新增 `tenants/<tenant>/tenant.config.js`
 - 新功能开关：放在 `features`
 - 新售后品牌差异：放在 `afterService`
+- 新发票规则/提示：放在 `features.invoice` 和 `invoice`
+- 新资源兜底：放在 `assets`
 - 新支付/二维码参数：放在 `payment` / `qrcode`
 - 新运营页面数据：走 CloudBase 集合，不走本地配置

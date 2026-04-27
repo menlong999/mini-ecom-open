@@ -29,7 +29,7 @@ Page({
     orderList: [],
     listLoading: ListLoadStatus.IDLE, // 使用常量进行初始化
     pullDownRefreshing: false,
-    emptyImg: 'https://tdesign.gtimg.com/miniprogram/template/retail/order/empty-order-list.png',
+    emptyImg: '',
     backRefresh: false,
   },
 

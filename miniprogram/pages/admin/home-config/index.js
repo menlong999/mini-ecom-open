@@ -168,7 +168,7 @@ Page({
       title: '删除确认',
       content: '确认删除该轮播图？',
       confirmText: '删除',
-      confirmColor: '#fa4126',
+      confirmColor: '#B84A42',
       success: (res) => {
         if (!res.confirm) return;
         this.removeSwiper({ currentTarget: { dataset: { index } } });
@@ -275,7 +275,7 @@ Page({
       title: '删除确认',
       content: `确认删除${title ? ` Tab「${title}」` : '该 Tab'}？`,
       confirmText: '删除',
-      confirmColor: '#fa4126',
+      confirmColor: '#B84A42',
       success: (res) => {
         if (!res.confirm) return;
         this.removeTab({ currentTarget: { dataset: { index } } });

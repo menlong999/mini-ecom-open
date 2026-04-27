@@ -1,5 +1,3 @@
-import { config } from '../../config/index';
-
 /** 获取商品评论数 */
 /** 获取商品评论数 */
 export async function fetchCommentsCount(spuId = 0) {

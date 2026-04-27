@@ -60,7 +60,7 @@
             description="买家已寄出"
             arrow
           >
-            <t-icon prefix="wr" color="#333333" name="deliver" size="40rpx" slot="left-icon" />
+            <t-icon prefix="wr" color="#202421" name="deliver" size="40rpx" slot="left-icon" />
           </t-cell>
         </view>
         <view
@@ -74,7 +74,7 @@
       <view class="service-section goods-refund-address" wx:if="{{service.receiverName}}">
         <t-cell-group>
           <t-cell align="top" title="退货地址" bordered="{{false}}">
-            <t-icon prefix="wr" color="#333333" name="location" size="40rpx" slot="left-icon" />
+            <t-icon prefix="wr" color="#202421" name="location" size="40rpx" slot="left-icon" />
             <view
               slot="note"
               class="right text-btn goods-refund-address-copy-btn"
@@ -248,7 +248,7 @@
 <!-- 退款说明填写 -->
 <t-dialog id="input-dialog" visible="{{inputDialogVisible}}">
   <view class="input-dialog__content" slot="content">
-    <view style="color: #333333; padding-left: 32rpx">物流单号</view>
+    <view style="color: #202421; padding-left: 32rpx">物流单号</view>
     <t-input class="input" placeholder="请输入物流单号" />
     <view class="tips">{{amountTip}}</view>
   </view>

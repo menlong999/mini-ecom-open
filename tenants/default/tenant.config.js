@@ -13,8 +13,8 @@ module.exports = {
     projectDescription: "开源电商小程序",
   },
   assets: {
-    cdnBase:
-      "https://we-retail-static-1300977798.cos.ap-guangzhou.myqcloud.com/retail-mp",
+    cdnBase: "",
+    defaultGoodsDescImages: [],
   },
   afterService: {
     returnAddress: {
@@ -22,6 +22,15 @@ module.exports = {
       phone: "",
       address: "",
     },
+    reasonList: [
+      { id: 1, desc: "实际商品与描述不符" },
+      { id: 2, desc: "质量问题" },
+      { id: 3, desc: "少件/漏发" },
+      { id: 4, desc: "包装或商品破损" },
+      { id: 5, desc: "发货太慢" },
+      { id: 6, desc: "商家发错货" },
+      { id: 8, desc: "不喜欢/不想要" },
+    ],
   },
   customerService: {
     phone: "",
@@ -30,7 +39,19 @@ module.exports = {
   },
   features: {
     distributor: true,
+    invoice: true,
     pickup: true,
+  },
+  invoice: {
+    notice: [
+      "请根据当地税务要求填写真实、有效的发票抬头信息。",
+      "电子普通发票与纸质发票具有同等法律效力，可用于报销或售后凭证。",
+      "如需开具特殊类型发票，请先联系商家客服确认。",
+    ],
+    taxCodeNotice: [
+      "纳税人识别号或统一社会信用代码通常可在营业执照或税务登记资料中查看。",
+      "企业抬头发票请确认名称与税号一致，避免影响开票。",
+    ],
   },
   logistics: {
     // 如果启用物流轨迹查询，这里的 code 必须与微信物流助手后台已绑定的 deliveryId 一致。

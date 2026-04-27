@@ -20,12 +20,12 @@
 }
 .mini {
   font-size: 24rpx;
-  color: #5d5d5d;
+  color: var(--color-text-secondary);
   font-weight: 400;
 }
 .del .pprice {
   font-size: 32rpx;
-  color: #9b9b9b;
+  color: var(--color-text-muted);
   text-decoration: line-through;
   font-weight: 400;
 }

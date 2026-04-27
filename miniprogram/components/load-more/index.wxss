@@ -10,19 +10,19 @@
   display: flex;
   justify-content: center;
 
-  --td-loading-color: #fa4126;
+  --td-loading-color: var(--color-primary);
 }
 
 .load-more .t-class-loading-text {
-  color: #bbbbbb;
+  color: var(--color-text-muted);
 }
 
 .t-class-divider-content {
   margin: 0 10rpx;
-  color: #bbbbbb;
+  color: var(--color-text-muted);
 }
 .load-more .t-class-indicator {
-  color: #b9b9b9 !important;
+  color: var(--color-text-muted) !important;
 }
 
 .load-more__error {
@@ -31,5 +31,5 @@
 
 .load-more__refresh-btn {
   margin-left: 16rpx;
-  color: #fa4126;
+  color: var(--color-primary);
 }

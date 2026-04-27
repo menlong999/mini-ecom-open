@@ -1,5 +1,28 @@
 import { OrderStatus } from './orderConfig';
 
+function buildCloudModelOrderWhere(openId, orderStatus) {
+  const clauses = [{ _openid: { $eq: openId } }, { deleted: { $eq: false } }];
+
+  if (orderStatus && orderStatus !== OrderStatus.ALL) {
+    clauses.push({ status: { $eq: orderStatus } });
+  }
+
+  return { $and: clauses };
+}
+
+function buildDatabaseOrderWhere(openId, orderStatus) {
+  const where = {
+    _openid: openId,
+    deleted: false,
+  };
+
+  if (orderStatus && orderStatus !== OrderStatus.ALL) {
+    where.status = orderStatus;
+  }
+
+  return where;
+}
+
 /**
  * 获取订单列表数据 (已重构，不再使用 Mock)
  * @param {object} params - 包含分页和筛选参数 { parameter: { pageSize, pageNum, orderStatus } }
@@ -19,12 +42,7 @@ export async function fetchOrders(params) {
   // 2. 构建数据库查询条件
   const conds = {
     filter: {
-      where: {
-        $and: [
-          { _openid: { $eq: userInfo._openid } }, // 核心：只查询当前用户的订单
-          { deleted: { $eq: false } }, // 通常不查询已删除的订单
-        ],
-      },
+      where: buildCloudModelOrderWhere(userInfo._openid, orderStatus),
     },
     pageSize,
     pageNumber: pageIndex,
@@ -35,16 +53,6 @@ export async function fetchOrders(params) {
       },
     ],
   };
-
-  if (orderStatus && orderStatus !== OrderStatus.ALL) {
-    // 如果有特定的订单状态，添加到查询条件中
-    conds.filter.where.$and.push({ status: { $eq: orderStatus } });
-  }
-
-  // 特殊逻辑：对于“已完成”状态（通常对应“待评价”），排除已评价的订单
-  if (orderStatus === OrderStatus.COMPLETE) {
-    conds.filter.where.$and.push({ isCommented: { $ne: true } });
-  }
 
   // 3. 调用 app.cloudModels 进行查询
   try {
@@ -95,14 +103,7 @@ export async function fetchOrdersCount() {
   ];
 
   const countPromises = statuses.map((status) =>
-    db
-      .collection('order')
-      .where({
-        _openid: openId,
-        status: status,
-        deleted: false,
-      })
-      .count()
+    db.collection('order').where(buildDatabaseOrderWhere(openId, status)).count()
   );
 
   try {

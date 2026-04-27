@@ -4,7 +4,7 @@
   <!-- 微信地址导入按钮 -->
   <view class="wx-address-import" bindtap="handleWxAddress">
     <text>获取微信收货地址</text>
-    <t-icon name="chevron-right" size="32rpx" color="#bbb" />
+    <t-icon name="chevron-right" size="32rpx" color="#9aa19a" />
   </view>
 
   <view class="divider-line" />
@@ -105,7 +105,7 @@
               {{label.name}}
             </t-button>
             <t-button size="extra-small" t-class="label-list" bindtap="openAddLabelDialog">
-              <t-icon name="add" size="40rpx" color="#bbb" />
+              <t-icon name="add" size="40rpx" color="#9aa19a" />
             </t-button>
           </view>
         </t-cell>
@@ -114,7 +114,6 @@
           <t-switch
             value="{{editingAddress.isDefault}}"
             slot="note"
-            colors="{{['#0ABF5B', '#c6c6c6']}}"
             bind:change="handleDefaultToggle"
           />
         </t-cell>

@@ -19,10 +19,25 @@ module.exports = {
       phone: "售后联系电话",
       address: "售后退货地址",
     },
+    reasonList: [
+      { id: 1, desc: "实际商品与描述不符" },
+      { id: 2, desc: "质量问题" },
+      { id: 3, desc: "商家发错货" },
+    ],
   },
   customerService: {
     phone: "你的客服电话",
     serviceTimeDuration: "例如 9:00-18:00",
+  },
+  features: {
+    invoice: true,
+  },
+  invoice: {
+    notice: [
+      "请根据你的开票规则填写发票须知。",
+      "如需开具特殊类型发票，请先联系商家客服确认。",
+    ],
+    taxCodeNotice: ["企业抬头发票请确认名称与税号一致，避免影响开票。"],
   },
   payment: {
     workflowName: "你的支付工作流名称",

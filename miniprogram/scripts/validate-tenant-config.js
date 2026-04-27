@@ -20,6 +20,7 @@ const allowedTopLevelKeys = new Set([
   'afterService',
   'customerService',
   'features',
+  'invoice',
   'logistics',
   'order',
   'payment',
@@ -93,6 +94,26 @@ function validateLogisticsCompanies(companies, label) {
   });
 }
 
+function validateStringList(value, label) {
+  if (!Array.isArray(value)) {
+    fail(`${label} must be an array`);
+  }
+  value.forEach((item, index) => {
+    assertString(item, `${label}[${index}]`);
+  });
+}
+
+function validateReasonList(value, label) {
+  if (!Array.isArray(value)) {
+    fail(`${label} must be an array`);
+  }
+  value.forEach((item, index) => {
+    assertObject(item, `${label}[${index}]`);
+    assertNumber(item.id, `${label}[${index}].id`);
+    assertString(item.desc, `${label}[${index}].desc`);
+  });
+}
+
 function validateTenantConfig(config, label) {
   assertObject(config, label);
 
@@ -111,6 +132,10 @@ function validateTenantConfig(config, label) {
 
   assertObject(config.assets, `${label}.assets`);
   assertString(config.assets.cdnBase, `${label}.assets.cdnBase`);
+  validateStringList(
+    config.assets.defaultGoodsDescImages,
+    `${label}.assets.defaultGoodsDescImages`
+  );
 
   assertObject(config.afterService, `${label}.afterService`);
   assertObject(config.afterService.returnAddress, `${label}.afterService.returnAddress`);
@@ -123,6 +148,7 @@ function validateTenantConfig(config, label) {
     config.afterService.returnAddress.address,
     `${label}.afterService.returnAddress.address`
   );
+  validateReasonList(config.afterService.reasonList, `${label}.afterService.reasonList`);
 
   assertObject(config.customerService, `${label}.customerService`);
   assertString(config.customerService.phone, `${label}.customerService.phone`);
@@ -134,7 +160,12 @@ function validateTenantConfig(config, label) {
 
   assertObject(config.features, `${label}.features`);
   assertBoolean(config.features.distributor, `${label}.features.distributor`);
+  assertBoolean(config.features.invoice, `${label}.features.invoice`);
   assertBoolean(config.features.pickup, `${label}.features.pickup`);
+
+  assertObject(config.invoice, `${label}.invoice`);
+  validateStringList(config.invoice.notice, `${label}.invoice.notice`);
+  validateStringList(config.invoice.taxCodeNotice, `${label}.invoice.taxCodeNotice`);
 
   assertObject(config.logistics, `${label}.logistics`);
   validateLogisticsCompanies(config.logistics.companies, `${label}.logistics.companies`);

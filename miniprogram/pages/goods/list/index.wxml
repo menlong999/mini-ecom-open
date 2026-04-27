@@ -15,17 +15,17 @@
       <view class="filter-arrows">
         <view
           class="wr wr-arrow_drop_up"
-          style="font-size: 18rpx; color: {{filter.priceSortDirection === 'asc' ? '#FA4126' : '#bbb'}}"
+          style="font-size: 18rpx; color: {{filter.priceSortDirection === 'asc' ? '#4F6F64' : '#9aa19a'}}"
         ></view>
         <view
           class="wr wr-arrow_drop_down"
-          style="font-size: 18rpx; color: {{filter.priceSortDirection === 'desc' ? '#FA4126' : '#bbb'}}"
+          style="font-size: 18rpx; color: {{filter.priceSortDirection === 'desc' ? '#4F6F64' : '#9aa19a'}}"
         ></view>
       </view>
     </view>
     <view class="filter-item" bindtap="openFilterPopup">
       筛选
-      <t-icon name="filter" prefix="wr" color="#333" size="32rpx" />
+      <t-icon name="filter" prefix="wr" color="#202421" size="32rpx" />
     </view>
   </view>
 
@@ -89,7 +89,7 @@
           <text class="goods-price">¥{{item.price}}</text>
           <text class="goods-origin-price" wx:if="{{item.originPrice}}">¥{{item.originPrice}}</text>
           <view class="goods-cart-btn" catchtap="handleAddCart" data-index="{{index}}">
-            <t-icon prefix="wr" name="cartAdd" size="48rpx" color="#FA550F" />
+            <t-icon prefix="wr" name="cartAdd" size="48rpx" color="#4F6F64" />
           </view>
         </view>
       </view>

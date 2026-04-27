@@ -1,7 +1,7 @@
 .edit-container {
     padding: 24rpx;
     padding-bottom: 200rpx;
-    background-color: #f5f5f5;
+    background-color: var(--color-page);
     min-height: 100vh;
 }
 
@@ -22,11 +22,11 @@
 .card-title {
     font-size: 30rpx;
     font-weight: bold;
-    color: #333;
+    color: var(--color-text);
 }
 
 .spec-item {
-    background: #f9f9f9;
+    background: var(--color-page);
     padding: 16rpx;
     border-radius: 8rpx;
     margin-bottom: 16rpx;
@@ -44,7 +44,7 @@
 }
 
 .delete-icon {
-    color: #999;
+    color: var(--color-text-muted);
     margin-left: 16rpx;
 }
 
@@ -66,15 +66,15 @@
     display: flex;
     align-items: center;
     font-size: 24rpx;
-    color: #0052d9;
+    color: var(--admin-primary);
     padding: 4rpx 16rpx;
-    background: #e6eefb;
+    background: var(--admin-primary-light);
     border-radius: 4rpx;
     cursor: pointer;
 }
 
 .sku-list {
-    border-top: 1rpx solid #eee;
+    border-top: 1rpx solid var(--color-border);
 }
 
 .sku-header {
@@ -83,9 +83,9 @@
     justify-content: flex-start;
     gap: 16rpx;
     padding: 12rpx 0;
-    color: #999;
+    color: var(--color-text-muted);
     font-size: 24rpx;
-    border-bottom: 1rpx solid #eee;
+    border-bottom: 1rpx solid var(--color-border);
 }
 
 .sku-header__spec {
@@ -111,7 +111,7 @@
 
 .sku-input {
     box-sizing: border-box;
-    border: 1rpx solid #e7e7e7;
+    border: 1rpx solid var(--color-border);
     border-radius: 8rpx;
     background: #fff;
     padding: 16rpx 20rpx;
@@ -123,7 +123,7 @@
     justify-content: flex-start;
     gap: 16rpx;
     padding: 16rpx 0;
-    border-bottom: 1rpx solid #eee;
+    border-bottom: 1rpx solid var(--color-border);
 }
 
 .sku-info {
@@ -142,12 +142,12 @@
     width: 96rpx;
     height: 96rpx;
     border-radius: 12rpx;
-    background: #f2f2f2;
+    background: var(--color-page);
     flex-shrink: 0;
 }
 
 .sku-thumb--placeholder {
-    background: #f0f0f0;
+    background: var(--color-page);
 }
 
 .sku-image-actions {
@@ -159,11 +159,11 @@
 
 .sku-specs {
     font-size: 26rpx;
-    color: #333;
+    color: var(--color-text);
 }
 
 .sku-specs .divider {
-    color: #ccc;
+    color: var(--color-border);
     margin: 0 4rpx;
 }
 
@@ -185,6 +185,6 @@
     right: 0;
     padding: 24rpx;
     background: #fff;
-    box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-bar);
     z-index: 100;
 }

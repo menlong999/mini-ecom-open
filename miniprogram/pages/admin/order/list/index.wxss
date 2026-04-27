@@ -1,6 +1,6 @@
 .order-list-container {
   padding: 24rpx;
-  background: #f5f5f5;
+  background: var(--color-page);
   min-height: 100vh;
 }
 
@@ -15,12 +15,12 @@
   background: #fff;
   border-radius: 999rpx;
   font-size: 24rpx;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .status-tab.active {
-  color: #0052d9;
-  background: #e6eefb;
+  color: var(--admin-primary);
+  background: var(--admin-primary-light);
 }
 
 .search-bar {
@@ -55,16 +55,16 @@
   align-items: center;
   margin-bottom: 12rpx;
   font-size: 24rpx;
-  color: #333;
+  color: var(--color-text);
 }
 
 .order-status {
-  color: #0052d9;
+  color: var(--admin-primary);
 }
 
 .order-card__body {
   font-size: 24rpx;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .order-goods-list {
@@ -79,7 +79,7 @@
   justify-content: space-between;
   gap: 16rpx;
   padding-bottom: 12rpx;
-  border-bottom: 1rpx solid #f0f0f0;
+  border-bottom: 1rpx solid var(--color-border);
 }
 
 .order-goods-item:last-child {
@@ -92,13 +92,13 @@
 }
 
 .order-goods-title {
-  color: #333;
+  color: var(--color-text);
   font-size: 26rpx;
   margin-bottom: 6rpx;
 }
 
 .order-goods-specs {
-  color: #999;
+  color: var(--color-text-muted);
   font-size: 22rpx;
 }
 
@@ -107,7 +107,7 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 6rpx;
-  color: #333;
+  color: var(--color-text);
   font-size: 24rpx;
 }
 
@@ -116,7 +116,7 @@
 }
 
 .order-goods-qty {
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .order-meta {
@@ -130,15 +130,15 @@
   flex-direction: column;
   gap: 6rpx;
   margin-bottom: 8rpx;
-  color: #333;
+  color: var(--color-text);
 }
 
 .order-logistics {
-  color: #999;
+  color: var(--color-text-muted);
 }
 
 .order-operator {
-  color: #999;
+  color: var(--color-text-muted);
   margin-top: 4rpx;
 }
 
@@ -150,7 +150,7 @@
 
 .empty-tip {
   text-align: center;
-  color: #999;
+  color: var(--color-text-muted);
   font-size: 26rpx;
   margin-top: 80rpx;
 }

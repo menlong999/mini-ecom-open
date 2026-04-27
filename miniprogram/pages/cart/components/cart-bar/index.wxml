@@ -5,7 +5,7 @@
 >
   <t-icon
     size="40rpx"
-    color="{{isAllSelected ? '#FA4126' : '#BBBBBB'}}"
+    color="{{isAllSelected ? '#4F6F64' : '#BBBBBB'}}"
     name="{{isAllSelected ? 'check-circle-filled' : 'circle'}}"
     class="cart-bar__check"
     catchtap="handleSelectAll"

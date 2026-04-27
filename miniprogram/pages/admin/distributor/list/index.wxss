@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  background: #f7f8fa;
+  background: var(--color-page);
   padding: 20rpx 24rpx 40rpx;
   box-sizing: border-box;
 }
@@ -14,12 +14,12 @@
 .loading-wrap {
   padding: 48rpx 0;
   text-align: center;
-  color: #b9b9b9;
+  color: var(--color-text-muted);
 }
 
 .empty {
   text-align: center;
-  color: #999;
+  color: var(--color-text-muted);
   padding: 32rpx 0;
   font-size: 26rpx;
 }
@@ -29,7 +29,7 @@
   border-radius: 16rpx;
   padding: 20rpx;
   margin-top: 16rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-card);
 }
 
 .card-header {
@@ -42,17 +42,17 @@
 .card-name {
   font-size: 30rpx;
   font-weight: 600;
-  color: #1f1f1f;
+  color: var(--color-text);
 }
 
 .card-status {
   font-size: 24rpx;
-  color: #ff5f15;
+  color: var(--color-warning);
 }
 
 .card-row {
   font-size: 24rpx;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-top: 6rpx;
   word-break: break-all;
 }
@@ -65,7 +65,7 @@
 
 .finish {
   text-align: center;
-  color: #b9b9b9;
+  color: var(--color-text-muted);
   padding: 20rpx 0;
   font-size: 24rpx;
 }
@@ -80,7 +80,7 @@
 .reject-title {
   font-size: 28rpx;
   font-weight: 600;
-  color: #1f1f1f;
+  color: var(--color-text);
   margin-bottom: 16rpx;
 }
 

@@ -2,6 +2,15 @@
 
 本文档详细列出了电商小程序核心数据模型的字段及其含义。所有模型均部署在 CloudBase FlexDB 中。
 
+> **数据契约真值**：本仓库已通过 `cloudbase cli` 拉取并保存了**完整的字段级 schema 快照**，
+> 位于 [`docs/schemas/`](docs/schemas/README.md)：
+>
+> - `docs/schemas/json/*.json` —— 含字段类型、索引、关系等元数据，控制台导出原文。
+> - `docs/schemas/types/*.d.ts` —— 可直接被 `@cloudbase/wx-cloud-client-sdk` 复用的 TS 类型。
+>
+> 当字段定义存在差异时，**以 `docs/schemas/` 为准**；本文档侧重业务语义说明。
+> 刷新方式见 [`docs/schemas/README.md`](docs/schemas/README.md#如何刷新-schema-快照)。
+
 ## 1. 商品模块 (Goods)
 
 ### 1.1 商品 SPU (`goods_spu`)
@@ -137,3 +146,25 @@
 | `geoLoc`        | Object | 地理位置信息，可选     | 否   |
 | `createdAt`     | Number | 创建时间戳             | 否   |
 | `updatedAt`     | Number | 更新时间戳             | 否   |
+
+---
+
+## 附：完整字段索引
+
+以下模型的全字段、嵌套结构与索引信息可直接查阅快照：
+
+| 模型            | JSON Schema                                                     | TS 类型                                                           |
+| :-------------- | :-------------------------------------------------------------- | :---------------------------------------------------------------- |
+| `goods_spu`     | [json/goods_spu.json](docs/schemas/json/goods_spu.json)         | [types/goods_spu.d.ts](docs/schemas/types/goods_spu.d.ts)         |
+| `goods_sku`     | [json/goods_sku.json](docs/schemas/json/goods_sku.json)         | [types/goods_sku.d.ts](docs/schemas/types/goods_sku.d.ts)         |
+| `goods_spec`    | [json/goods_spec.json](docs/schemas/json/goods_spec.json)       | [types/goods_spec.d.ts](docs/schemas/types/goods_spec.d.ts)       |
+| `category1`     | [json/category1.json](docs/schemas/json/category1.json)         | [types/category1.d.ts](docs/schemas/types/category1.d.ts)         |
+| `category2`     | [json/category2.json](docs/schemas/json/category2.json)         | [types/category2.d.ts](docs/schemas/types/category2.d.ts)         |
+| `cart`          | [json/cart.json](docs/schemas/json/cart.json)                   | [types/cart.d.ts](docs/schemas/types/cart.d.ts)                   |
+| `address`       | [json/address.json](docs/schemas/json/address.json)             | [types/address.d.ts](docs/schemas/types/address.d.ts)             |
+| `user_info`     | [json/user_info.json](docs/schemas/json/user_info.json)         | [types/user_info.d.ts](docs/schemas/types/user_info.d.ts)         |
+| `comments`      | [json/comments.json](docs/schemas/json/comments.json)           | [types/comments.d.ts](docs/schemas/types/comments.d.ts)           |
+| `order`         | [json/order.json](docs/schemas/json/order.json)                 | [types/order.d.ts](docs/schemas/types/order.d.ts)                 |
+| `after-service` | [json/after-service.json](docs/schemas/json/after-service.json) | [types/after-service.d.ts](docs/schemas/types/after-service.d.ts) |
+| `home_config`   | [json/home_config.json](docs/schemas/json/home_config.json)     | [types/home_config.d.ts](docs/schemas/types/home_config.d.ts)     |
+| `store`         | [json/store.json](docs/schemas/json/store.json)                 | [types/store.d.ts](docs/schemas/types/store.d.ts)                 |

@@ -1,11 +1,11 @@
 page {
-  background-color: #f5f5f5;
+  background-color: var(--color-page);
 }
 
 page .divider-line {
   width: 100%;
   height: 20rpx;
-  background-color: #f5f5f5;
+  background-color: var(--color-page);
 }
 
 /* 微信地址导入按钮 */
@@ -17,7 +17,7 @@ page .divider-line {
   justify-content: space-between;
   font-size: 30rpx;
   font-weight: 500;
-  color: #07c160;
+  color: var(--color-success);
   /* 微信绿 */
 }
 
@@ -62,7 +62,7 @@ page .divider-line {
 .form-address .map {
   font-size: 48rpx !important;
   margin-left: 20rpx;
-  color: #9d9d9f;
+  color: var(--color-text-muted);
 }
 
 .address__tag {
@@ -70,8 +70,8 @@ page .divider-line {
 }
 
 .form-address .label-list {
-  background: #f5f5f5;
-  color: #333;
+  background: var(--color-page);
+  color: var(--color-text);
   min-width: 100rpx;
   margin-right: 0;
   margin-left: 0;
@@ -86,13 +86,13 @@ page .divider-line {
 }
 
 .form-address .active-btn {
-  color: #fa4126;
-  border: 2rpx solid #fa4126;
-  background: rgba(255, 95, 21, 0.04);
+  color: var(--color-primary);
+  border: 2rpx solid var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .form-address .active-btn::after {
-  border: 4rpx solid #ff5f15;
+  border: 4rpx solid var(--color-warning);
 }
 
 .submit {
@@ -101,12 +101,12 @@ page .divider-line {
 }
 
 .submit .btn-submit-address {
-  background: #fa4126 !important;
+  background: var(--color-primary) !important;
   color: #fff !important;
 }
 
 .dialog__button-confirm {
-  color: #fa4126 !important;
+  color: var(--color-primary) !important;
 }
 
 .form-address .form-content {
@@ -118,5 +118,5 @@ page .divider-line {
   border-radius: 8rpx;
   box-sizing: border-box;
   --td-input-vertical-padding: 12px;
-  --td-input-bg-color: #f3f3f3;
+  --td-input-bg-color: var(--color-page-soft);
 }

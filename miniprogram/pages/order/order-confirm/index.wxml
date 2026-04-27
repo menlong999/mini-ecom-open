@@ -210,7 +210,7 @@
   >
     <view
       class="store-popup-header"
-      style="padding: 24rpx; text-align: center; font-weight: bold; border-bottom: 1rpx solid #eee"
+      style="padding: 24rpx; text-align: center; font-weight: bold; border-bottom: 1rpx solid #e3e7e1"
     >
       选择门店
     </view>
@@ -227,7 +227,7 @@
             slot="right-icon"
             name="check"
             wx:if="{{selectedStore._id === item._id}}"
-            color="#fa4126"
+            color="#4F6F64"
           />
         </t-cell>
       </block>

@@ -1,3 +1,6 @@
+import { runtimeConfig } from '../../config/index';
+import { uploadImages } from '../../utils/uploadHelper';
+
 /**
  * 获取售后单预览数据
  * 这里为了简单，先直接复用 order service 的逻辑获取订单详情，然后在前端或这里处理成 preview 数据。
@@ -73,18 +76,9 @@ export async function fetchRightsPreview(params) {
 
 /** 获取可选的售后原因列表 */
 export function fetchApplyReasonList(_params) {
-  // 简单起见，返回静态配置。也可改为从云数据库 `config` 集合拉取
   return Promise.resolve({
     data: {
-      rightsReasonList: [
-        { id: 1, desc: '实际商品与描述不符' },
-        { id: 2, desc: '质量问题' },
-        { id: 3, desc: '少件/漏发' },
-        { id: 4, desc: '包装/商品/污迹/裂痕/变形' },
-        { id: 5, desc: '发货太慢' },
-        { id: 6, desc: '商家发错货' },
-        { id: 8, desc: '不喜欢/不想要' },
-      ],
+      rightsReasonList: runtimeConfig.afterService?.reasonList || [],
     },
   });
 }
@@ -106,7 +100,5 @@ export function dispatchApplyService(params) {
       throw new Error((res.result && res.result.message) || 'Apply failed');
     });
 }
-
-import { uploadImages } from '../../utils/uploadHelper';
 
 export { uploadImages };

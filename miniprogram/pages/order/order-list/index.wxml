@@ -26,7 +26,7 @@
     normal-bar-height="{{200}}"
     max-bar-height="{{272}}"
     refreshTimeout="{{3000}}"
-    background="#f5f5f5"
+    background="#f6f7f5"
     use-loading-slot
     loading-size="60rpx"
     bindrefresh="handlePullDownRefresh"

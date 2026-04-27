@@ -21,7 +21,7 @@
   left: 0;
   bottom: -1px;
   height: 1px;
-  background-color: #eee;
+  background-color: var(--color-border);
   z-index: 1;
 }
 .c-tabbar__inner.c-tabbar__inner_more::after {
@@ -34,16 +34,16 @@
 .c-tabbar-item {
   flex: none;
   height: 100rpx;
-  color: #282828;
+  color: var(--color-text);
   font-size: 28rpx;
   padding: 0 20rpx;
 }
 .c-tabbar-item.active:not(.disabled) {
-  color: #0071ce;
+  color: var(--color-primary);
   position: relative;
 }
 .c-tabbar-item.disabled {
-  color: #ccc;
+  color: var(--color-border);
 }
 .c-tabbar-item__text {
   width: 100%;

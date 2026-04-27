@@ -1,5 +1,5 @@
 page {
-  background-color: #f5f5f5;
+  background-color: var(--color-page);
 }
 .page-section {
   margin-top: 24rpx;
@@ -14,43 +14,43 @@ page {
 .wr-cell__title {
   flex: none;
   font-size: 28rpx;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 .wr-cell__value {
   flex: auto;
   margin-left: 30rpx;
   font-size: 28rpx;
-  color: #333 !important;
+  color: var(--color-text) !important;
 }
 .logistics-no {
   display: inline-block;
   text-align: left;
   word-break: break-all;
-  color: #333;
+  color: var(--color-text);
 }
 .text-btn {
   margin-left: 20rpx;
   display: inline;
   font-size: 24rpx;
   padding: 0 15rpx;
-  border: 1rpx solid #ddd;
+  border: 1rpx solid var(--color-border);
   border-radius: 28rpx;
-  color: #333;
+  color: var(--color-text);
 }
 .text-btn--active {
   opacity: 0.5;
 }
 .steps .step-title {
   font-weight: bold;
-  color: #333 !important;
+  color: var(--color-text) !important;
   font-size: 30rpx;
 }
 .steps .step-desc {
-  color: #333333;
+  color: var(--color-text);
   font-size: 28rpx;
 }
 .steps .step-date {
-  color: #999999;
+  color: var(--color-text-muted);
   font-size: 24rpx;
 }
 
@@ -64,7 +64,7 @@ page {
   .t-step--vertical.t-step--default-anchor
   .t-steps-item--process
   .t-steps-item__icon-number {
-  background: #ffece9 !important;
+  background: var(--color-primary-light) !important;
   color: white !important;
   border: none;
 }
@@ -74,7 +74,7 @@ page {
   .t-steps-item--default
   .t-steps-item__icon-number {
   color: white !important;
-  background: #f5f5f5 !important;
+  background: var(--color-page) !important;
   border: none;
 }
 
@@ -92,7 +92,7 @@ page {
   .t-step--vertical.t-step--default-anchor.t-step--not-last-child
   .t-steps-item--default
   .t-steps-item__inner:after {
-  background: #f5f5f5 !important;
+  background: var(--color-page) !important;
 }
 .page-section__steps {
   padding: 24rpx;

@@ -10,7 +10,7 @@
             <view class="check-wrap" catchtap="handleGoodsSelect" data-goods="{{item}}">
               <t-icon
                 size="40rpx"
-                color="{{item.isSelected ? '#FA4126' : '#BBBBBB'}}"
+                color="{{item.isSelected ? '#4F6F64' : '#BBBBBB'}}"
                 name="{{item.isSelected ? 'check-circle-filled' : 'circle'}}"
               />
             </view>
@@ -110,7 +110,7 @@
 </block>
 <block wx:else>
   <view class="empty-login-wrap">
-    <image class="prompt-image" src="/assets/images/cart-empty.png" mode="aspectFit" />
+    <view class="prompt-image prompt-image-placeholder">空</view>
     <view class="prompt-text">登录后才能看到购物车哦</view>
     <t-button bind:tap="navigateToLogin" theme="primary" size="large">立即登录</t-button>
   </view>

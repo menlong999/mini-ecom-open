@@ -7,7 +7,7 @@ const getPermission = ({ code, name }) => {
             title: `获取${name}失败`,
             content: `获取${name}失败，请在【右上角】-小程序【设置】项中，将【${name}】开启。`,
             confirmText: '去设置',
-            confirmColor: '#FA550F',
+            confirmColor: '#4F6F64',
             cancelColor: '取消',
             success(res) {
               if (res.confirm) {

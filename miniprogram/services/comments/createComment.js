@@ -1,5 +1,3 @@
-import { config } from '../../config/index';
-
 /**
  * 创建商品评价
  * @param {Object} data 评价数据

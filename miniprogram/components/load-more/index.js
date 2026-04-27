@@ -22,11 +22,11 @@ Component({
     },
     color: {
       type: String,
-      value: '#BBBBBB',
+      value: '#9AA19A',
     },
     failedColor: {
       type: String,
-      value: '#FA550F',
+      value: '#4F6F64',
     },
     size: {
       type: null,
@@ -34,7 +34,7 @@ Component({
     },
     loadingBackgroundColor: {
       type: String,
-      value: '#F5F5F5',
+      value: '#F6F7F5',
     },
     listIsEmpty: {
       type: Boolean,

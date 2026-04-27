@@ -1,6 +1,9 @@
 <wxs module="phoneMask">
-  var toHide = function(phone) { if (!phone || phone.length < 7) return phone || ''; return
-  phone.substring(0, 3) + '****' + phone.substring(7); } module.exports.toHide = toHide;
+  var toHide = function(phone) {
+    if (!phone || phone.length < 7) return phone || '';
+    return phone.substring(0, 3) + '****' + phone.substring(7);
+  }
+  module.exports.toHide = toHide;
 </wxs>
 
 <view class="address-container">
@@ -12,7 +15,7 @@
         <view class="address-content" bindtap="handleAddressSelect" data-item="{{item}}">
           <!-- 选中状态（选择模式下显示） -->
           <view class="address-check" wx:if="{{selectMode && item.checked}}">
-            <t-icon name="check" size="40rpx" color="#FA4126" />
+            <t-icon name="check" size="40rpx" color="#4F6F64" />
           </view>
 
           <!-- 地址信息 -->
@@ -34,7 +37,7 @@
 
           <!-- 编辑按钮 -->
           <view class="address-edit" catchtap="handleAddressEdit" data-id="{{item.id}}">
-            <t-icon name="edit" size="40rpx" color="#bbb" />
+            <t-icon name="edit" size="40rpx" color="#9aa19a" />
           </view>
         </view>
 
@@ -60,11 +63,11 @@
   <view class="bottom-fixed">
     <view class="btn-wrap">
       <view class="wx-address-btn" bindtap="handleWXAddress" wx:if="{{addressList.length < 20}}">
-        <t-icon name="location" size="36rpx" color="#333" />
+        <t-icon name="location" size="36rpx" color="#202421" />
         <text>微信地址导入</text>
       </view>
       <view class="wx-address-btn btn-disabled" wx:else>
-        <t-icon name="location" size="36rpx" color="#999" />
+        <t-icon name="location" size="36rpx" color="#9aa19a" />
         <text>微信地址导入</text>
       </view>
 

@@ -3,9 +3,13 @@
   <block wx:if="{{currAuthStep === 1}}">
     <view class="user-center-card__header" bind:tap="handleUserCardClick">
       <t-avatar
-        image="{{userInfo.avatarUrl || 'https://tdesign.gtimg.com/miniprogram/template/retail/usercenter/icon-user-center-avatar@2x.png'}}"
+        wx:if="{{userInfo.avatarUrl}}"
+        image="{{userInfo.avatarUrl}}"
         class="user-center-card__header__avatar"
       />
+      <view wx:else class="user-center-card__header__avatar avatar-placeholder">
+        <t-icon name="user" size="44rpx" />
+      </view>
       <view class="user-center-card__header__name">{{'请登录'}}</view>
     </view>
   </block>
@@ -13,9 +17,13 @@
   <block wx:if="{{currAuthStep === 2}}">
     <view class="user-center-card__header" bind:tap="handleUserCardClick">
       <t-avatar
-        image="{{userInfo.avatarUrl || 'https://tdesign.gtimg.com/miniprogram/template/retail/usercenter/icon-user-center-avatar@2x.png'}}"
+        wx:if="{{userInfo.avatarUrl}}"
+        image="{{userInfo.avatarUrl}}"
         class="user-center-card__header__avatar"
       />
+      <view wx:else class="user-center-card__header__avatar avatar-placeholder">
+        <t-icon name="user" size="44rpx" />
+      </view>
       <view class="user-center-card__header__name">{{userInfo.nickName || '微信用户'}}</view>
     </view>
   </block>
@@ -23,11 +31,15 @@
   <block wx:if="{{currAuthStep === 3}}">
     <view class="user-center-card__header" bind:tap="handleUserCardClick">
       <t-avatar
+        wx:if="{{userInfo.avatarUrl}}"
         t-class="avatar"
         mode="aspectFill"
         class="user-center-card__header__avatar"
-        image="{{userInfo.avatarUrl || 'https://tdesign.gtimg.com/miniprogram/template/retail/usercenter/icon-user-center-avatar@2x.png'}}"
+        image="{{userInfo.avatarUrl}}"
       />
+      <view wx:else class="user-center-card__header__avatar avatar-placeholder">
+        <t-icon name="user" size="44rpx" />
+      </view>
       <view class="user-center-card__header__name">{{userInfo.nickName || '微信用户'}}</view>
     </view>
   </block>

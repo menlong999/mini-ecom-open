@@ -1,5 +1,5 @@
 :host {
-  background-color: #f5f5f5;
+  background-color: var(--color-page);
 }
 
 .page-container .tab-bar__placeholder,
@@ -11,7 +11,7 @@
 
 .page-container .tab-bar__inner {
   font-size: 26rpx;
-  color: #333333;
+  color: var(--color-text);
   position: fixed;
   width: 100vw;
   top: 0;
@@ -23,11 +23,11 @@
 }
 
 .tab-bar__inner .t-tabs-is-active {
-  color: #fa4126 !important;
+  color: var(--color-primary) !important;
 }
 
 .tab-bar__inner .t-tabs-track {
-  background: #fa4126 !important;
+  background: var(--color-primary) !important;
 }
 
 .page-container .tab-bar__active {
@@ -35,18 +35,18 @@
 }
 
 .page-container .specs-popup .bottom-btn {
-  color: #fa4126;
-  color: var(--color-primary, #fa4126);
+  color: var(--color-primary);
+  color: var(--color-primary, var(--color-primary));
 }
 
 .page-container .specs-popup .bottom-btn::after {
-  border-color: #fa4126;
-  border-color: var(--color-primary, #fa4126);
+  border-color: var(--color-primary);
+  border-color: var(--color-primary, var(--color-primary));
 }
 
 .dialog .dialog__button-confirm {
-  color: #fa4126;
-  color: var(--color-primary, #fa4126);
+  color: var(--color-primary);
+  color: var(--color-primary, var(--color-primary));
 }
 
 .list-loading {
@@ -68,7 +68,7 @@
 .price-total {
   font-size: 24rpx;
   line-height: 32rpx;
-  color: #999999;
+  color: var(--color-text-muted);
   padding-top: 10rpx;
   width: 100%;
   display: flex;
@@ -77,16 +77,16 @@
 }
 
 .price-total .bold-price {
-  color: #333333;
+  color: var(--color-text);
   font-size: 28rpx;
   line-height: 40rpx;
-  color: #333333;
+  color: var(--color-text);
 }
 
 .price-total .real-pay {
   font-size: 36rpx;
   line-height: 48rpx;
-  color: #fa4126;
+  color: var(--color-price);
   font-weight: bold;
 }
 
@@ -96,29 +96,29 @@
 
 .t-empty-text {
   font-size: 28rpx;
-  color: #999;
+  color: var(--color-text-muted);
 }
 
 .page-container .order-number {
-  color: #666666;
+  color: var(--color-text-secondary);
   font-size: 28rpx;
 }
 
 .t-class-indicator {
-  color: #b9b9b9 !important;
+  color: var(--color-text-muted) !important;
 }
 
 .tab-bar .tab-bar__active {
-  color: #333333 !important;
+  color: var(--color-text) !important;
 }
 
 .tab-bar .t-tabs-track {
-  background: #333333 !important;
+  background: var(--color-text) !important;
 }
 
 .t-button {
-  --td-button-default-color: #000;
-  --td-button-primary-text-color: #fa4126;
+  --td-button-default-color: var(--color-text);
+  --td-button-primary-text-color: var(--color-primary);
 }
 
 .empty-wrapper-container {
@@ -146,14 +146,14 @@
 
 .order-card .header .order-no {
   font-size: 26rpx;
-  color: #666;
+  color: var(--color-text-secondary);
   line-height: 40rpx;
 }
 
 .order-card .header .order-status {
   font-size: 26rpx;
   line-height: 40rpx;
-  color: #fa4126;
+  color: var(--color-primary);
 }
 
 /* Goods Item Styles (Consistent with order-detail) */
@@ -168,7 +168,7 @@
   border-radius: 16rpx;
   flex-shrink: 0;
   margin-right: 24rpx;
-  background-color: #f5f5f5;
+  background-color: var(--color-page);
   overflow: hidden;
 }
 
@@ -181,7 +181,7 @@
 
 .goods-title {
   font-size: 28rpx;
-  color: #333;
+  color: var(--color-text);
   line-height: 36rpx;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -192,7 +192,7 @@
 
 .goods-specs {
   font-size: 24rpx;
-  color: #999;
+  color: var(--color-text-muted);
   margin-top: 8rpx;
 }
 
@@ -211,10 +211,10 @@
 .goods-price {
   font-size: 32rpx;
   font-weight: bold;
-  color: #333;
+  color: var(--color-text);
 }
 
 .goods-num {
   font-size: 24rpx;
-  color: #999;
+  color: var(--color-text-muted);
 }

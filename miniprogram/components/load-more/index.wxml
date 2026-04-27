@@ -16,11 +16,7 @@
   />
 
   <!-- 已全部加载 -->
-  <t-divider
-    wx:if="{{status === 2}}"
-    t-class="t-class-divider"
-    t-class-content="t-class-divider-content"
-  >
+  <t-divider wx:if="{{status === 2}}" t-class="t-class-divider" t-class-content="t-class-divider-content">
     <text slot="content">{{noMoreText}}</text>
   </t-divider>
 

@@ -39,7 +39,7 @@
         <view class="goods-tag">
           <t-button open-type="share" t-class="shareBtn" variant="text">
             <view class="btn-icon">
-              <t-icon name="share" size="40rpx" color="#000" />
+              <t-icon name="share" size="40rpx" color="#202421" />
               <view class="share-text">分享</view>
             </view>
           </t-button>
@@ -74,7 +74,14 @@
         wx:key="goodsSpu"
       >
         <view class="comment-item-head">
-          <t-image src="{{commentItem.userHeadUrl}}" t-class="comment-item-avatar" />
+          <t-image
+            wx:if="{{commentItem.userHeadUrl}}"
+            src="{{commentItem.userHeadUrl}}"
+            t-class="comment-item-avatar"
+          />
+          <view wx:else class="comment-item-avatar comment-item-avatar-placeholder">
+            {{commentItem.avatarText || '匿'}}
+          </view>
           <view class="comment-head-right">
             <view class="comment-username">{{commentItem.userName}}</view>
             <t-rate
@@ -92,9 +99,7 @@
   </view>
   <view class="desc-content">
     <view class="desc-content__title" wx:if="{{details.desc.length > 0}}">
-      <t-image t-class="img" src="{{recLeftImg}}" />
       <span class="desc-content__title--text">详情介绍</span>
-      <t-image t-class="img" src="{{recRightImg}}" />
     </view>
     <view wx:if="{{details.desc.length > 0}}" wx:for="{{details.desc}}" wx:key="index">
       <t-image t-class="desc-content__img" src="{{item}}" mode="widthFix" />

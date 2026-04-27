@@ -1,6 +1,6 @@
 .order-sure {
   box-sizing: border-box;
-  background: #f6f6f6;
+  background: var(--color-page);
   padding: 24rpx 0 calc(env(safe-area-inset-bottom) + 136rpx);
   min-height: 100vh;
 }
@@ -27,7 +27,7 @@
 }
 
 .order-sure .wx-pay-cover .wx-pay .price {
-  color: #fa4126;
+  color: var(--color-price);
   font-weight: bold;
   font-size: 63rpx;
   line-height: 88rpx;
@@ -37,7 +37,7 @@
   height: 80rpx;
   width: 240rpx;
   border-radius: 40rpx;
-  background-color: #fa4126;
+  background-color: var(--color-primary);
   color: #ffffff;
   line-height: 80rpx;
   font-weight: bold;
@@ -46,7 +46,7 @@
 }
 
 .order-sure .wx-pay-cover .wx-pay .btn-gray {
-  background: #cccccc;
+  background: var(--color-border);
 }
 
 .order-wrapper .store-wrapper {
@@ -58,7 +58,7 @@
   align-items: center;
   font-size: 28rpx;
   line-height: 40rpx;
-  color: #333333;
+  color: var(--color-text);
   background-color: #ffffff;
 }
 
@@ -75,7 +75,7 @@
   justify-content: space-between;
   font-size: 24rpx;
   line-height: 32rpx;
-  color: #999999;
+  color: var(--color-text-muted);
   background-color: #ffffff;
 }
 
@@ -101,7 +101,7 @@
   font-size: 28rpx;
   line-height: 40rpx;
   margin-bottom: 12rpx;
-  color: #333333;
+  color: var(--color-text);
   margin-right: 16rpx;
 }
 
@@ -113,7 +113,7 @@
 }
 
 .goods-right .goods-price {
-  color: #333333;
+  color: var(--color-text);
   font-size: 32rpx;
   line-height: 48rpx;
   font-weight: bold;
@@ -139,11 +139,11 @@
   justify-content: space-between;
   font-size: 26rpx;
   line-height: 36rpx;
-  color: #666666;
+  color: var(--color-text-secondary);
 }
 
 .order-sure .pay-detail .pay-item .pay-item__right {
-  color: #333333;
+  color: var(--color-text);
   font-size: 24rpx;
   display: flex;
   align-items: center;
@@ -166,15 +166,15 @@
 }
 
 .order-sure .pay-detail .pay-item .primary {
-  color: #fa4126;
+  color: var(--color-primary);
 }
 
 .add-notes .add-notes__content {
-  --td-textarea-background-color: #f5f5f5;
+  --td-textarea-background-color: var(--color-page);
 }
 
 .add-notes .t-textarea__placeholder {
-  color: #aeb3b7;
+  color: var(--color-text-muted);
 }
 
 .add-notes .add-notes__textarea__font {
@@ -208,7 +208,7 @@
   align-items: center;
   justify-content: flex-end;
   font-size: 28rpx;
-  color: #333333;
+  color: var(--color-text);
   position: relative;
 }
 
@@ -221,27 +221,25 @@
   height: 200%;
   transform: scale(0.5);
   transform-origin: 0 0;
-  border-top: 2rpx solid #f5f5f5;
+  border-top: 2rpx solid var(--color-page);
 }
 
 .order-sure .pay-amount .order-num {
-  color: #999999;
+  color: var(--color-text-muted);
   padding-right: 8rpx;
 }
 
 .order-sure .pay-amount .total-price {
   font-size: 36rpx;
-  color: #fa4126;
+  color: var(--color-price);
   font-weight: bold;
   padding-left: 8rpx;
 }
 
 .top-line {
   width: 100%;
-  height: 6rpx;
-  background-color: #fff;
-  background-image: url(https://tdesign.gtimg.com/miniprogram/template/retail/order/stripe.png);
-  background-repeat: repeat-x;
+  height: 2rpx;
+  background: var(--color-border);
   display: block;
 }
 
@@ -261,7 +259,7 @@
 
 .goods-fail .info {
   font-size: 26rpx;
-  color: #999;
+  color: var(--color-text-muted);
   text-align: center;
   padding: 20rpx 40rpx;
 }
@@ -275,7 +273,7 @@
 .goods-fail-item {
   display: flex;
   padding: 24rpx 0;
-  border-bottom: 2rpx solid #f5f5f5;
+  border-bottom: 2rpx solid var(--color-page);
 }
 
 .goods-fail-img {
@@ -291,7 +289,7 @@
 
 .goods-fail-title {
   font-size: 28rpx;
-  color: #333;
+  color: var(--color-text);
   line-height: 1.4;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -302,7 +300,7 @@
 
 .goods-fail-specs {
   font-size: 24rpx;
-  color: #999;
+  color: var(--color-text-muted);
   margin-top: 8rpx;
 }
 
@@ -314,12 +312,12 @@
 .goods-fail-price {
   font-size: 28rpx;
   font-weight: bold;
-  color: #333;
+  color: var(--color-text);
 }
 
 .goods-fail-num {
   font-size: 24rpx;
-  color: #999;
+  color: var(--color-text-muted);
   margin-top: 8rpx;
 }
 
@@ -335,14 +333,14 @@
   line-height: 80rpx;
   text-align: center;
   border-radius: 40rpx;
-  border: 2rpx solid #ddd;
+  border: 2rpx solid var(--color-border);
   margin: 0 12rpx;
   font-size: 28rpx;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .fail-btn.primary {
-  background: #fa4126;
+  background: var(--color-primary);
   color: #fff;
-  border-color: #fa4126;
+  border-color: var(--color-primary);
 }

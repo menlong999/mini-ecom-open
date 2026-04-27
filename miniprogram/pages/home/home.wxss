@@ -8,11 +8,11 @@ page {
 }
 
 .home-page-header {
-  background: linear-gradient(#fff, #f5f5f5);
+  background: var(--color-page-soft);
 }
 
 .home-page-container {
-  background: #f5f5f5;
+  background: var(--color-page);
 }
 
 .home-page-container,
@@ -28,7 +28,7 @@ page {
 
 .home-page-header .t-search__input {
   font-size: 28rpx !important;
-  color: rgb(116, 116, 116) !important;
+  color: var(--color-text-secondary) !important;
 }
 
 .home-page-header .swiper-wrap {
@@ -43,14 +43,14 @@ page {
 }
 
 .home-page-container .t-tabs {
-  background: #f5f5f5 !important;
+  background: var(--color-page) !important;
 }
 
 .home-page-container .t-tabs .t-tabs-nav {
   background-color: transparent;
   line-height: 80rpx;
   font-size: 28rpx;
-  color: #333;
+  color: var(--color-text);
 }
 
 .home-page-container .t-tabs .t-tabs-scroll {
@@ -63,7 +63,7 @@ page {
 }
 
 .home-page-container .tab .order-nav-item.active {
-  color: #fa550f !important;
+  color: var(--color-primary) !important;
 }
 
 .home-page-container .tab .bottom-line {
@@ -71,21 +71,21 @@ page {
 }
 
 .home-page-container .tab .order-nav-item.active .bottom-line {
-  background-color: #fa550f !important;
+  background-color: var(--color-primary) !important;
 }
 
 .home-page-container .tabs-external__item {
-  /* color: #666 !important; */
+  /* color: var(--color-text-secondary) !important; */
   font-size: 28rpx;
 }
 
 .home-page-container .tabs-external__active {
-  color: #333333 !important;
+  color: var(--color-text) !important;
   font-size: 32rpx;
 }
 
 .home-page-container .tabs-external__track {
-  /* background-color: #fa4126 !important; */
+  /* background-color: var(--color-primary) !important; */
   height: 6rpx !important;
   border-radius: 4rpx !important;
   width: 48rpx !important;
@@ -97,15 +97,15 @@ page {
 }
 
 .home-page-container .goods-list-container {
-  background: #f5f5f5 !important;
+  background: var(--color-page) !important;
   margin-top: 16rpx;
 }
 
 .home-page-tabs {
   --td-tab-nav-bg-color: transparent;
   --td-tab-border-color: transparent;
-  --td-tab-item-color: #666;
-  --td-tab-track-color: red;
+  --td-tab-item-color: var(--color-text-secondary);
+  --td-tab-track-color: var(--color-primary);
 }
 
 /* 商品列表样式 */
@@ -136,7 +136,7 @@ page {
 
 .goods-title {
   font-size: 28rpx;
-  color: #333;
+  color: var(--color-text);
   line-height: 36rpx;
   height: 72rpx;
   display: -webkit-box;
@@ -152,9 +152,9 @@ page {
 }
 
 .goods-tag {
-  color: #fa4126;
+  color: var(--color-primary);
   font-size: 20rpx;
-  border: 1rpx solid #fa4126;
+  border: 1rpx solid var(--color-primary);
   padding: 0 8rpx;
   border-radius: 16rpx;
   line-height: 30rpx;
@@ -172,12 +172,12 @@ page {
 .goods-price {
   font-size: 36rpx;
   font-weight: 700;
-  color: #fa4126;
+  color: var(--color-price);
 }
 
 .goods-origin-price {
   font-size: 24rpx;
-  color: #bbb;
+  color: var(--color-text-muted);
   text-decoration: line-through;
   margin-left: 8rpx;
 }

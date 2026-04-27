@@ -2,7 +2,7 @@ Component({
   properties: {
     imgUrl: {
       type: String,
-      value: 'https://tdesign.gtimg.com/miniprogram/template/retail/template/empty-cart.png',
+      value: '',
     },
     tip: {
       type: String,

@@ -1,4 +1,4 @@
-import { createComment, createCommentsBatch } from '../../../../services/comments/createComment';
+import { createCommentsBatch } from '../../../../services/comments/createComment';
 import { uploadFile } from '../../../../services/common/upload';
 import Toast from 'tdesign-miniprogram/toast/index';
 

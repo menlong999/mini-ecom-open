@@ -1,0 +1,82 @@
+name: 🐛 Bug 报告
+description: 报告一个可复现的问题
+title: "[Bug] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢报告！请填写以下信息以便我们快速复现。
+        > ⚠️ 如果是安全相关问题，请勿在此公开报告，参见 [SECURITY.md](../../SECURITY.md)。
+  - type: input
+    id: version
+    attributes:
+      label: 版本 / Commit
+      description: 例如 v1.0.1 或具体 commit hash
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: 影响范围
+      multiple: true
+      options:
+        - miniprogram (前端)
+        - cloudfunctions (云函数)
+        - tenants (租户配置)
+        - docs / scripts (文档或工具)
+    validations:
+      required: true
+  - type: input
+    id: tenant
+    attributes:
+      label: 使用的租户
+      description: 默认 default；如使用自定义租户请说明 overlay 范围
+      placeholder: default / example / custom
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: 复现步骤
+      description: 1. ... 2. ... 3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 环境信息
+      description: 微信开发者工具版本、基础库版本、Node 版本、操作系统
+      placeholder: |
+        - 微信开发者工具：1.06.x
+        - 基础库：3.x
+        - Node：18.x
+        - OS：macOS 14
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 相关日志或截图
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前检查
+      options:
+        - label: 我已确认这不是我自己租户配置 (`tenants/<x>/tenant.config.js`) 导致的
+          required: true
+        - label: 我已搜索过现有 issue，没有重复
+          required: true

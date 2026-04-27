@@ -1,6 +1,6 @@
 :host {
   padding-bottom: 100rpx;
-  background-color: #f5f5f5;
+  background-color: var(--color-page);
 }
 
 .gap {
@@ -21,7 +21,7 @@
   display: flex;
   padding: 24rpx;
   background-color: #fff;
-  border-bottom: 1rpx solid #f9f9f9;
+  border-bottom: 1rpx solid var(--color-page);
 }
 
 .cart-item:last-child {
@@ -60,7 +60,7 @@
 
 .title {
   font-size: 28rpx;
-  color: #333;
+  color: var(--color-text);
   line-height: 40rpx;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -76,8 +76,8 @@
 .specs-text {
   display: inline-block;
   font-size: 24rpx;
-  color: #999;
-  background-color: #f5f5f5;
+  color: var(--color-text-muted);
+  background-color: var(--color-page);
   padding: 4rpx 12rpx;
   border-radius: 8rpx;
   max-width: 100%;
@@ -94,7 +94,7 @@
 }
 
 .price-class {
-  color: #fa4126;
+  color: var(--color-price);
   font-size: 36rpx;
   font-weight: bold;
 }
@@ -103,7 +103,7 @@
 .delete-btn {
   height: 100%;
   width: 144rpx;
-  background-color: #fa4126;
+  background-color: var(--color-primary);
   color: #fff;
   display: flex;
   align-items: center;
@@ -117,16 +117,16 @@
   justify-content: space-between;
   padding: 30rpx 40rpx;
   font-size: 28rpx;
-  background-color: #f5f5f5;
+  background-color: var(--color-page);
 }
 
 .invalid-title {
-  color: #333;
+  color: var(--color-text);
   font-weight: bold;
 }
 
 .clear-invalid {
-  color: #fa4126;
+  color: var(--color-primary);
 }
 
 .opacity-50 {
@@ -151,13 +151,24 @@
   height: 240rpx;
 }
 
+.prompt-image-placeholder {
+  border-radius: 120rpx;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  font-weight: 600;
+}
+
 .prompt-text {
   font-size: 28rpx;
-  color: #999;
+  color: var(--color-text-muted);
   margin: 32rpx 0 48rpx;
 }
 
 .t-button {
-  --td-button-default-color: #000;
-  --td-button-primary-text-color: #fa4126;
+  --td-button-default-color: var(--color-text);
+  --td-button-primary-text-color: var(--color-primary);
 }

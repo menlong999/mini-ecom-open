@@ -1,5 +1,3 @@
-import { config } from '../../config/index';
-
 export function getGoodsDetailsCommentsCount(spuId = 0) {
   console.log('Fetching comments count for spuId:', spuId);
 
@@ -65,7 +63,6 @@ export function getGoodsDetailsCommentsList(spuId = 0) {
     })
     .then((res) => {
       const records = res?.data?.records || [];
-      const total = res?.data?.total || 0;
       if (!Array.isArray(records) || records.length === 0) {
         console.log('No comments records found');
         return {
@@ -84,9 +81,7 @@ export function getGoodsDetailsCommentsList(spuId = 0) {
             commentScore: latestComment.commentScore || 0,
             uid: latestComment.uid,
             userName: latestComment.userName || '匿名用户',
-            userHeadUrl:
-              latestComment.userHeadUrl ||
-              'https://wx.qlogo.cn/mmopen/vi_32/5mKrvn3ibyDNaDZSZics3aoKlz1cv0icqn4EruVm6gKjsK0xvZZhC2hkUkRWGxlIzOEc4600JkzKn9icOLE6zjgsxw/132',
+            userHeadUrl: latestComment.userHeadUrl || '',
           },
         ],
       };

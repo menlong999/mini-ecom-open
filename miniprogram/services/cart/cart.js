@@ -1,5 +1,3 @@
-import { config } from '../../config/index';
-
 const app = getApp();
 
 // 获取购物车列表
@@ -18,9 +16,7 @@ export async function fetchCartList(openId) {
 }
 
 // 添加商品到购物车
-export async function addCart(openId, goods) {
-  console.log('addCart', openId, goods);
-
+export async function addCart(_openId, goods) {
   const res = await wx.cloud.callFunction({
     name: 'manageCart',
     data: {
@@ -83,7 +79,7 @@ export async function deleteGoods(openId, spuId, skuId) {
 }
 
 // 清空失效商品
-export async function clearInvalidGoods(openId) {
+export async function clearInvalidGoods(_openId) {
   console.log('clearInvalidGoods');
   await wx.cloud.callFunction({
     name: 'manageCart',

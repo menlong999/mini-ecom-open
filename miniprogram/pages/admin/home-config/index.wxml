@@ -303,7 +303,7 @@
               <t-checkbox
                 class="picker-checkbox"
                 checked="{{tabEditingSpuIdMap[item._id]}}"
-                color="#FF5F15"
+                color="#4E667A"
                 bind:change="onTabGoodsCheckChange"
                 data-id="{{item._id}}"
               />

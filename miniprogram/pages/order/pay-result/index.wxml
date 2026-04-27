@@ -1,25 +1,33 @@
 <t-navbar background="#ffffff" left-icon="slot" />
 <view class="pay-result">
-  <view class="pay-status">
-    <t-icon name="check-circle-filled" size="60rpx" color="#47D368" />
+  <view class="pay-result-card">
+    <view class="pay-status-icon">
+      <t-icon name="check" size="56rpx" color="#4F7D5A" />
+    </view>
     <view class="pay-status-text">支付成功</view>
+    <view class="pay-status-desc">订单已提交，商家会尽快处理</view>
   </view>
-  <view class="pay-money">
-    微信支付：
-    <price
-      wx:if="{{totalPaid}}"
-      price="{{totalPaid}}"
-      wr-class="pay-money__price"
-      decimalSmaller
-      fill
-      priceUnit="yuan"
-    />
+
+  <view class="pay-summary">
+    <view class="pay-summary-label">微信支付</view>
+    <view class="pay-summary-amount">
+      <price
+        wx:if="{{totalPaid}}"
+        price="{{totalPaid}}"
+        wr-class="pay-money__price"
+        decimalSmaller
+        fill
+        priceUnit="yuan"
+      />
+      <text wx:else>¥0.00</text>
+    </view>
   </view>
+
   <view class="btn-wrapper">
     <t-button
       block
-      theme="light"
-      t-class="status-btn"
+      theme="primary"
+      t-class="status-btn status-btn-primary"
       size="large"
       data-type="orderList"
       bind:tap="onTapReturn"
@@ -28,7 +36,7 @@
     <t-button
       block
       theme="light"
-      t-class="status-btn"
+      t-class="status-btn status-btn-secondary"
       size="large"
       data-type="home"
       bind:tap="onTapReturn"

@@ -1,0 +1,653 @@
+{
+    "x-primary-column": "_id",
+    "x-kind": "tcb",
+    "x-defaultMethods": [
+        "wedaCreate",
+        "wedaUpdate",
+        "wedaDelete",
+        "wedaGetItem",
+        "wedaGetRecords",
+        "wedaGetList",
+        "wedaBatchCreate",
+        "wedaBatchUpdate",
+        "wedaBatchDelete"
+    ],
+    "type": "object",
+    "x-relatedType": "exist",
+    "x-viewId": "view-7n3k2u79a8",
+    "required": [],
+    "properties": {
+        "searchPlaceholder": {
+            "x-required": false,
+            "x-keyPath": "",
+            "x-id": "3b5926a6",
+            "format": "",
+            "description": "",
+            "type": "string",
+            "x-index": 2,
+            "title": "searchPlaceholder",
+            "x-unique": false,
+            "maxLength": 256
+        },
+        "owner": {
+            "default": "",
+            "x-system": true,
+            "x-id": "1e0b700",
+            "name": "owner",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "所有人",
+            "x-index": 4,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "_mainDep": {
+            "x-system": true,
+            "x-id": "1cc6ad7",
+            "name": "_mainDep",
+            "format": "father-son",
+            "x-hidden": true,
+            "type": "string",
+            "title": "所属主管部门",
+            "x-index": 7,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_department"
+            }
+        },
+        "tabList": {
+            "x-required": false,
+            "x-keyPath": "",
+            "x-id": "379e9956",
+            "format": "",
+            "description": "",
+            "type": "array",
+            "x-index": 4,
+            "title": "tabList",
+            "list": [
+                {
+                    "x-required": false,
+                    "x-keyPath": "",
+                    "x-id": "f6164445",
+                    "format": "",
+                    "name": "spuIds",
+                    "description": "",
+                    "pId": "379e9956",
+                    "type": "array",
+                    "x-index": 6,
+                    "title": "spuIds",
+                    "items": {
+                        "format": "",
+                        "type": "string"
+                    },
+                    "x-unique": false
+                },
+                {
+                    "x-required": true,
+                    "x-keyPath": "",
+                    "x-id": "3653622f",
+                    "format": "",
+                    "name": "key",
+                    "description": "",
+                    "pId": "379e9956",
+                    "type": "string",
+                    "x-index": 4,
+                    "title": "key",
+                    "x-unique": false
+                },
+                {
+                    "x-required": false,
+                    "x-keyPath": "",
+                    "x-id": "743bd82d",
+                    "format": "",
+                    "name": "text",
+                    "description": "",
+                    "pId": "379e9956",
+                    "type": "string",
+                    "x-index": 2,
+                    "title": "text",
+                    "x-unique": false
+                }
+            ],
+            "items": {
+                "format": "",
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "x-required": false,
+                        "x-keyPath": "",
+                        "x-id": "743bd82d",
+                        "format": "",
+                        "name": "text",
+                        "description": "",
+                        "pId": "379e9956",
+                        "type": "string",
+                        "x-index": 2,
+                        "title": "text",
+                        "x-unique": false
+                    },
+                    "spuIds": {
+                        "x-required": false,
+                        "x-keyPath": "",
+                        "x-id": "f6164445",
+                        "format": "",
+                        "name": "spuIds",
+                        "description": "",
+                        "pId": "379e9956",
+                        "type": "array",
+                        "x-index": 6,
+                        "title": "spuIds",
+                        "items": {
+                            "format": "",
+                            "type": "string"
+                        },
+                        "x-unique": false
+                    },
+                    "key": {
+                        "x-required": true,
+                        "x-keyPath": "",
+                        "x-id": "3653622f",
+                        "format": "",
+                        "name": "key",
+                        "description": "",
+                        "pId": "379e9956",
+                        "type": "string",
+                        "x-index": 4,
+                        "title": "key",
+                        "x-unique": false
+                    }
+                }
+            },
+            "x-unique": false,
+            "required": [
+                "key"
+            ]
+        },
+        "createdAt": {
+            "default": 0,
+            "x-system": true,
+            "x-id": "783518c",
+            "format": "datetime",
+            "type": "number",
+            "title": "创建时间",
+            "x-index": 2,
+            "x-unique": false
+        },
+        "createBy": {
+            "default": "",
+            "x-system": true,
+            "x-id": "a72ca0f",
+            "name": "createBy",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "创建人",
+            "x-index": 5,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "swiper": {
+            "x-required": false,
+            "x-keyPath": "",
+            "x-id": "17b3c47c",
+            "format": "",
+            "description": "",
+            "type": "array",
+            "x-index": 6,
+            "title": "swiper",
+            "list": [
+                {
+                    "x-keyPath": "",
+                    "x-id": "2bf66ce5",
+                    "format": "",
+                    "description": "",
+                    "pId": "17b3c47c",
+                    "type": "object",
+                    "x-index": 12,
+                    "title": "poi",
+                    "list": [
+                        {
+                            "x-required": false,
+                            "x-keyPath": "",
+                            "x-id": "acf468d7",
+                            "format": "",
+                            "name": "longitude",
+                            "description": "",
+                            "pId": "2bf66ce5",
+                            "type": "number",
+                            "x-index": 8,
+                            "title": "longitude",
+                            "x-unique": false
+                        },
+                        {
+                            "x-required": false,
+                            "x-keyPath": "",
+                            "x-id": "7d236dcd",
+                            "format": "",
+                            "name": "latitude",
+                            "description": "",
+                            "pId": "2bf66ce5",
+                            "type": "number",
+                            "x-index": 6,
+                            "title": "latitude",
+                            "x-unique": false
+                        },
+                        {
+                            "x-required": false,
+                            "x-keyPath": "",
+                            "x-id": "ed85f937",
+                            "format": "",
+                            "name": "address",
+                            "description": "",
+                            "pId": "2bf66ce5",
+                            "type": "string",
+                            "x-index": 4,
+                            "title": "address",
+                            "x-unique": false
+                        },
+                        {
+                            "x-required": false,
+                            "x-keyPath": "",
+                            "x-id": "83864699",
+                            "format": "",
+                            "name": "name",
+                            "description": "",
+                            "pId": "2bf66ce5",
+                            "type": "string",
+                            "x-index": 2,
+                            "title": "name",
+                            "x-unique": false
+                        }
+                    ],
+                    "x-unique": false,
+                    "x-required": false,
+                    "name": "poi",
+                    "properties": {
+                        "address": {
+                            "x-required": false,
+                            "x-keyPath": "",
+                            "x-id": "ed85f937",
+                            "format": "",
+                            "name": "address",
+                            "description": "",
+                            "pId": "2bf66ce5",
+                            "type": "string",
+                            "x-index": 4,
+                            "title": "address",
+                            "x-unique": false
+                        },
+                        "latitude": {
+                            "x-required": false,
+                            "x-keyPath": "",
+                            "x-id": "7d236dcd",
+                            "format": "",
+                            "name": "latitude",
+                            "description": "",
+                            "pId": "2bf66ce5",
+                            "type": "number",
+                            "x-index": 6,
+                            "title": "latitude",
+                            "x-unique": false
+                        },
+                        "name": {
+                            "x-required": false,
+                            "x-keyPath": "",
+                            "x-id": "83864699",
+                            "format": "",
+                            "name": "name",
+                            "description": "",
+                            "pId": "2bf66ce5",
+                            "type": "string",
+                            "x-index": 2,
+                            "title": "name",
+                            "x-unique": false
+                        },
+                        "longitude": {
+                            "x-required": false,
+                            "x-keyPath": "",
+                            "x-id": "acf468d7",
+                            "format": "",
+                            "name": "longitude",
+                            "description": "",
+                            "pId": "2bf66ce5",
+                            "type": "number",
+                            "x-index": 8,
+                            "title": "longitude",
+                            "x-unique": false
+                        }
+                    }
+                },
+                {
+                    "x-required": false,
+                    "default": "spu",
+                    "x-keyPath": "",
+                    "x-id": "64cf26fe",
+                    "format": "",
+                    "name": "linkType",
+                    "description": "spu: 商品详情，poi：地址",
+                    "pId": "17b3c47c",
+                    "type": "string",
+                    "x-index": 10,
+                    "title": "linkType",
+                    "x-unique": false
+                },
+                {
+                    "x-required": false,
+                    "x-keyPath": "",
+                    "x-id": "27eca66a",
+                    "format": "",
+                    "name": "spuId",
+                    "description": "",
+                    "pId": "17b3c47c",
+                    "type": "string",
+                    "x-index": 8,
+                    "title": "spuId",
+                    "x-unique": false
+                },
+                {
+                    "x-keyPath": "",
+                    "x-id": "b3a5168a",
+                    "format": "x-image",
+                    "description": "",
+                    "pId": "17b3c47c",
+                    "type": "string",
+                    "x-index": 6,
+                    "title": "image",
+                    "x-unique": false,
+                    "x-image-size": 5242880,
+                    "x-required": false,
+                    "name": "image",
+                    "x-storage-type": "cloudID"
+                },
+                {
+                    "x-required": false,
+                    "x-keyPath": "",
+                    "x-id": "68cf1612",
+                    "format": "",
+                    "name": "imageUrl",
+                    "description": "",
+                    "pId": "17b3c47c",
+                    "type": "string",
+                    "x-index": 4,
+                    "title": "imageUrl",
+                    "x-unique": false
+                },
+                {
+                    "x-required": false,
+                    "x-keyPath": "",
+                    "x-id": "7a7dbef8",
+                    "format": "",
+                    "name": "skuId",
+                    "description": "",
+                    "pId": "17b3c47c",
+                    "type": "string",
+                    "x-index": 2,
+                    "title": "skuId",
+                    "x-unique": false
+                }
+            ],
+            "items": {
+                "format": "",
+                "type": "object",
+                "properties": {
+                    "image": {
+                        "x-keyPath": "",
+                        "x-id": "b3a5168a",
+                        "format": "x-image",
+                        "description": "",
+                        "pId": "17b3c47c",
+                        "type": "string",
+                        "x-index": 6,
+                        "title": "image",
+                        "x-unique": false,
+                        "x-image-size": 5242880,
+                        "x-required": false,
+                        "name": "image",
+                        "x-storage-type": "cloudID"
+                    },
+                    "imageUrl": {
+                        "x-required": false,
+                        "x-keyPath": "",
+                        "x-id": "68cf1612",
+                        "format": "",
+                        "name": "imageUrl",
+                        "description": "",
+                        "pId": "17b3c47c",
+                        "type": "string",
+                        "x-index": 4,
+                        "title": "imageUrl",
+                        "x-unique": false
+                    },
+                    "spuId": {
+                        "x-required": false,
+                        "x-keyPath": "",
+                        "x-id": "27eca66a",
+                        "format": "",
+                        "name": "spuId",
+                        "description": "",
+                        "pId": "17b3c47c",
+                        "type": "string",
+                        "x-index": 8,
+                        "title": "spuId",
+                        "x-unique": false
+                    },
+                    "linkType": {
+                        "x-required": false,
+                        "default": "spu",
+                        "x-keyPath": "",
+                        "x-id": "64cf26fe",
+                        "format": "",
+                        "name": "linkType",
+                        "description": "spu: 商品详情，poi：地址",
+                        "pId": "17b3c47c",
+                        "type": "string",
+                        "x-index": 10,
+                        "title": "linkType",
+                        "x-unique": false
+                    },
+                    "poi": {
+                        "x-keyPath": "",
+                        "x-id": "2bf66ce5",
+                        "format": "",
+                        "description": "",
+                        "pId": "17b3c47c",
+                        "type": "object",
+                        "x-index": 12,
+                        "title": "poi",
+                        "list": [
+                            {
+                                "x-required": false,
+                                "x-keyPath": "",
+                                "x-id": "acf468d7",
+                                "format": "",
+                                "name": "longitude",
+                                "description": "",
+                                "pId": "2bf66ce5",
+                                "type": "number",
+                                "x-index": 8,
+                                "title": "longitude",
+                                "x-unique": false
+                            },
+                            {
+                                "x-required": false,
+                                "x-keyPath": "",
+                                "x-id": "7d236dcd",
+                                "format": "",
+                                "name": "latitude",
+                                "description": "",
+                                "pId": "2bf66ce5",
+                                "type": "number",
+                                "x-index": 6,
+                                "title": "latitude",
+                                "x-unique": false
+                            },
+                            {
+                                "x-required": false,
+                                "x-keyPath": "",
+                                "x-id": "ed85f937",
+                                "format": "",
+                                "name": "address",
+                                "description": "",
+                                "pId": "2bf66ce5",
+                                "type": "string",
+                                "x-index": 4,
+                                "title": "address",
+                                "x-unique": false
+                            },
+                            {
+                                "x-required": false,
+                                "x-keyPath": "",
+                                "x-id": "83864699",
+                                "format": "",
+                                "name": "name",
+                                "description": "",
+                                "pId": "2bf66ce5",
+                                "type": "string",
+                                "x-index": 2,
+                                "title": "name",
+                                "x-unique": false
+                            }
+                        ],
+                        "x-unique": false,
+                        "required": [],
+                        "x-required": false,
+                        "name": "poi",
+                        "properties": {
+                            "address": {
+                                "x-required": false,
+                                "x-keyPath": "",
+                                "x-id": "ed85f937",
+                                "format": "",
+                                "name": "address",
+                                "description": "",
+                                "pId": "2bf66ce5",
+                                "type": "string",
+                                "x-index": 4,
+                                "title": "address",
+                                "x-unique": false
+                            },
+                            "latitude": {
+                                "x-required": false,
+                                "x-keyPath": "",
+                                "x-id": "7d236dcd",
+                                "format": "",
+                                "name": "latitude",
+                                "description": "",
+                                "pId": "2bf66ce5",
+                                "type": "number",
+                                "x-index": 6,
+                                "title": "latitude",
+                                "x-unique": false
+                            },
+                            "name": {
+                                "x-required": false,
+                                "x-keyPath": "",
+                                "x-id": "83864699",
+                                "format": "",
+                                "name": "name",
+                                "description": "",
+                                "pId": "2bf66ce5",
+                                "type": "string",
+                                "x-index": 2,
+                                "title": "name",
+                                "x-unique": false
+                            },
+                            "longitude": {
+                                "x-required": false,
+                                "x-keyPath": "",
+                                "x-id": "acf468d7",
+                                "format": "",
+                                "name": "longitude",
+                                "description": "",
+                                "pId": "2bf66ce5",
+                                "type": "number",
+                                "x-index": 8,
+                                "title": "longitude",
+                                "x-unique": false
+                            }
+                        }
+                    },
+                    "skuId": {
+                        "x-required": false,
+                        "x-keyPath": "",
+                        "x-id": "7a7dbef8",
+                        "format": "",
+                        "name": "skuId",
+                        "description": "",
+                        "pId": "17b3c47c",
+                        "type": "string",
+                        "x-index": 2,
+                        "title": "skuId",
+                        "x-unique": false
+                    }
+                }
+            },
+            "x-unique": false,
+            "required": []
+        },
+        "updateBy": {
+            "default": "",
+            "x-system": true,
+            "x-id": "93a079a",
+            "name": "updateBy",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "修改人",
+            "x-index": 6,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "_openid": {
+            "default": "",
+            "x-system": true,
+            "x-id": "614eed4",
+            "name": "_openid",
+            "format": "",
+            "pattern": "",
+            "description": "仅微信云开发下使用",
+            "type": "string",
+            "title": "记录创建者",
+            "x-index": 45,
+            "x-unique": false
+        },
+        "_id": {
+            "x-system": true,
+            "x-id": "76f4c89",
+            "format": "",
+            "type": "string",
+            "title": "数据标识",
+            "x-index": 1,
+            "x-unique": true
+        },
+        "updatedAt": {
+            "default": 0,
+            "x-system": true,
+            "x-id": "3f27eb8",
+            "format": "datetime",
+            "type": "number",
+            "title": "更新时间",
+            "x-index": 3,
+            "x-unique": false
+        }
+    },
+    "title": "home_config"
+}

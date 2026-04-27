@@ -1,4 +1,20 @@
 #!/bin/sh
 echo "🔍 Running pre-commit checks..."
+
+# 防呆：禁止把 default/example 之外的租户目录提交到主仓
+ROOT=$(git rev-parse --show-toplevel)
+LEAKED=$(git diff --cached --name-only --diff-filter=AM \
+  | grep -E '^tenants/' \
+  | grep -Ev '^tenants/(default|example)/' || true)
+if [ -n "$LEAKED" ]; then
+  echo "❌ 检测到租户私有目录被加入提交：" >&2
+  echo "$LEAKED" | sed 's/^/   /' >&2
+  echo "" >&2
+  echo "   开源主仓只允许提交 tenants/default/ 与 tenants/example/。" >&2
+  echo "   私有租户配置应保持本地（已在 .gitignore 中），或独立私有仓库管理。" >&2
+  echo "   如确需提交，请先 git restore --staged 上述文件并复核。" >&2
+  exit 1
+fi
+
 # Enter miniprogram directory and run lint-staged
-cd miniprogram && npx lint-staged
+cd "$ROOT/miniprogram" && npx lint-staged

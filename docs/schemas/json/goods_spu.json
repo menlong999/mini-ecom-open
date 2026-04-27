@@ -1,0 +1,391 @@
+{
+    "x-primary-column": "title",
+    "x-kind": "tcb",
+    "x-defaultMethods": [
+        "wedaCreate",
+        "wedaUpdate",
+        "wedaDelete",
+        "wedaGetItem",
+        "wedaGetRecords",
+        "wedaGetList",
+        "wedaBatchCreate",
+        "wedaBatchUpdate",
+        "wedaBatchDelete"
+    ],
+    "type": "object",
+    "x-relatedType": "exist",
+    "x-viewId": "view-7nk3kvhr8g",
+    "required": [
+        "images",
+        "primaryImage",
+        "title"
+    ],
+    "properties": {
+        "spuStockQuantity": {
+            "x-required": false,
+            "default": 0,
+            "x-keyPath": "",
+            "x-id": "d8edfe51",
+            "format": "",
+            "numberCount": 0,
+            "description": "spu 总库存，可以从 sku 计算",
+            "type": "number",
+            "x-index": 18,
+            "title": "spuStockQuantity",
+            "minimum": 0,
+            "x-unique": false
+        },
+        "owner": {
+            "default": "",
+            "x-system": true,
+            "x-id": "79c64a3",
+            "name": "owner",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "所有人",
+            "x-index": 26,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "_mainDep": {
+            "x-system": true,
+            "x-id": "6def4c8",
+            "name": "_mainDep",
+            "format": "father-son",
+            "x-hidden": true,
+            "type": "string",
+            "title": "所属主管部门",
+            "x-index": 27,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_department"
+            }
+        },
+        "images": {
+            "x-required": true,
+            "x-keyPath": "",
+            "x-id": "77a815fc",
+            "format": "",
+            "description": "详情上方图列表",
+            "type": "array",
+            "x-index": 8,
+            "title": "images",
+            "items": {
+                "x-image-size": 5242880,
+                "format": "x-image",
+                "type": "string",
+                "x-storage-type": "cloudID"
+            },
+            "x-unique": false
+        },
+        "primaryImage": {
+            "x-image-size": 5242880,
+            "x-required": true,
+            "x-keyPath": "",
+            "x-id": "824f8fb5",
+            "format": "x-image",
+            "description": "列表主图",
+            "type": "string",
+            "x-index": 6,
+            "title": "primaryImage",
+            "x-storage-type": "cloudID",
+            "x-unique": false,
+            "maxLength": 1024
+        },
+        "soldNum": {
+            "x-required": false,
+            "default": 0,
+            "x-keyPath": "",
+            "x-id": "f47ffcc8",
+            "format": "",
+            "numberCount": 0,
+            "description": "spu 总销售量",
+            "type": "number",
+            "x-index": 16,
+            "title": "soldNum",
+            "minimum": 0,
+            "x-unique": false
+        },
+        "isPutOnSale": {
+            "x-required": false,
+            "default": true,
+            "x-keyPath": "",
+            "x-id": "cd2ad1a7",
+            "format": "",
+            "description": "是否上架",
+            "type": "boolean",
+            "x-index": 20,
+            "title": "isPutOnSale",
+            "x-unique": false
+        },
+        "minSalePrice": {
+            "x-required": false,
+            "default": 0,
+            "x-keyPath": "",
+            "x-id": "761e8544",
+            "format": "",
+            "numberCount": 2,
+            "description": "最低售价，可从 sku 计算得出",
+            "type": "number",
+            "x-index": 12,
+            "title": "minSalePrice",
+            "minimum": 0,
+            "x-unique": false
+        },
+        "title": {
+            "x-required": true,
+            "x-keyPath": "",
+            "x-id": "b3a32191",
+            "format": "",
+            "description": "商品标题",
+            "type": "string",
+            "x-index": 4,
+            "title": "title",
+            "x-unique": false,
+            "maxLength": 256
+        },
+        "tags": {
+            "x-required": false,
+            "x-keyPath": "",
+            "x-id": "72a2be2a",
+            "format": "",
+            "description": "列表页展示标签",
+            "type": "array",
+            "x-index": 24,
+            "title": "tags",
+            "items": {
+                "format": "",
+                "type": "string",
+                "maxLength": 256
+            },
+            "x-unique": false
+        },
+        "createdAt": {
+            "default": 0,
+            "x-system": true,
+            "x-id": "fbc7b2d",
+            "format": "datetime",
+            "type": "number",
+            "title": "创建时间",
+            "x-index": 28,
+            "x-unique": false
+        },
+        "createBy": {
+            "default": "",
+            "x-system": true,
+            "x-id": "d0194d3",
+            "name": "createBy",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "创建人",
+            "x-index": 29,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "updateBy": {
+            "default": "",
+            "x-system": true,
+            "x-id": "93a079a",
+            "name": "updateBy",
+            "format": "father-son",
+            "pattern": "",
+            "x-hidden": true,
+            "type": "string",
+            "title": "修改人",
+            "x-index": 30,
+            "x-unique": false,
+            "x-parent": {
+                "fatherAction": "judge",
+                "type": "father-son",
+                "parentDataSourceName": "sys_user"
+            }
+        },
+        "_openid": {
+            "default": "",
+            "x-system": true,
+            "x-id": "e3cef2d",
+            "name": "_openid",
+            "format": "",
+            "pattern": "",
+            "description": "仅微信云开发下使用",
+            "type": "string",
+            "title": "记录创建者",
+            "x-index": 31,
+            "x-unique": false
+        },
+        "maxLinePrice": {
+            "x-required": false,
+            "default": 0,
+            "x-keyPath": "",
+            "x-id": "4c1f8a49",
+            "format": "",
+            "numberCount": 2,
+            "description": "最大划线价，主要在列表页展示",
+            "type": "number",
+            "x-index": 14,
+            "title": "maxLinePrice",
+            "minimum": 0,
+            "x-unique": false
+        },
+        "spuId": {
+            "x-required": false,
+            "x-keyPath": "",
+            "x-autonumber": {
+                "start": 1000,
+                "type": "prefix-string",
+                "value": "GSPU-{SEQNUM:5}"
+            },
+            "x-id": "75aea14d",
+            "format": "x-autonumber",
+            "description": "",
+            "type": "string",
+            "x-index": 2,
+            "title": "spuId",
+            "x-unique": true,
+            "maxLength": 128
+        },
+        "goods_sku_spu_id_list": {
+            "maxItems": 500,
+            "x-logical": true,
+            "name": "goods_sku_spu_id_list",
+            "format": "one-many",
+            "deleteWay": "doNothing",
+            "title": "goods_sku_spu_id",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "name": "_id",
+                        "title": "数据标识",
+                        "type": "string"
+                    }
+                }
+            },
+            "x-parent": {
+                "parentFieldKey": "spuId",
+                "parentFieldTitle": "spuId",
+                "parentDataSourceName": "goods_sku"
+            }
+        },
+        "_id": {
+            "x-system": true,
+            "x-id": "4bf4bd6",
+            "format": "",
+            "type": "string",
+            "title": "数据标识",
+            "x-index": 32,
+            "x-unique": true
+        },
+        "categoryId": {
+            "x-keyPath": "",
+            "x-logical": false,
+            "x-id": "79ca5379",
+            "format": "many-one",
+            "description": "分类",
+            "type": "object",
+            "x-index": 22,
+            "title": "categoryId",
+            "list": [
+                {
+                    "x-id": "79ca5379_parent_ds",
+                    "name": "category2",
+                    "pId": "79ca5379",
+                    "x-middle-info": true,
+                    "title": "关联模型标识",
+                    "type": "string"
+                },
+                {
+                    "x-id": "itdw0i83",
+                    "name": "_id",
+                    "pId": "79ca5379",
+                    "title": "数据标识",
+                    "type": "string"
+                }
+            ],
+            "x-unique": false,
+            "required": [],
+            "x-parent": {
+                "parentFieldKey": "data_spu_catL2_id_list",
+                "parentFieldTitle": "data_spu_catL2_id",
+                "parentDataSourceName": "category2"
+            },
+            "x-required": false,
+            "name": "categoryId",
+            "deleteWay": "doNothing",
+            "properties": {
+                "_id": {
+                    "name": "_id",
+                    "title": "数据标识",
+                    "type": "string"
+                }
+            }
+        },
+        "goods_spec_spu_id_list": {
+            "maxItems": 500,
+            "x-logical": true,
+            "name": "goods_spec_spu_id_list",
+            "format": "one-many",
+            "deleteWay": "doNothing",
+            "title": "goods_spec_spu_id",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "name": "_id",
+                        "title": "数据标识",
+                        "type": "string"
+                    }
+                }
+            },
+            "x-parent": {
+                "parentFieldKey": "spuId",
+                "parentFieldTitle": "spuId",
+                "parentDataSourceName": "goods_spec"
+            }
+        },
+        "desc": {
+            "x-required": false,
+            "x-keyPath": "",
+            "x-id": "6c6f2dd7",
+            "format": "",
+            "description": "详情页描述图",
+            "type": "array",
+            "x-index": 10,
+            "title": "desc",
+            "items": {
+                "x-image-size": 5242880,
+                "format": "x-image",
+                "type": "string",
+                "x-storage-type": "cloudID"
+            },
+            "x-unique": false
+        },
+        "updatedAt": {
+            "default": 0,
+            "x-system": true,
+            "x-id": "011bec5",
+            "format": "datetime",
+            "type": "number",
+            "title": "更新时间",
+            "x-index": 33,
+            "x-unique": false
+        }
+    },
+    "title": "goods_spu"
+}

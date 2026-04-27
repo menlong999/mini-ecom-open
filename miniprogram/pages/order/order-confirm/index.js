@@ -27,7 +27,7 @@ Page({
       promotionAmount: 0,
 
       totalPayAmount: 0,
-      invoiceSupport: true,
+      invoiceSupport: runtimeConfig.features.invoice,
     },
 
     // 用户地址
@@ -237,7 +237,7 @@ Page({
       promotionAmount: promotionAmount.toFixed(2),
 
       totalPayAmount: Math.max(0, totalPayAmount).toFixed(2),
-      invoiceSupport: true,
+      invoiceSupport: runtimeConfig.features.invoice,
     };
   },
 
@@ -357,6 +357,7 @@ Page({
 
   // 发票相关
   handleInvoiceClick() {
+    if (!runtimeConfig.features.invoice) return;
     const invoiceData = this.data.invoiceData || {};
     wx.navigateTo({
       url: `/pages/order/invoice/index?invoiceData=${JSON.stringify(invoiceData)}`,
