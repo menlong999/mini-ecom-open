@@ -182,11 +182,29 @@ npm run sync:tenant -- <tenant>
 
 补充说明：
 
-- mock 图片源码保存在 [miniprogram/assets/mock/](../miniprogram/assets/mock/)
-- 建议先把这些文件统一上传到 CloudBase 云存储目录 `mock/retail-demo/`
+- mock 图片源码保存在 [miniprogram/assets/mock/](../miniprogram/assets/mock/)，共 18 张：banner/category/goods/detail/avatar 五类
+- 建议先把这些文件**保留原文件名**统一上传到 CloudBase 云存储目录 `mock/retail-demo/`
 - `*.mock.json` 中的图片字段统一使用 `cloud://<your-env-id>.<your-bucket>/mock/retail-demo/<filename>` 占位格式
 - 导入前只需全局替换 `<your-env-id>.<your-bucket>`，即可得到可导入的演示数据文件
 - 这套路径设计的目的，是让演示数据、README 截图和后续发文素材保持同一套稳定资源目录
+
+## 把账号设为管理员
+
+管理端能力（商品 / 订单 / 售后管理）通过条件渲染暴露在「个人中心 → 商家工作台 (管理员)」入口下，依据是 `user_info.role === 'admin'`。
+
+目前仓库**没有提供「一键提升为管理员」的入口**，需要按下面的步骤手动开通（一次性操作）：
+
+1. 在小程序里用要被设为管理员的微信号登录一次，触发 `cloudfunctions/login` 自动建档（写入 `user_info` 集合）
+2. 打开 CloudBase 控制台 → 数据模型 → `user_info`
+3. 找到该记录（按 `_openid` 或昵称定位），把字段 `role` 设为字符串 `admin`
+4. 在小程序里下拉刷新「个人中心」，「商家工作台 (管理员)」入口即会出现
+
+安全提示：
+
+- `role` 字段没有任何前端写入入口
+- 所有 `adminManage*` 云函数内部都会校验 `user.role === 'admin'`
+- 请只把可信账号设为 admin
+- 后续会通过专用云函数 + 白名单提供「自助开通 / 邀请码升级」能力，作为独立 PR 推进
 
 ## 环境文件
 
