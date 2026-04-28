@@ -1,0 +1,100 @@
+[
+  {
+    "_id": "mock-spu-coldbrew",
+    "spuId": "MOCK-SPU-COFFEE-01",
+    "title": "冷萃美式双瓶装",
+    "primaryImage": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-coldbrew.png",
+    "images": [
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-coldbrew.png",
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-coffee-1.png"
+    ],
+    "desc": [
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-coffee-1.png",
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-coffee-2.png"
+    ],
+    "minSalePrice": 2990,
+    "maxLinePrice": 3990,
+    "soldNum": 128,
+    "spuStockQuantity": 58,
+    "isPutOnSale": true,
+    "tags": ["新品", "冷藏发货"],
+    "categoryId": {
+      "_id": "mock-c2-coldbrew"
+    },
+    "createdAt": 1714000000000,
+    "updatedAt": 1714000000000
+  },
+  {
+    "_id": "mock-spu-beans",
+    "spuId": "MOCK-SPU-COFFEE-02",
+    "title": "耶加雪菲挂耳 10 袋装",
+    "primaryImage": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-beans.png",
+    "images": [
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-beans.png",
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-coffee-1.png"
+    ],
+    "desc": [
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-coffee-1.png",
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-coffee-2.png"
+    ],
+    "minSalePrice": 4590,
+    "maxLinePrice": 5990,
+    "soldNum": 87,
+    "spuStockQuantity": 86,
+    "isPutOnSale": true,
+    "tags": ["花果香", "轻烘焙"],
+    "categoryId": {
+      "_id": "mock-c2-beans"
+    },
+    "createdAt": 1714000001000,
+    "updatedAt": 1714000001000
+  },
+  {
+    "_id": "mock-spu-bagel",
+    "spuId": "MOCK-SPU-FOOD-01",
+    "title": "芝士贝果早餐组合",
+    "primaryImage": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-bagel.png",
+    "images": [
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-bagel.png",
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-bagel-1.png"
+    ],
+    "desc": [
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-bagel-1.png"
+    ],
+    "minSalePrice": 2690,
+    "maxLinePrice": 3290,
+    "soldNum": 53,
+    "spuStockQuantity": 45,
+    "isPutOnSale": true,
+    "tags": ["早餐", "冷冻到家"],
+    "categoryId": {
+      "_id": "mock-c2-bagel"
+    },
+    "createdAt": 1714000002000,
+    "updatedAt": 1714000002000
+  },
+  {
+    "_id": "mock-spu-gift",
+    "spuId": "MOCK-SPU-GIFT-01",
+    "title": "办公室咖啡零食礼盒",
+    "primaryImage": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-gift.png",
+    "images": [
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/goods-gift.png",
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-gift-1.png"
+    ],
+    "desc": [
+      "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/detail-gift-1.png"
+    ],
+    "minSalePrice": 6990,
+    "maxLinePrice": 8990,
+    "soldNum": 24,
+    "spuStockQuantity": 20,
+    "isPutOnSale": true,
+    "tags": ["礼盒", "企业团购"],
+    "categoryId": {
+      "_id": "mock-c2-gift"
+    },
+    "createdAt": 1714000003000,
+    "updatedAt": 1714000003000
+  }
+]

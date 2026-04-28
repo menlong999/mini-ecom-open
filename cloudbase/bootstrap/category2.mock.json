@@ -1,0 +1,46 @@
+[
+  {
+    "_id": "mock-c2-coldbrew",
+    "category2Id": "C2-MOCK-COLDBREW",
+    "category2Name": "冷萃即饮",
+    "thumbnail": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/category-coldbrew.png",
+    "category1Id": {
+      "_id": "mock-c1-coffee"
+    },
+    "createdAt": 1714000000000,
+    "updatedAt": 1714000000000
+  },
+  {
+    "_id": "mock-c2-beans",
+    "category2Id": "C2-MOCK-BEANS",
+    "category2Name": "咖啡豆与挂耳",
+    "thumbnail": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/category-beans.png",
+    "category1Id": {
+      "_id": "mock-c1-coffee"
+    },
+    "createdAt": 1714000000000,
+    "updatedAt": 1714000000000
+  },
+  {
+    "_id": "mock-c2-bagel",
+    "category2Id": "C2-MOCK-BAGEL",
+    "category2Name": "贝果轻食",
+    "thumbnail": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/category-bagel.png",
+    "category1Id": {
+      "_id": "mock-c1-food"
+    },
+    "createdAt": 1714000000000,
+    "updatedAt": 1714000000000
+  },
+  {
+    "_id": "mock-c2-gift",
+    "category2Id": "C2-MOCK-GIFT",
+    "category2Name": "办公室礼盒",
+    "thumbnail": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/category-gift.png",
+    "category1Id": {
+      "_id": "mock-c1-food"
+    },
+    "createdAt": 1714000000000,
+    "updatedAt": 1714000000000
+  }
+]

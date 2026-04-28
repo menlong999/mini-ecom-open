@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "mock-c1-coffee",
+    "category1Id": "C1-MOCK-COFFEE",
+    "category1Name": "咖啡饮品",
+    "thumbnail": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/category-coffee.png",
+    "createdAt": 1714000000000,
+    "updatedAt": 1714000000000
+  },
+  {
+    "_id": "mock-c1-food",
+    "category1Id": "C1-MOCK-FOOD",
+    "category1Name": "轻食烘焙",
+    "thumbnail": "cloud://<your-env-id>.<your-bucket>/mock/retail-demo/category-bakery.png",
+    "createdAt": 1714000000000,
+    "updatedAt": 1714000000000
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "_id": "mock-spec-coldbrew",
+    "specId": "MOCK-SPEC-CB",
+    "title": "规格",
+    "values": [
+      { "valueId": "MOCK-VAL-CB-2", "value": "双瓶装" },
+      { "valueId": "MOCK-VAL-CB-6", "value": "六瓶装" }
+    ],
+    "sortOrder": 1,
+    "spuId": { "_id": "mock-spu-coldbrew" },
+    "createdAt": 1714000000000,
+    "updatedAt": 1714000000000
+  },
+  {
+    "_id": "mock-spec-beans",
+    "specId": "MOCK-SPEC-BEANS",
+    "title": "规格",
+    "values": [
+      { "valueId": "MOCK-VAL-BEANS-10", "value": "10 袋装" },
+      { "valueId": "MOCK-VAL-BEANS-20", "value": "20 袋装" }
+    ],
+    "sortOrder": 1,
+    "spuId": { "_id": "mock-spu-beans" },
+    "createdAt": 1714000001000,
+    "updatedAt": 1714000001000
+  },
+  {
+    "_id": "mock-spec-bagel",
+    "specId": "MOCK-SPEC-BAGEL",
+    "title": "口味",
+    "values": [
+      { "valueId": "MOCK-VAL-BAGEL-CHEESE", "value": "芝士贝果" },
+      { "valueId": "MOCK-VAL-BAGEL-MIX", "value": "混合 4 枚装" }
+    ],
+    "sortOrder": 1,
+    "spuId": { "_id": "mock-spu-bagel" },
+    "createdAt": 1714000002000,
+    "updatedAt": 1714000002000
+  },
+  {
+    "_id": "mock-spec-gift",
+    "specId": "MOCK-SPEC-GIFT",
+    "title": "版本",
+    "values": [
+      { "valueId": "MOCK-VAL-GIFT-STD", "value": "标准版" },
+      { "valueId": "MOCK-VAL-GIFT-PRO", "value": "企业版" }
+    ],
+    "sortOrder": 1,
+    "spuId": { "_id": "mock-spu-gift" },
+    "createdAt": 1714000003000,
+    "updatedAt": 1714000003000
+  }
+]

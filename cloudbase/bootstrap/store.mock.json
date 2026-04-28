@@ -1,0 +1,20 @@
+[
+  {
+    "name": "南山科技园店",
+    "address": "广东省深圳市南山区高新南一道 18 号",
+    "phone": "0755-80000001",
+    "businessHours": "08:30-20:30",
+    "status": 1,
+    "createdAt": 1714000011000,
+    "updatedAt": 1714000011000
+  },
+  {
+    "name": "福田 CBD 店",
+    "address": "广东省深圳市福田区金田路 88 号",
+    "phone": "0755-80000002",
+    "businessHours": "09:00-21:00",
+    "status": 1,
+    "createdAt": 1714000012000,
+    "updatedAt": 1714000012000
+  }
+]
