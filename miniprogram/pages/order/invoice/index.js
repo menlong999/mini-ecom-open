@@ -1,10 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import Dialog from 'tdesign-miniprogram/dialog/index';
-import {
-  INVOICE_TYPES,
-  TITLE_TYPES,
-  CONTENT_TYPES,
-} from '../../../services/order/invoiceConstants';
+import { INVOICE_TYPES, TITLE_TYPES, CONTENT_TYPES } from '../services/invoiceConstants';
 import { runtimeConfig } from '../../../config/index';
 
 const invoiceJson = {

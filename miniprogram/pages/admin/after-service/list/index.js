@@ -1,4 +1,4 @@
-import { fetchAdminAfterServices } from '../../../../services/admin/afterServiceMgr';
+import { fetchAdminAfterServices } from '../../services/afterServiceMgr';
 import { ServiceTypeDesc } from '../../../../services/order/orderConfig';
 import { formatTime } from '../../../../utils/util';
 import Toast from 'tdesign-miniprogram/toast/index';

@@ -1,7 +1,7 @@
 import Dialog from 'tdesign-miniprogram/dialog/index';
 import Toast from 'tdesign-miniprogram/toast/index';
 
-import { cancelService } from '../../../../services/order/afterService';
+import { cancelService } from '../../services/afterService';
 import { ServiceButtonTypes } from '../../../../services/order/orderConfig';
 
 Component({

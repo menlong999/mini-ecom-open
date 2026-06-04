@@ -1,4 +1,4 @@
-import { fetchGoodsList as fetchGoodsListService } from '../../../services/good/fetchGoodsList';
+import { fetchGoodsList as fetchGoodsListService } from '../services/fetchGoodsList';
 import { addCart } from '../../../services/cart/cart';
 import { dispatchLogin } from '../../../services/common/login';
 import Toast from 'tdesign-miniprogram/toast/index';

@@ -9,7 +9,7 @@ import {
   createCategory2,
   updateCategory2,
   deleteCategory2,
-} from '../../../services/admin/categoryMgr';
+} from '../services/categoryMgr';
 
 const TABS = [
   { key: 'category1', text: '一级分类' },

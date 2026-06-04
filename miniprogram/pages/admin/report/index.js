@@ -1,5 +1,5 @@
 import Toast from 'tdesign-miniprogram/toast/index';
-import { fetchReportOverview } from '../../../services/admin/reportMgr';
+import { fetchReportOverview } from '../services/reportMgr';
 
 const DEFAULT_SUMMARY = {
   day: { orderCount: 0, salesAmount: '0.00' },

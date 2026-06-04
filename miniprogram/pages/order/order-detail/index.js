@@ -2,14 +2,10 @@ import { formatTime } from '../../../utils/util';
 import { OrderStatus } from '../../../services/order/orderConfig';
 import Toast from 'tdesign-miniprogram/toast/index';
 import Dialog from 'tdesign-miniprogram/dialog/index';
-import { fetchOrderDetail, cancelOrder, deleteOrder } from '../../../services/order/orderDetail';
-import { getPaymentParams } from '../../../services/order/payment';
+import { fetchOrderDetail, cancelOrder, deleteOrder } from '../services/orderDetail';
+import { getPaymentParams } from '../services/payment';
 import { getOrderButtons, getOrderStatusDesc } from '../../../utils/orderHelper';
-import {
-  INVOICE_TYPES,
-  TITLE_TYPES,
-  CONTENT_TYPES,
-} from '../../../services/order/invoiceConstants';
+import { INVOICE_TYPES, TITLE_TYPES, CONTENT_TYPES } from '../services/invoiceConstants';
 import { runtimeConfig } from '../../../config/index';
 
 Page({

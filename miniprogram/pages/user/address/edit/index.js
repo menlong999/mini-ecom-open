@@ -1,11 +1,7 @@
-import {
-  fetchAddressById,
-  createAddress,
-  updateAddress,
-} from '../../../../services/address/address';
+import { fetchAddressById, createAddress, updateAddress } from '../../services/address/address';
 import Toast from 'tdesign-miniprogram/toast/index';
-import { addressEditor } from '../../../../services/address/channel';
-import { areaData } from '../../../../utils/areaData'; // 从独立的地理数据文件中导入
+import { addressEditor } from '../../services/address/channel';
+import { areaData } from '../../utils/areaData'; // 从独立的地理数据文件中导入
 
 Page({
   data: {

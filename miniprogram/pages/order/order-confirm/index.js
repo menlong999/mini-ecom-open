@@ -1,15 +1,11 @@
 import Toast from 'tdesign-miniprogram/toast/index';
-import { getDefaultAddress } from '../../../services/address/address';
-import { addressPicker } from '../../../services/address/channel';
+import { getDefaultAddress } from '../../user/services/address/address';
+import { addressPicker } from '../../user/services/address/channel';
 // import { saveOrder, deleteCartItems, checkStock, deductStock } from '../../../services/order/orderConfirm';
-import { getPaymentParams } from '../../../services/order/payment';
-import { createOrder } from '../../../services/order/createOrder';
-import { fetchStoreList } from '../../../services/store/store';
-import {
-  INVOICE_TYPES,
-  TITLE_TYPES,
-  CONTENT_TYPES,
-} from '../../../services/order/invoiceConstants';
+import { getPaymentParams } from '../services/payment';
+import { createOrder } from '../services/createOrder';
+import { fetchStoreList } from '../services/store/store';
+import { INVOICE_TYPES, TITLE_TYPES, CONTENT_TYPES } from '../services/invoiceConstants';
 import { runtimeConfig } from '../../../config/index';
 
 Page({
@@ -292,7 +288,7 @@ Page({
       .catch(() => {});
 
     const { userAddress } = this.data;
-    let url = '/pages/usercenter/address/list/index?selectMode=1&isOrderSure=1';
+    let url = '/pages/user/address/list/index?selectMode=1&isOrderSure=1';
 
     if (userAddress?.id) {
       url += `&id=${userAddress.id}`;

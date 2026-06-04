@@ -1,4 +1,8 @@
-import { ServiceButtonTypes, AfterServiceStatus, ServiceType } from './orderConfig';
+import {
+  ServiceButtonTypes,
+  AfterServiceStatus,
+  ServiceType,
+} from '../../../services/order/orderConfig';
 
 function getCurrentOpenId() {
   const userInfo = wx.getStorageSync('userInfo') || {};

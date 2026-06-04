@@ -1,5 +1,5 @@
-import { fetchComments } from '../../../services/comments/fetchComments';
-import { fetchCommentsCount } from '../../../services/comments/fetchCommentsCount';
+import { fetchComments } from '../services/comments/fetchComments';
+import { fetchCommentsCount } from '../services/comments/fetchCommentsCount';
 import Toast from 'tdesign-miniprogram/toast/index';
 import dayjs from 'dayjs';
 

@@ -1,10 +1,7 @@
 import Toast from 'tdesign-miniprogram/toast/index';
 import { uploadImages } from '../../../utils/uploadHelper';
-import { getHomeConfig, saveHomeConfig } from '../../../services/admin/homeConfigMgr';
-import {
-  fetchGoodsBriefMap,
-  fetchGoodsList as fetchAdminGoodsList,
-} from '../../../services/admin/goodsMgr';
+import { getHomeConfig, saveHomeConfig } from '../services/homeConfigMgr';
+import { fetchGoodsBriefMap, fetchGoodsList as fetchAdminGoodsList } from '../services/goodsMgr';
 
 function genKey() {
   return `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
@@ -50,6 +47,11 @@ Page({
     tabItemHeightPx: 0,
     tabSpuItemHeightPx: 0,
 
+    // drag active indices (-1 means disabled)
+    swiperActiveIndex: -1,
+    tabActiveIndex: -1,
+    tabSpuActiveIndex: -1,
+
     goodsPickerVisible: false,
     goodsPickerMode: '',
     goodsPickerIndex: -1,
@@ -79,6 +81,27 @@ Page({
   },
 
   onDragHandleTap() {},
+
+  onDragSwiperStart(e) {
+    const index = Number(e.currentTarget.dataset.index);
+    if (Number.isNaN(index)) return;
+    wx.vibrateShort({ type: 'light' });
+    this.setData({ swiperActiveIndex: index });
+  },
+
+  onDragTabStart(e) {
+    const index = Number(e.currentTarget.dataset.index);
+    if (Number.isNaN(index)) return;
+    wx.vibrateShort({ type: 'light' });
+    this.setData({ tabActiveIndex: index });
+  },
+
+  onDragTabSpuStart(e) {
+    const index = Number(e.currentTarget.dataset.index);
+    if (Number.isNaN(index)) return;
+    wx.vibrateShort({ type: 'light' });
+    this.setData({ tabSpuActiveIndex: index });
+  },
 
   async loadConfig() {
     this.setData({ loading: true });
@@ -235,22 +258,37 @@ Page({
 
     const h = this.data.swiperItemHeightPx || 1;
     const toIndex = Math.max(0, Math.min(list.length - 1, Math.round(y / h)));
-    if (toIndex === fromIndex) return;
+    if (toIndex === fromIndex) {
+      this.setData({ swiperActiveIndex: -1 });
+      return;
+    }
     delete this._dragY.swiper[fromIndex];
-    this.setData({ swiperList: moveInArray(list, fromIndex, toIndex) });
+    this.setData({
+      swiperList: moveInArray(list, fromIndex, toIndex),
+      swiperActiveIndex: -1,
+    });
   },
 
   onSwiperDragEnd(e) {
     const fromIndex = Number(e.currentTarget.dataset.index);
     const y = this._dragY && this._dragY.swiper ? this._dragY.swiper[fromIndex] : undefined;
     const list = this.data.swiperList || [];
-    if (!list.length || Number.isNaN(fromIndex) || typeof y !== 'number') return;
+    if (!list.length || Number.isNaN(fromIndex) || typeof y !== 'number') {
+      this.setData({ swiperActiveIndex: -1 });
+      return;
+    }
 
     const h = this.data.swiperItemHeightPx || 1;
     const toIndex = Math.max(0, Math.min(list.length - 1, Math.round(y / h)));
     delete this._dragY.swiper[fromIndex];
-    if (toIndex === fromIndex) return;
-    this.setData({ swiperList: moveInArray(list, fromIndex, toIndex) });
+    if (toIndex === fromIndex) {
+      this.setData({ swiperActiveIndex: -1 });
+      return;
+    }
+    this.setData({
+      swiperList: moveInArray(list, fromIndex, toIndex),
+      swiperActiveIndex: -1,
+    });
   },
 
   addTab() {
@@ -295,22 +333,37 @@ Page({
 
     const h = this.data.tabItemHeightPx || 1;
     const toIndex = Math.max(0, Math.min(list.length - 1, Math.round(y / h)));
-    if (toIndex === fromIndex) return;
+    if (toIndex === fromIndex) {
+      this.setData({ tabActiveIndex: -1 });
+      return;
+    }
     delete this._dragY.tab[fromIndex];
-    this.setData({ tabList: moveInArray(list, fromIndex, toIndex) });
+    this.setData({
+      tabList: moveInArray(list, fromIndex, toIndex),
+      tabActiveIndex: -1,
+    });
   },
 
   onTabDragEnd(e) {
     const fromIndex = Number(e.currentTarget.dataset.index);
     const y = this._dragY && this._dragY.tab ? this._dragY.tab[fromIndex] : undefined;
     const list = this.data.tabList || [];
-    if (!list.length || Number.isNaN(fromIndex) || typeof y !== 'number') return;
+    if (!list.length || Number.isNaN(fromIndex) || typeof y !== 'number') {
+      this.setData({ tabActiveIndex: -1 });
+      return;
+    }
 
     const h = this.data.tabItemHeightPx || 1;
     const toIndex = Math.max(0, Math.min(list.length - 1, Math.round(y / h)));
     delete this._dragY.tab[fromIndex];
-    if (toIndex === fromIndex) return;
-    this.setData({ tabList: moveInArray(list, fromIndex, toIndex) });
+    if (toIndex === fromIndex) {
+      this.setData({ tabActiveIndex: -1 });
+      return;
+    }
+    this.setData({
+      tabList: moveInArray(list, fromIndex, toIndex),
+      tabActiveIndex: -1,
+    });
   },
 
   onTabTextChange(e) {
@@ -384,7 +437,21 @@ Page({
         pageSize: 50,
         keyword: this.data.goodsKeyword || '',
       });
-      this.setData({ goodsSearchList: res.list || [] });
+      const list = res.list || [];
+      const newGoodsMap = { ...this.data.goodsMap };
+      list.forEach((item) => {
+        if (item && item._id) {
+          newGoodsMap[item._id] = {
+            title: item.title,
+            primaryImage: item.primaryImage,
+            minSalePrice: item.minSalePrice,
+          };
+        }
+      });
+      this.setData({
+        goodsSearchList: list,
+        goodsMap: newGoodsMap,
+      });
     } catch (err) {
       console.error(err);
       Toast({ context: this, selector: '#t-toast', message: err.message || '查询失败' });
@@ -452,22 +519,37 @@ Page({
 
     const h = this.data.tabSpuItemHeightPx || 1;
     const toIndex = Math.max(0, Math.min(list.length - 1, Math.round(y / h)));
-    if (toIndex === fromIndex) return;
+    if (toIndex === fromIndex) {
+      this.setData({ tabSpuActiveIndex: -1 });
+      return;
+    }
     delete this._dragY.tabSpu[fromIndex];
-    this.setData({ tabEditingSpuIds: moveInArray(list, fromIndex, toIndex) });
+    this.setData({
+      tabEditingSpuIds: moveInArray(list, fromIndex, toIndex),
+      tabSpuActiveIndex: -1,
+    });
   },
 
   onTabSpuDragEnd(e) {
     const fromIndex = Number(e.currentTarget.dataset.index);
     const y = this._dragY && this._dragY.tabSpu ? this._dragY.tabSpu[fromIndex] : undefined;
     const list = this.data.tabEditingSpuIds || [];
-    if (!list.length || Number.isNaN(fromIndex) || typeof y !== 'number') return;
+    if (!list.length || Number.isNaN(fromIndex) || typeof y !== 'number') {
+      this.setData({ tabSpuActiveIndex: -1 });
+      return;
+    }
 
     const h = this.data.tabSpuItemHeightPx || 1;
     const toIndex = Math.max(0, Math.min(list.length - 1, Math.round(y / h)));
     delete this._dragY.tabSpu[fromIndex];
-    if (toIndex === fromIndex) return;
-    this.setData({ tabEditingSpuIds: moveInArray(list, fromIndex, toIndex) });
+    if (toIndex === fromIndex) {
+      this.setData({ tabSpuActiveIndex: -1 });
+      return;
+    }
+    this.setData({
+      tabEditingSpuIds: moveInArray(list, fromIndex, toIndex),
+      tabSpuActiveIndex: -1,
+    });
   },
 
   confirmTabGoods() {

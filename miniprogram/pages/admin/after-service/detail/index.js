@@ -13,7 +13,7 @@ import {
   markAfterServiceAbnormal,
   refundAfterService,
   closeAfterService,
-} from '../../../../services/admin/afterServiceMgr';
+} from '../../services/afterServiceMgr';
 
 const STATUS_MAP = {
   10: '待审核',

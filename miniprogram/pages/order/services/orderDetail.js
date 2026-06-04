@@ -1,4 +1,4 @@
-import { CancelResonTypes } from './orderConfig';
+import { CancelResonTypes } from '../../../services/order/orderConfig';
 
 /**
  * 获取订单详情

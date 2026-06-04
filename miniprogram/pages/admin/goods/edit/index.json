@@ -8,7 +8,6 @@
     "t-textarea": "tdesign-miniprogram/textarea/textarea",
     "t-upload": "tdesign-miniprogram/upload/upload",
     "t-icon": "tdesign-miniprogram/icon/icon",
-    "t-message": "tdesign-miniprogram/message/message",
     "t-popup": "tdesign-miniprogram/popup/popup",
     "t-picker": "tdesign-miniprogram/picker/picker",
     "t-picker-item": "tdesign-miniprogram/picker-item/picker-item",

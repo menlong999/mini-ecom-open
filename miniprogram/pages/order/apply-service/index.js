@@ -7,7 +7,7 @@ import {
   fetchApplyReasonList,
   dispatchApplyService,
   uploadImages,
-} from '../../../services/order/applyService';
+} from '../services/applyService';
 
 Page({
   query: {},

@@ -1,6 +1,6 @@
 import { updateUserInfo } from '../../../services/usercenter/fetchUsercenter';
 import { dispatchLogin } from '../../../services/common/login';
-import { uploadFile } from '../../../services/common/upload';
+import { uploadFile } from '../../../../services/common/upload';
 import Toast from 'tdesign-miniprogram/toast/index';
 
 Page({
@@ -97,7 +97,7 @@ Page({
         break;
       case 'name':
         wx.navigateTo({
-          url: `/pages/usercenter/name-edit/index?name=${nickName || ''}`,
+          url: `/pages/user/name-edit/index?name=${nickName || ''}`,
         });
         break;
       default:

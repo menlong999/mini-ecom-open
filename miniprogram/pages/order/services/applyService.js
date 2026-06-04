@@ -1,5 +1,5 @@
-import { runtimeConfig } from '../../config/index';
-import { uploadImages } from '../../utils/uploadHelper';
+import { runtimeConfig } from '../../../config/index';
+import { uploadImages } from '../../../utils/uploadHelper';
 
 /**
  * 获取售后单预览数据

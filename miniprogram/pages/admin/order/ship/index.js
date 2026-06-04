@@ -4,7 +4,7 @@ import {
   shipOrder,
   updateOrderLogistics,
   confirmPickup,
-} from '../../../../services/admin/orderMgr';
+} from '../../services/orderMgr';
 import { getDeliverCompanyList } from '../../../../services/order/logistics';
 import { getOrderStatusDesc } from '../../../../utils/orderHelper';
 

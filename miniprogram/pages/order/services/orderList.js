@@ -1,4 +1,4 @@
-import { OrderStatus } from './orderConfig';
+import { OrderStatus } from '../../../services/order/orderConfig';
 
 function buildCloudModelOrderWhere(openId, orderStatus) {
   const clauses = [{ _openid: { $eq: openId } }, { deleted: { $eq: false } }];

@@ -1,4 +1,4 @@
-import { fetchServiceList, getAfterServiceButtons } from '../../../services/order/afterService';
+import { fetchServiceList, getAfterServiceButtons } from '../services/afterService';
 import {
   AfterServiceStatus,
   ServiceType,

@@ -3,9 +3,9 @@ import {
   fetchUserAddressList,
   deleteAddress,
   setDefaultAddress,
-} from '../../../../services/address/address';
+} from '../../services/address/address';
 import Toast from 'tdesign-miniprogram/toast/index';
-import { addressPicker, addressEditor } from '../../../../services/address/channel';
+import { addressPicker, addressEditor } from '../../services/address/channel';
 
 Page({
   data: {
@@ -106,7 +106,7 @@ Page({
 
         wx.setStorageSync('wxAddressData', addressData);
         wx.navigateTo({
-          url: '/pages/usercenter/address/edit/index?fromWX=1',
+          url: '/pages/user/address/edit/index?fromWX=1',
         });
       },
       fail: (error) => {
@@ -221,7 +221,7 @@ Page({
     const { id } = e.currentTarget.dataset;
     if (id) {
       wx.navigateTo({
-        url: `/pages/usercenter/address/edit/index?id=${id}`,
+        url: `/pages/user/address/edit/index?id=${id}`,
       });
     }
   },
@@ -288,7 +288,7 @@ Page({
   handleAddressCreate() {
     this.waitForNewAddress();
     wx.navigateTo({
-      url: '/pages/usercenter/address/edit/index',
+      url: '/pages/user/address/edit/index',
     });
   },
 

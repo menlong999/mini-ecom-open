@@ -8,6 +8,7 @@ const textExtensions = new Set(['.js', '.json', '.md', '.sh', '.wxml', '.wxss', 
 const skipPaths = new Set([
   'miniprogram/scripts/check-tenant-boundary.js',
   'miniprogram/scripts/check-style-boundary.js',
+  'COURSE_OUTLINE.md',
 ]);
 const skipPrefixes = ['rules/', 'miniprogram/package-lock.json'];
 

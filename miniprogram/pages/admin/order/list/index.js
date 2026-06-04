@@ -1,4 +1,4 @@
-import { fetchAdminOrders } from '../../../../services/admin/orderMgr';
+import { fetchAdminOrders } from '../../services/orderMgr';
 import { getOrderStatusDesc } from '../../../../utils/orderHelper';
 import { formatTime } from '../../../../utils/util';
 import Toast from 'tdesign-miniprogram/toast/index';

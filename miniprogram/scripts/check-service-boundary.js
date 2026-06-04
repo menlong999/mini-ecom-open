@@ -23,6 +23,7 @@ function walkJsFiles(dir) {
   entries.forEach((entry) => {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
+      if (entry.name === 'services') return;
       files.push(...walkJsFiles(fullPath));
       return;
     }

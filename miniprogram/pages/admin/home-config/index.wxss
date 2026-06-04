@@ -65,7 +65,7 @@
   background: #fff;
   border-top-left-radius: 20rpx;
   border-top-right-radius: 20rpx;
-  max-height: 80vh;
+  height: 75vh;
   display: flex;
   flex-direction: column;
 }
@@ -97,7 +97,9 @@
 
 .picker-body {
   flex: 1;
-  overflow: auto;
+  height: 0;
+  min-height: 0;
+  overflow: hidden;
   padding: 12rpx 0;
 }
 
@@ -168,7 +170,9 @@
 }
 
 .picker-footer {
-  padding: 16rpx 20rpx 28rpx;
+  padding: 16rpx 20rpx calc(env(safe-area-inset-bottom) + 20rpx);
+  border-top: 1rpx solid var(--color-border);
+  background: #fff;
 }
 
 .drag-area {

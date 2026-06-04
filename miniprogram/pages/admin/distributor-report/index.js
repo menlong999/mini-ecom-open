@@ -1,6 +1,6 @@
 import Toast from 'tdesign-miniprogram/toast/index';
-import { fetchDistributorOrders } from '../../../services/admin/reportMgr';
-import { fetchDistributorList } from '../../../services/admin/distributorMgr';
+import { fetchDistributorOrders } from '../services/reportMgr';
+import { fetchDistributorList } from '../services/distributorMgr';
 import { formatTime } from '../../../utils/util';
 
 Page({
