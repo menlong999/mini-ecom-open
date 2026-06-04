@@ -1,6 +1,6 @@
 import Toast from 'tdesign-miniprogram/toast/index';
 import { addCart } from '../../../../services/cart/cart';
-import { confirmReceipt } from '../../../../services/order/orderDetail';
+import { confirmReceipt } from '../../services/orderDetail';
 import Dialog from 'tdesign-miniprogram/dialog/index';
 import { OrderButtonTypes } from '../../../../services/order/orderConfig';
 

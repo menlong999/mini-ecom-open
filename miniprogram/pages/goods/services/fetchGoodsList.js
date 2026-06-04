@@ -1,4 +1,4 @@
-import { getDefaultSku } from './skuHelper';
+import { getDefaultSku } from '../../../../services/good/skuHelper';
 
 /** 排序字段 */
 const SORT_FIELD = {

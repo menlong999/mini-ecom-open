@@ -67,7 +67,7 @@ export async function fetchOrderTagInfos() {
   } catch (error) {
     console.error('获取订单状态数量失败:', error);
     // 出错时返回一个默认的空结构，防止页面报错
-    // 出错时返回一个默认的空结构，防止页面报错
+    // 出错时返回一个默认 of the empty structure, to prevent page errors
     return [
       {
         orderStatus: OrderStatus.PENDING_PAYMENT,

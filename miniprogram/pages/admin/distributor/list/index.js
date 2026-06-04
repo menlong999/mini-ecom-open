@@ -3,7 +3,7 @@ import {
   fetchDistributorList,
   approveDistributor,
   rejectDistributor,
-} from '../../../../services/admin/distributorMgr';
+} from '../../services/distributorMgr';
 import { formatTime } from '../../../../utils/util';
 
 const STATUS_TABS = [

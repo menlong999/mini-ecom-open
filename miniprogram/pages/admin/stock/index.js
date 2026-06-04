@@ -1,9 +1,6 @@
 import Toast from 'tdesign-miniprogram/toast/index';
-import { fetchStockList, addSkuStock } from '../../../services/admin/stockMgr';
-import {
-  fetchAllCategories,
-  filterCategory2ByCategory1,
-} from '../../../services/admin/categoryService';
+import { fetchStockList, addSkuStock } from '../services/stockMgr';
+import { fetchAllCategories, filterCategory2ByCategory1 } from '../services/categoryService';
 
 const EMPTY_OPTION = { label: '全部', value: '' };
 

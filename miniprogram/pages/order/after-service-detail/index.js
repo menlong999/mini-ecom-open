@@ -6,7 +6,7 @@ import {
   ServiceButtonTypes,
 } from '../../../services/order/orderConfig';
 import { formatTime } from '../../../utils/util';
-import { fetchServiceDetail, getAfterServiceButtons } from '../../../services/order/afterService';
+import { fetchServiceDetail, getAfterServiceButtons } from '../services/afterService';
 import { runtimeConfig } from '../../../config/index';
 
 const formatSpecs = (goods) => {

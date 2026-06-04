@@ -1,9 +1,9 @@
-import { createGoods, updateGoods, getGoodsDetail } from '../../../../services/admin/goodsMgr';
+import { createGoods, updateGoods, getGoodsDetail } from '../../services/goodsMgr';
 import {
   fetchAllCategories,
   filterCategory2ByCategory1,
   getCategory1IdValue,
-} from '../../../../services/admin/categoryService';
+} from '../../services/categoryService';
 import { uploadImages } from '../../../../utils/uploadHelper';
 import { generateId } from '../../../../utils/util';
 import Toast from 'tdesign-miniprogram/toast/index';

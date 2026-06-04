@@ -197,7 +197,7 @@ Page({
       this.executeLogin();
     } else {
       // 状态二/三：已登录，统一跳转到个人信息页进行完善/修改
-      wx.navigateTo({ url: '/pages/usercenter/person-info/index' });
+      wx.navigateTo({ url: '/pages/user/person-info/index' });
     }
   },
 
@@ -245,7 +245,7 @@ Page({
         break;
       }
       case 'address': {
-        wx.navigateTo({ url: '/pages/usercenter/address/list/index' });
+        wx.navigateTo({ url: '/pages/user/address/list/index' });
         break;
       }
 

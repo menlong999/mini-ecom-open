@@ -1,8 +1,5 @@
-import { fetchGoodsList } from '../../../../services/admin/goodsMgr';
-import {
-  fetchAllCategories,
-  filterCategory2ByCategory1,
-} from '../../../../services/admin/categoryService';
+import { fetchGoodsList } from '../../services/goodsMgr';
+import { fetchAllCategories, filterCategory2ByCategory1 } from '../../services/categoryService';
 import Toast from 'tdesign-miniprogram/toast/index';
 
 Page({

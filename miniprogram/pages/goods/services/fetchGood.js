@@ -1,4 +1,4 @@
-import { runtimeConfig } from '../../config/index';
+import { runtimeConfig } from '../../../config/index';
 
 const defaultDesc = runtimeConfig.assets?.defaultGoodsDescImages || [];
 

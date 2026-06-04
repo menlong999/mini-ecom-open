@@ -1,7 +1,7 @@
 import { OrderStatus } from '../../../services/order/orderConfig';
-import { fetchOrders, fetchOrdersCount } from '../../../services/order/orderList';
-import { cancelOrder, deleteOrder } from '../../../services/order/orderDetail';
-import { getPaymentParams } from '../../../services/order/payment';
+import { fetchOrders, fetchOrdersCount } from '../services/orderList';
+import { cancelOrder, deleteOrder } from '../services/orderDetail';
+import { getPaymentParams } from '../services/payment';
 import { cosThumb } from '../../../utils/util';
 import { getOrderButtons, getOrderStatusDesc } from '../../../utils/orderHelper';
 import Toast from 'tdesign-miniprogram/toast/index';

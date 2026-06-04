@@ -1,9 +1,9 @@
 import Toast from 'tdesign-miniprogram/toast/index';
-import { fetchGood } from '../../../services/good/fetchGood';
+import { fetchGood } from '../services/fetchGood';
 import {
   getGoodsDetailsCommentsList,
   getGoodsDetailsCommentsCount,
-} from '../../../services/good/fetchGoodsDetailsComments';
+} from '../services/fetchGoodsDetailsComments';
 import { addCart } from '../../../services/cart/cart';
 import { dispatchLogin } from '../../../services/common/login';
 

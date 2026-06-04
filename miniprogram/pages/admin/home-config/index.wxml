@@ -25,6 +25,7 @@
           direction="vertical"
           out-of-bounds="{{false}}"
           damping="50"
+          disabled="{{swiperActiveIndex !== index}}"
           bindchange="onSwiperDragChange"
           bindtouchend="onSwiperDragEnd"
           bindtouchcancel="onSwiperDragEnd"
@@ -34,6 +35,8 @@
             <view
               class="drag-handle"
               catchtap="onDragHandleTap"
+              bindlongpress="onDragSwiperStart"
+              data-index="{{index}}"
               aria-role="button"
               aria-label="拖动排序"
             >
@@ -166,13 +169,20 @@
           direction="vertical"
           out-of-bounds="{{false}}"
           damping="50"
+          disabled="{{tabActiveIndex !== index}}"
           bindchange="onTabDragChange"
           bindtouchend="onTabDragEnd"
           bindtouchcancel="onTabDragEnd"
           data-index="{{index}}"
         >
           <view class="drag-row drag-row--tab">
-            <view class="drag-handle" aria-role="button" aria-label="拖动排序">
+            <view
+              class="drag-handle"
+              bindlongpress="onDragTabStart"
+              data-index="{{index}}"
+              aria-role="button"
+              aria-label="拖动排序"
+            >
               <t-icon name="menu" size="36rpx" />
             </view>
 
@@ -246,7 +256,7 @@
         <t-button size="small" theme="primary" bind:tap="searchGoods">搜索</t-button>
       </view>
 
-      <view class="picker-body">
+      <scroll-view class="picker-body" scroll-y="{{true}}">
         <view wx:if="{{goodsSearchLoading}}" class="picker-loading">
           <t-loading theme="circular" size="40rpx" />
         </view>
@@ -265,19 +275,26 @@
                   wx:for="{{tabEditingSpuIds}}"
                   wx:for-item="spuId"
                   wx:for-index="spuIndex"
-                  wx:key="spuId"
+                  wx:key="*this"
                   class="drag-item drag-item--compact"
                   y="{{spuIndex * tabSpuItemHeightPx}}"
                   direction="vertical"
                   out-of-bounds="{{false}}"
                   damping="50"
+                  disabled="{{tabSpuActiveIndex !== spuIndex}}"
                   bindchange="onTabSpuDragChange"
                   bindtouchend="onTabSpuDragEnd"
                   bindtouchcancel="onTabSpuDragEnd"
                   data-index="{{spuIndex}}"
                 >
                   <view class="drag-row drag-row--compact">
-                    <view class="drag-handle" aria-role="button" aria-label="拖动排序">
+                    <view
+                      class="drag-handle"
+                      bindlongpress="onDragTabSpuStart"
+                      data-index="{{spuIndex}}"
+                      aria-role="button"
+                      aria-label="拖动排序"
+                    >
                       <t-icon name="menu" size="32rpx" />
                     </view>
                     <view class="compact-title">
@@ -313,10 +330,6 @@
                 <view class="picker-sub">¥{{item.minSalePrice}}</view>
               </view>
             </view>
-
-            <view class="picker-footer">
-              <t-button theme="primary" block bind:tap="confirmTabGoods">确定</t-button>
-            </view>
           </block>
 
           <block wx:else>
@@ -335,6 +348,10 @@
             </view>
           </block>
         </view>
+      </scroll-view>
+
+      <view wx:if="{{goodsPickerMode === 'tab' && !goodsSearchLoading}}" class="picker-footer">
+        <t-button theme="primary" block bind:tap="confirmTabGoods">确定</t-button>
       </view>
     </view>
   </t-popup>
