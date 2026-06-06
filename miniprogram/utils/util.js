@@ -78,7 +78,7 @@ export const loadSystemWidth = () => {
   }
 
   try {
-    const info = wx.getSystemInfoSync();
+    const info = wx.getWindowInfo();
     systemWidth = info.screenWidth || 0;
   } catch (e) {
     systemWidth = 0;

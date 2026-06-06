@@ -13,9 +13,9 @@ App({
   onLaunch: function (options) {
     const envId = runtimeConfig.cloud.envId;
     if (envId) {
-      wx.cloud.init({ env: envId });
+      wx.cloud.init({ env: envId, traceUser: true });
     } else {
-      wx.cloud.init({});
+      wx.cloud.init({ traceUser: true });
       console.warn('[app] cloud env is not configured, using default environment resolution');
     }
     // 自动挂载 env 到 wx.cloud.config，兼容 wxCloudClientSDK 取 env

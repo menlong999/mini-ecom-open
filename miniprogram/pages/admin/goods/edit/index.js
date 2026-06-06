@@ -683,7 +683,7 @@ Page({
     wx.showModal({
       title: '确认删除商品',
       content: '确定要永久删除该商品及所有规格数据吗？该操作不可撤销。',
-      confirmColor: '#e34d59',
+      confirmColor: '#fa5151',
       success: async (res) => {
         if (res.confirm) {
           wx.showLoading({ title: '删除中...' });

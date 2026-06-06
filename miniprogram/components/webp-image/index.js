@@ -1,4 +1,4 @@
-const systemInfo = wx.getSystemInfoSync();
+const systemInfo = wx.getWindowInfo();
 Component({
   externalClasses: ['t-class', 't-class-load'],
   properties: {
