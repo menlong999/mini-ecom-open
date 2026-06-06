@@ -329,7 +329,10 @@ async function updateGoods({ id, ...data }) {
 
     // 2. Replace Specs (Simplest strategy: Delete All + Create New)
     // In transactions, bulk where().remove() is not supported. Query then loop-delete.
-    const oldSpecRes = await transaction.collection(COLL_SPEC).where({ spuId: id }).get();
+    const oldSpecRes = await transaction
+      .collection(COLL_SPEC)
+      .where({ spuId: id })
+      .get();
     for (const spec of oldSpecRes.data) {
       await transaction.collection(COLL_SPEC).doc(spec._id).remove();
     }
@@ -351,7 +354,10 @@ async function updateGoods({ id, ...data }) {
 
     // 3. Replace SKUs
     // In transactions, bulk where().remove() is not supported. Query then loop-delete.
-    const oldSkuRes = await transaction.collection(COLL_SKU).where({ spuId: id }).get();
+    const oldSkuRes = await transaction
+      .collection(COLL_SKU)
+      .where({ spuId: id })
+      .get();
     for (const sku of oldSkuRes.data) {
       await transaction.collection(COLL_SKU).doc(sku._id).remove();
     }
@@ -384,8 +390,14 @@ async function deleteGoods({ id }) {
   const transaction = await db.startTransaction();
   try {
     // 1. Get specs and skus inside the transaction
-    const specRes = await transaction.collection(COLL_SPEC).where({ spuId: id }).get();
-    const skuRes = await transaction.collection(COLL_SKU).where({ spuId: id }).get();
+    const specRes = await transaction
+      .collection(COLL_SPEC)
+      .where({ spuId: id })
+      .get();
+    const skuRes = await transaction
+      .collection(COLL_SKU)
+      .where({ spuId: id })
+      .get();
 
     // 2. Query SPU to get image/video files for deletion
     const spuDoc = await transaction.collection(COLL_SPU).doc(id).get();
@@ -406,7 +418,10 @@ async function deleteGoods({ id }) {
     try {
       await cleanHomeConfigReferences(id);
     } catch (configErr) {
-      console.error("[deleteGoods] Failed to clean home_config references:", configErr);
+      console.error(
+        "[deleteGoods] Failed to clean home_config references:",
+        configErr,
+      );
     }
 
     // 5. Post-transaction: delete cloud storage files
@@ -414,7 +429,10 @@ async function deleteGoods({ id }) {
       try {
         await deleteGoodsMediaFiles(spuData, skuRes.data);
       } catch (fileErr) {
-        console.error("[deleteGoods] Failed to delete cloud storage files:", fileErr);
+        console.error(
+          "[deleteGoods] Failed to delete cloud storage files:",
+          fileErr,
+        );
       }
     }
 
@@ -435,7 +453,7 @@ async function cleanHomeConfigReferences(spuId) {
 
     // Filter swiper
     const swiperLen = newSwiper.length;
-    newSwiper = newSwiper.filter(item => item.spuId !== spuId);
+    newSwiper = newSwiper.filter((item) => item.spuId !== spuId);
     if (newSwiper.length !== swiperLen) {
       changed = true;
     }
@@ -443,20 +461,25 @@ async function cleanHomeConfigReferences(spuId) {
     // Filter tabList spuIds
     for (const tab of newTabList) {
       if (tab.spuIds && tab.spuIds.includes(spuId)) {
-        tab.spuIds = tab.spuIds.filter(id => id !== spuId);
+        tab.spuIds = tab.spuIds.filter((id) => id !== spuId);
         changed = true;
       }
     }
 
     if (changed) {
-      await db.collection(COLL_HOME_CONFIG).doc(doc._id).update({
-        data: {
-          swiper: newSwiper,
-          tabList: newTabList,
-          updatedAt: Date.now()
-        }
-      });
-      console.log(`[deleteGoods] Cleaned home_config references in doc ${doc._id}`);
+      await db
+        .collection(COLL_HOME_CONFIG)
+        .doc(doc._id)
+        .update({
+          data: {
+            swiper: newSwiper,
+            tabList: newTabList,
+            updatedAt: Date.now(),
+          },
+        });
+      console.log(
+        `[deleteGoods] Cleaned home_config references in doc ${doc._id}`,
+      );
     }
   }
 }
@@ -471,7 +494,7 @@ async function deleteGoodsMediaFiles(spuData, skuList) {
 
   // 2. images (轮播图)
   if (Array.isArray(spuData.images)) {
-    spuData.images.forEach(img => {
+    spuData.images.forEach((img) => {
       if (img && img.startsWith("cloud://")) {
         fileList.push(img);
       }
@@ -480,8 +503,8 @@ async function deleteGoodsMediaFiles(spuData, skuList) {
 
   // 3. desc (详情图/视频)
   if (Array.isArray(spuData.desc)) {
-    spuData.desc.forEach(item => {
-      const url = typeof item === "string" ? item : (item && item.url);
+    spuData.desc.forEach((item) => {
+      const url = typeof item === "string" ? item : item && item.url;
       if (url && url.startsWith("cloud://")) {
         fileList.push(url);
       }
@@ -490,7 +513,7 @@ async function deleteGoodsMediaFiles(spuData, skuList) {
 
   // 4. sku images
   if (Array.isArray(skuList)) {
-    skuList.forEach(sku => {
+    skuList.forEach((sku) => {
       if (sku.image && sku.image.startsWith("cloud://")) {
         fileList.push(sku.image);
       }

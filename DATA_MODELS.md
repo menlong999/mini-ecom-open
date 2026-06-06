@@ -59,18 +59,18 @@
 
 ### 2.1 订单 (`order`)
 
-| 字段名         | 类型     | 描述                                         | 必填 |
-| :------------- | :------- | :------------------------------------------- | :--- |
-| `orderNo`      | String   | 订单编号                                     | 是   |
-| `userId`       | String   | 用户唯一标识                                 | 是   |
-| `status`       | String   | 订单状态（待支付、待发货、已取消等）         | 是   |
-| `goodsList`    | Array    | 商品快照列表（包含标题、单价(分)、数量、规格等） | 是   |
-| `orderSummary` | Object   | 订单金额汇总（均为 Number(分)：总价、运费、应付金额等）       | 是   |
-| `userAddress`  | Object   | 收货地址快照                                 | 否   |
-| `deliveryType` | Number   | 配送方式（1: 快递, 2: 自提）                 | 是   |
-| `pickupStore`  | Object   | 自提门店信息（自提模式下必填）               | 否   |
-| `isCommented`  | Boolean  | 是否已评价                                   | 否   |
-| `payTime`      | DateTime | 支付时间                                     | 否   |
+| 字段名         | 类型     | 描述                                                    | 必填 |
+| :------------- | :------- | :------------------------------------------------------ | :--- |
+| `orderNo`      | String   | 订单编号                                                | 是   |
+| `userId`       | String   | 用户唯一标识                                            | 是   |
+| `status`       | String   | 订单状态（待支付、待发货、已取消等）                    | 是   |
+| `goodsList`    | Array    | 商品快照列表（包含标题、单价(分)、数量、规格等）        | 是   |
+| `orderSummary` | Object   | 订单金额汇总（均为 Number(分)：总价、运费、应付金额等） | 是   |
+| `userAddress`  | Object   | 收货地址快照                                            | 否   |
+| `deliveryType` | Number   | 配送方式（1: 快递, 2: 自提）                            | 是   |
+| `pickupStore`  | Object   | 自提门店信息（自提模式下必填）                          | 否   |
+| `isCommented`  | Boolean  | 是否已评价                                              | 否   |
+| `payTime`      | DateTime | 支付时间                                                | 否   |
 
 ### 2.2 购物车 (`cart`)
 
