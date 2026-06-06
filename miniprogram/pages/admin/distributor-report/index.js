@@ -14,7 +14,7 @@ Page({
     orderLoading: false,
     orderSummary: {
       totalCount: 0,
-      totalAmount: '0.00',
+      totalAmount: 0,
     },
   },
 
@@ -91,7 +91,7 @@ Page({
     this.setData({
       orderLoading: true,
       distributorOrders: [],
-      orderSummary: { totalCount: 0, totalAmount: '0.00' },
+      orderSummary: { totalCount: 0, totalAmount: 0 },
     });
     try {
       const res = await fetchDistributorOrders({
@@ -110,11 +110,10 @@ Page({
         }${address.detailAddress || ''}`;
         const amount = parseAmount(order.orderSummary && order.orderSummary.totalPayAmount);
         totalAmount += amount;
-        const totalAmountText = formatAmount(amount);
         const goodsList = (order.goodsList || []).map((goods) => ({
           title: goods.title || '',
           specsText: formatSpecs(goods),
-          price: formatAmount(goods.price),
+          price: parseAmount(goods.price),
           quantity: goods.quantity || 0,
         }));
 
@@ -125,7 +124,7 @@ Page({
           addressName: address.name || address.userName || '',
           addressPhoneMasked: maskPhone(phone),
           addressDetail,
-          totalAmount: totalAmountText,
+          totalAmount: amount,
           goodsList,
           createdAtText: order.createdAt ? formatTime(order.createdAt, 'YYYY-MM-DD HH:mm') : '',
         };
@@ -134,7 +133,7 @@ Page({
         distributorOrders: list,
         orderSummary: {
           totalCount: list.length,
-          totalAmount: formatAmount(totalAmount),
+          totalAmount: totalAmount,
         },
       });
     } catch (err) {
@@ -157,11 +156,6 @@ function parseAmount(amount) {
     return parseInt(amount, 10) || 0; // 假设数据已修正为分
   }
   return amount || 0;
-}
-
-function formatAmount(amount) {
-  const value = parseAmount(amount);
-  return Number.isNaN(value) ? '0.00' : (value / 100).toFixed(2);
 }
 
 function formatSpecs(goods) {
