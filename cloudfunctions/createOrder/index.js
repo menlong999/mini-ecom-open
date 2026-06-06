@@ -18,7 +18,7 @@ const shippingConfig =
 
 function buildOrderSummary({ goodsTotalAmount, deliveryType }) {
   const freeShippingThreshold = Math.round(
-    Number(shippingConfig.freeShippingThreshold || 0) * 100,
+    Number(shippingConfig.freeShippingThreshold || 0) * 100
   );
   const defaultFee = Math.round(Number(shippingConfig.defaultFee || 0) * 100);
   const normalizedDeliveryType = Number(deliveryType) === 2 ? 2 : 1;
@@ -28,7 +28,7 @@ function buildOrderSummary({ goodsTotalAmount, deliveryType }) {
   const promotionAmount = 0;
   const totalPayAmount = Math.max(
     0,
-    goodsTotalAmount + deliveryFee - promotionAmount,
+    goodsTotalAmount + deliveryFee - promotionAmount
   );
 
   return {
@@ -100,7 +100,7 @@ exports.main = async (event, context) => {
   try {
     console.log(
       "[createOrder] start transaction, goods count:",
-      goodsList.length,
+      goodsList.length
     );
     let goodsTotalAmount = 0;
     // 1. 循环处理商品库存
@@ -141,7 +141,7 @@ exports.main = async (event, context) => {
 
       if (dbPrice !== clientPrice) {
         console.warn(
-          `[createOrder] Price mismatch for ${item.title}: DB=${dbPrice}, Client=${clientPrice}`,
+          `[createOrder] Price mismatch for ${item.title}: DB=${dbPrice}, Client=${clientPrice}`
         );
         throw new Error(`商品 "${item.title}" 价格变动，请重新下单`);
       }
@@ -177,7 +177,7 @@ exports.main = async (event, context) => {
     const normalizedDeliveryType = Number(orderData.deliveryType) === 2 ? 2 : 1;
     const totalGoodsCount = goodsList.reduce(
       (sum, item) => sum + Number(item.quantity || 0),
-      0,
+      0
     );
     const computedOrderSummary = {
       ...buildOrderSummary({

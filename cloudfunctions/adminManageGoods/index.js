@@ -420,7 +420,7 @@ async function deleteGoods({ id }) {
     } catch (configErr) {
       console.error(
         "[deleteGoods] Failed to clean home_config references:",
-        configErr,
+        configErr
       );
     }
 
@@ -431,7 +431,7 @@ async function deleteGoods({ id }) {
       } catch (fileErr) {
         console.error(
           "[deleteGoods] Failed to delete cloud storage files:",
-          fileErr,
+          fileErr
         );
       }
     }
@@ -478,7 +478,7 @@ async function cleanHomeConfigReferences(spuId) {
           },
         });
       console.log(
-        `[deleteGoods] Cleaned home_config references in doc ${doc._id}`,
+        `[deleteGoods] Cleaned home_config references in doc ${doc._id}`
       );
     }
   }
