@@ -268,11 +268,11 @@ exports.main = async (event, context) => {
     const now = Date.now();
     const refundAmountCents = Number(amount && amount.refund);
     const refundAmount = Number.isFinite(refundAmountCents)
-      ? Math.round(refundAmountCents) / 100
+      ? Math.round(refundAmountCents)
       : undefined;
     const totalAmountCents = Number(amount && amount.total);
     const totalAmount = Number.isFinite(totalAmountCents)
-      ? Math.round(totalAmountCents) / 100
+      ? Math.round(totalAmountCents)
       : undefined;
 
     const nextRefund = {

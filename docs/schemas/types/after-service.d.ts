@@ -265,7 +265,7 @@ status?: string
 interface IModels {
 
     /**
-    * 数据模型：after-service
+    * Data Model：after-service
     */ 
     after_service: DataModelMethods<IModalAfterService>;    
 }

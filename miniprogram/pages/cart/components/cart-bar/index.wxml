@@ -19,7 +19,7 @@
         fill="{{false}}"
         decimalSmaller
         class="cart-bar__total--bold cart-bar__total--price"
-        priceUnit="yuan"
+        
       />
       <text class="cart-bar__total--normal">（不含运费）</text>
     </view>
@@ -29,7 +29,7 @@
         class="cart-bar__total--normal"
         price="{{totalDiscountAmount || '0'}}"
         fill="{{false}}"
-        priceUnit="yuan"
+        
       />
     </view>
   </view>

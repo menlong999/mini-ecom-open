@@ -153,13 +153,15 @@ function maskPhone(phone) {
 }
 
 function parseAmount(amount) {
-  const value = parseFloat(amount || 0);
-  return Number.isNaN(value) ? 0 : value;
+  if (typeof amount === 'string') {
+    return parseInt(amount, 10) || 0; // 假设数据已修正为分
+  }
+  return amount || 0;
 }
 
 function formatAmount(amount) {
-  const value = parseFloat(amount || 0);
-  return Number.isNaN(value) ? '0.00' : value.toFixed(2);
+  const value = parseAmount(amount);
+  return Number.isNaN(value) ? '0.00' : (value / 100).toFixed(2);
 }
 
 function formatSpecs(goods) {

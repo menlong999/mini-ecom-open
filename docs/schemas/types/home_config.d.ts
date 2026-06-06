@@ -90,7 +90,7 @@ skuId?: string
 interface IModels {
 
     /**
-    * 数据模型：home_config
+    * Data Model：home_config
     */ 
     home_config: DataModelMethods<IModalHomeConfig>;    
 }

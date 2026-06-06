@@ -36,7 +36,7 @@ _id?: string
 interface IModels {
 
     /**
-    * 数据模型：category2
+    * Data Model：category2
     */ 
     category2: DataModelMethods<IModalCategory2>;    
 }

@@ -313,26 +313,33 @@ Page({
     this.setData({ 'formData.amount.focus': false });
     const val = parseFloat(this.data.formData.amount.temp);
     // Val is Yuan. Ensure it doesn't exceed max.
-    let currentYuan = val;
-    if (isNaN(currentYuan) || currentYuan < 0) currentYuan = 0;
+    let currentCents = Math.round(val * 100);
+    if (isNaN(currentCents) || currentCents < 0) currentCents = 0;
 
-    const maxYuan = this.data.formData.amount.max;
-    console.log('[handleAmountBlur] Val:', val, 'MaxYuan:', maxYuan, 'CurrentYuan:', currentYuan);
+    const maxCents = this.data.formData.amount.max;
+    console.log(
+      '[handleAmountBlur] Val:',
+      val,
+      'maxCents:',
+      maxCents,
+      'currentCents:',
+      currentCents
+    );
 
-    if (currentYuan > maxYuan) {
+    if (currentCents > maxCents) {
       console.warn('[handleAmountBlur] Exceeds max, resetting to max');
-      currentYuan = maxYuan;
+      currentCents = maxCents;
       Toast({
         context: this,
         selector: '#t-toast',
-        message: '不能超过最大可退金额',
+        message: '退款金额不能超过可退金额',
       });
     }
 
     this.setData(
       {
-        'formData.amount.current': currentYuan,
-        'formData.amount.temp': priceFormat(currentYuan),
+        'formData.amount.current': currentCents,
+        'formData.amount.temp': priceFormat(currentCents),
         inputDialogVisible: false,
       },
       () => this.validate()

@@ -13,9 +13,10 @@ function priceFormat(price, fill = 0) {
     return price;
   }
 
-  // 移除 /100 逻辑，假设输入即为元
-  let priceFormatValue = Math.round(parseFloat(`${price}`) * 10 ** 8) / 10 ** 8;
-  priceFormatValue = `${priceFormatValue}`;
+  // 输入是以分为单位的金额
+  let p = parseFloat(`${price}`);
+  p = Math.round(p * 10 ** 8) / 10 ** 8; // 处理潜在的浮点误差
+  let priceFormatValue = (p / 100).toString();
 
   if (fill > 0) {
     // 补充小数位数

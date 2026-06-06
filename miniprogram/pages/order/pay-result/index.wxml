@@ -17,9 +17,9 @@
         wr-class="pay-money__price"
         decimalSmaller
         fill
-        priceUnit="yuan"
+        
       />
-      <text wx:else>¥0.00</text>
+      <price wx:else price="0" />
     </view>
   </view>
 

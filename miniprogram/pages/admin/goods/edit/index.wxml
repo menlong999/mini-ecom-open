@@ -300,7 +300,8 @@
     />
   </t-dialog>
 
-  <view class="footer-btn">
-    <t-button theme="primary" block size="large" bind:tap="onSubmit">保存商品</t-button>
+  <view class="footer-btn {{id ? 'footer-btn--dual' : ''}}">
+    <t-button wx:if="{{id}}" theme="danger" variant="outline" class="btn-delete" size="large" bind:tap="onDeleteGoods">删除商品</t-button>
+    <t-button theme="primary" block class="btn-save" size="large" bind:tap="onSubmit">保存商品</t-button>
   </view>
 </view>

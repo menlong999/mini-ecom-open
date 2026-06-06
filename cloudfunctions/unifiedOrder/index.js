@@ -14,18 +14,12 @@ try {
 const workflowName =
   (privateConfig.payment && privateConfig.payment.workflowName) || "";
 
-function toCents(amountYuan) {
-  const amount = Number(amountYuan);
+function getOrderTotalFee(order) {
+  const amount = Number(order && order.orderSummary && order.orderSummary.totalPayAmount);
   if (!Number.isFinite(amount) || amount <= 0) {
     throw new Error("Invalid order total amount");
   }
-  return Math.round(amount * 100);
-}
-
-function getOrderTotalFee(order) {
-  return toCents(
-    order && order.orderSummary && order.orderSummary.totalPayAmount
-  );
+  return amount;
 }
 
 function getPaymentDescription(order) {

@@ -224,7 +224,7 @@ async function approveService(
     const wechatPayInfo = order && order.wechatPayInfo;
     const totalFee = Number(wechatPayInfo && wechatPayInfo.totalFee);
     if (!SKIP_PAY_AMOUNT_CHECK && Number.isFinite(totalFee) && totalFee > 0) {
-      const approvedAmountCents = Math.round(finalApprovedAmount * 100);
+      const approvedAmountCents = finalApprovedAmount;
       if (approvedAmountCents > totalFee) {
         throw new Error("Approved amount exceeds paid total");
       }
@@ -415,7 +415,7 @@ async function refundService(
     throw new Error("Missing transactionId");
   }
   const totalFee = Number(wechatPayInfo && wechatPayInfo.totalFee);
-  let refundAmountCents = Math.round(refundAmount * 100);
+  let refundAmountCents = refundAmount;
   if (SKIP_PAY_AMOUNT_CHECK) {
     refundAmountCents = 1;
   }
@@ -453,7 +453,7 @@ async function refundService(
     totalAmount: totalFee,
   });
 
-  const requestAmount = SKIP_PAY_AMOUNT_CHECK ? 0.01 : refundAmount;
+  const requestAmount = SKIP_PAY_AMOUNT_CHECK ? 1 : refundAmount;
   const updateData = {
     amount: requestAmount,
     refund: {

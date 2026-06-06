@@ -16,18 +16,10 @@ const _ = db.command;
 const shippingConfig =
   (privateConfig.order && privateConfig.order.shipping) || {};
 
-function roundCurrency(amount) {
-  return Math.round(Number(amount || 0) * 100) / 100;
-}
-
-function formatAmount(amount) {
-  return roundCurrency(amount).toFixed(2);
-}
-
 function buildOrderSummary({ goodsTotalAmount, deliveryType }) {
   const freeShippingThreshold =
-    Number(shippingConfig.freeShippingThreshold) || 0;
-  const defaultFee = Number(shippingConfig.defaultFee) || 0;
+    Math.round(Number(shippingConfig.freeShippingThreshold || 0) * 100);
+  const defaultFee = Math.round(Number(shippingConfig.defaultFee || 0) * 100);
   const normalizedDeliveryType = Number(deliveryType) === 2 ? 2 : 1;
   const shouldChargeShipping =
     normalizedDeliveryType === 1 && goodsTotalAmount < freeShippingThreshold;
@@ -40,10 +32,10 @@ function buildOrderSummary({ goodsTotalAmount, deliveryType }) {
 
   return {
     totalGoodsCount: 0,
-    totalSalePrice: formatAmount(goodsTotalAmount),
-    deliveryFee: formatAmount(deliveryFee),
-    promotionAmount: formatAmount(promotionAmount),
-    totalPayAmount: formatAmount(totalPayAmount),
+    totalSalePrice: goodsTotalAmount,
+    deliveryFee: deliveryFee,
+    promotionAmount: promotionAmount,
+    totalPayAmount: totalPayAmount,
     invoiceSupport: true,
   };
 }
@@ -142,24 +134,18 @@ exports.main = async (event, context) => {
         throw new Error(`商品 "${item.title}" 库存不足 (仅剩${currentStock})`);
       }
 
-      // [NEW] 1.3 价格安全校验
-      // 防止前端篡改价格。这里使用严格比较，允许 0.01 的浮动误差（通常不需要，但为了保险）
-      // 注意：数据库存储的价格单位通常是元还是分？Deshan项目中 minSalePrice 看起来是元 (e.g. 99.00)
-      // item.price 来自前端购物车，也是元。
-      const dbPrice = parseFloat(skuData.price);
-      const clientPrice = parseFloat(item.price);
+      // [NEW] 1.3 价格安全校验 (由于改为了分，直接整数比较)
+      const dbPrice = parseInt(skuData.price, 10) || 0;
+      const clientPrice = parseInt(item.price, 10) || 0;
 
-      if (Math.abs(dbPrice - clientPrice) > 0.01) {
+      if (dbPrice !== clientPrice) {
         console.warn(
           `[createOrder] Price mismatch for ${item.title}: DB=${dbPrice}, Client=${clientPrice}`
         );
-        // 暂时记录日志，或者直接抛错拒绝订单
         throw new Error(`商品 "${item.title}" 价格变动，请重新下单`);
       }
 
-      goodsTotalAmount = roundCurrency(
-        goodsTotalAmount + dbPrice * Number(item.quantity || 0)
-      );
+      goodsTotalAmount += dbPrice * Number(item.quantity || 0);
 
       // 1.4 扣减库存 (使用系统 _id)
       await transaction

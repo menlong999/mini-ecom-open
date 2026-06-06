@@ -65,7 +65,7 @@ _id?: string
 interface IModels {
 
     /**
-    * 数据模型：goods_sku
+    * Data Model：goods_sku
     */ 
     goods_sku: DataModelMethods<IModalGoodsSku>;    
 }

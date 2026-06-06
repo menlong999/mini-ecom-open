@@ -202,37 +202,39 @@ Page({
   computeOrderSummary() {
     const { goodsList } = this.data;
     const shippingConfig = runtimeConfig.order.shipping || {};
-    const freeShippingThreshold = Number(shippingConfig.freeShippingThreshold) || 0;
-    const defaultFee = Number(shippingConfig.defaultFee) || 0;
+    // 假设配置里填的是元，转换成分
+    const freeShippingThreshold = Math.round(
+      Number(shippingConfig.freeShippingThreshold || 0) * 100
+    );
+    const defaultFee = Math.round(Number(shippingConfig.defaultFee || 0) * 100);
 
-    // 1. 商品总价 & 总数
+    // 1. 商品总价 & 总数 (分)
     const totalGoodsCount = goodsList.reduce((sum, item) => sum + (item.quantity || 1), 0);
     const totalSalePrice = goodsList.reduce((sum, item) => {
-      const price = parseFloat(item.price || 0);
-      const quantity = parseInt(item.quantity || 1);
+      const price = parseInt(item.price || 0, 10);
+      const quantity = parseInt(item.quantity || 1, 10);
       return sum + price * quantity;
     }, 0);
 
-    // 2. 运费计算 (满99免运费)
+    // 2. 运费计算
     let deliveryFee = 0;
     if (this.data.deliveryType === 1) {
-      // 只有快递配送才算运费
       deliveryFee = totalSalePrice >= freeShippingThreshold ? 0 : defaultFee;
     }
 
     // 3. 优惠计算
+    const promotionAmount = 0;
 
-    const promotionAmount = 0; // 暂时无活动优惠
     // 4. 应付金额
     const totalPayAmount = totalSalePrice + deliveryFee - promotionAmount;
 
     return {
       totalGoodsCount,
-      totalSalePrice: totalSalePrice.toFixed(2),
-      deliveryFee: deliveryFee.toFixed(2),
-      promotionAmount: promotionAmount.toFixed(2),
+      totalSalePrice,
+      deliveryFee,
+      promotionAmount,
 
-      totalPayAmount: Math.max(0, totalPayAmount).toFixed(2),
+      totalPayAmount: Math.max(0, totalPayAmount),
       invoiceSupport: runtimeConfig.features.invoice,
     };
   },
@@ -523,10 +525,10 @@ Page({
 
   async executePay(orderSummary, orderId) {
     wx.showLoading({ title: '正在拉起支付...' });
-    // 5.1 获取支付参数 (金额为元，统一换算为分)
+    // 5.1 获取支付参数 (传入的已是分，不再转换)
     const paymentParams = await getPaymentParams({
       orderId,
-      amountYuan: orderSummary.totalPayAmount,
+      amountYuan: orderSummary.totalPayAmount, // 这里实际是分，因为下层要传给云函数
     });
 
     wx.hideLoading();

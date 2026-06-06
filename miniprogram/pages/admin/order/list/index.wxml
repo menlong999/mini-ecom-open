@@ -45,15 +45,15 @@
                 <view class="order-goods-specs">规格: {{goods.specs || '-'}}</view>
               </view>
               <view class="order-goods-aside">
-                <text class="order-goods-price">¥{{goods.price}}</text>
+                <price class="order-goods-price" price="{{goods.price}}" />
                 <text class="order-goods-qty">x{{goods.quantity}}</text>
               </view>
             </view>
           </view>
           <view class="order-total">
-            <text>商品总额: ¥{{item.totalSalePrice || item.totalPayAmount || '0'}}</text>
-            <text>运费: ¥{{item.deliveryFee || '0'}}</text>
-            <text>实付: ¥{{item.totalPayAmount || '0'}}</text>
+            <view style="display:inline-flex;align-items:center;">商品总额: <price price="{{item.totalSalePrice || item.totalPayAmount || '0'}}" /></view>
+            <view style="display:inline-flex;align-items:center;">运费: <price price="{{item.deliveryFee || '0'}}" /></view>
+            <view style="display:inline-flex;align-items:center;">实付: <price price="{{item.totalPayAmount || '0'}}" /></view>
           </view>
           <view class="order-meta">
             <text>{{item.deliveryTypeText}}</text>

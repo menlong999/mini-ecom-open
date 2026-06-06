@@ -75,7 +75,7 @@ distributorRejectReason?: string
 interface IModels {
 
     /**
-    * 数据模型：user_info
+    * Data Model：user_info
     */ 
     user_info: DataModelMethods<IModalUserInfo>;    
 }

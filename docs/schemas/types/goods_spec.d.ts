@@ -50,7 +50,7 @@ _id?: string
 interface IModels {
 
     /**
-    * 数据模型：goods_spec
+    * Data Model：goods_spec
     */ 
     goods_spec: DataModelMethods<IModalGoodsSpec>;    
 }

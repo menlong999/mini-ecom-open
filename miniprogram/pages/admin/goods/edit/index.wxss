@@ -188,3 +188,16 @@
     box-shadow: var(--shadow-bar);
     z-index: 100;
 }
+
+.footer-btn--dual {
+    display: flex;
+    gap: 16rpx;
+}
+
+.footer-btn--dual .btn-delete {
+    flex: 1;
+}
+
+.footer-btn--dual .btn-save {
+    flex: 2;
+}

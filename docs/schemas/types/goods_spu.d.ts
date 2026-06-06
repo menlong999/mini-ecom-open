@@ -76,7 +76,7 @@ _id?: string
 interface IModels {
 
     /**
-    * 数据模型：goods_spu
+    * Data Model：goods_spu
     */ 
     goods_spu: DataModelMethods<IModalGoodsSpu>;    
 }

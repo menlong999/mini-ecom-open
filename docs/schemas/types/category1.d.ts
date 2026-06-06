@@ -24,7 +24,7 @@ categoryL1Id_goods_list?: ARRAY_TYPE_IModalGoods
 interface IModels {
 
     /**
-    * 数据模型：category1
+    * Data Model：category1
     */ 
     category1: DataModelMethods<IModalCategory1>;    
 }

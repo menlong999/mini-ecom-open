@@ -85,7 +85,7 @@ Page({
           .filter((v) => v),
       }));
 
-      // 计算总金额和选中商品数量
+      // 计算总金额和选中商品数量 (价格为分)
       const selectedGoods = cartList.filter((item) => item.isSelected);
       const totalAmount = selectedGoods.reduce((sum, item) => sum + item.price * item.quantity, 0);
       const selectedGoodsCount = selectedGoods.reduce((sum, item) => sum + item.quantity, 0);

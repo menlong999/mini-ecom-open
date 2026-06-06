@@ -25,7 +25,7 @@
             price="{{goods.price}}"
             fill="{{true}}"
             decimalSmaller
-            priceUnit="yuan"
+            
           />
           <view class="goods-num">x{{goods.quantity}}</view>
         </view>
@@ -124,7 +124,7 @@
               wr-class="refund-money-price-class"
               symbol-class="refund-money-price-symbol"
               decimal-class="refund-money-price-decimal"
-              priceUnit="yuan"
+              
             />
             <view class="service-from-group__price">
               修改

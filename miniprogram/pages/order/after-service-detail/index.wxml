@@ -113,7 +113,7 @@
                 price="{{goods.itemRefundAmount}}"
                 fill="{{true}}"
                 decimalSmaller
-                priceUnit="yuan"
+                
               />
               <view class="goods-num">x{{goods.rightsQuantity}}</view>
             </view>
@@ -168,7 +168,7 @@
           title="申请金额"
         >
           <wr-price
-            priceUnit="yuan"
+            
             slot="note"
             price="{{service.applyAmount || service.refundRequestAmount}}"
             fill
@@ -182,7 +182,7 @@
           title="审核金额"
         >
           <wr-price
-            priceUnit="yuan"
+            
             slot="note"
             price="{{service.approvedAmount || service.refundRequestAmount}}"
             fill
@@ -195,7 +195,7 @@
           t-class-note="t-refund-note"
           title="退款金额"
         >
-          <wr-price priceUnit="yuan" slot="note" price="{{service.refundRequestAmount}}" fill />
+          <wr-price  slot="note" price="{{service.refundRequestAmount}}" fill />
         </t-cell>
         <t-cell
           bordered="{{false}}"

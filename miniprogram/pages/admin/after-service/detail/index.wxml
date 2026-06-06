@@ -10,9 +10,11 @@
       <t-cell title="状态" note="{{service.statusDesc}}" bordered="{{false}}" />
       <t-cell
         title="申请金额"
-        note="¥{{service.applyAmount || service.amount || '0'}}"
+        >
+        <price slot="note" price="{{service.applyAmount || service.amount || '0'}}" />
+      </t-cell><!--
         bordered="{{false}}"
-      />
+      -->
       <view wx:if="{{actionState.canApprove}}">
         <t-input
           class="right-input"
@@ -27,10 +29,12 @@
       <t-cell
         wx:else
         title="审核金额"
-        note="¥{{service.approvedAmount || '-'}}"
+        >
+        <price slot="note" price="{{service.approvedAmount || '-'}}" />
+      </t-cell><!--
         bordered="{{false}}"
-      />
-      <t-cell title="最终金额" note="¥{{service.amount || '0'}}" bordered="{{false}}" />
+      -->
+      <t-cell title="最终金额" bordered="{{false}}"><price slot="note" price="{{service.amount || '0'}}" /></t-cell>
       <t-cell title="申请时间" note="{{service.createdAtText}}" bordered="{{false}}" />
     </t-cell-group>
   </view>
@@ -49,7 +53,7 @@
         <view class="goods-specs">规格: {{goods.specs || '-'}}</view>
       </view>
       <view class="goods-aside">
-        <text class="goods-price">¥{{goods.price}}</text>
+        <price class="goods-price" price="{{goods.price}}" />
         <text class="goods-qty">x{{goods.quantity}}</text>
       </view>
     </view>
@@ -102,7 +106,7 @@
   <view class="card" wx:if="{{service.refundTimeText}}">
     <view class="card-title">退款信息</view>
     <t-cell-group>
-      <t-cell title="退款金额" note="¥{{service.refund.amount || '0'}}" bordered="{{false}}" />
+      <t-cell title="退款金额" bordered="{{false}}"><price slot="note" price="{{service.refund.amount || '0'}}" /></t-cell>
       <t-cell title="流水号" note="{{service.refund.traceNo || '-'}}" bordered="{{false}}" />
       <t-cell title="退款时间" note="{{service.refundTimeText}}" bordered="{{false}}" />
     </t-cell-group>

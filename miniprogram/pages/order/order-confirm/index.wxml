@@ -59,7 +59,7 @@
           <price
             wr-class="goods-price"
             price="{{goods.price}}"
-            priceUnit="yuan"
+            
             fill="{{true}}"
             decimalSmaller
           />
@@ -76,7 +76,7 @@
       <price
         fill
         decimalSmaller
-        priceUnit="yuan"
+        
         wr-class="pay-item__right font-bold"
         price="{{orderSummary.totalSalePrice || '0'}}"
       />
@@ -86,7 +86,7 @@
       <text>运费</text>
       <view class="pay-item__right font-bold">
         <block wx:if="{{orderSummary.deliveryFee && orderSummary.deliveryFee != 0}}">
-          +<price fill decimalSmaller priceUnit="yuan" price="{{orderSummary.deliveryFee}}" />
+          +<price fill decimalSmaller  price="{{orderSummary.deliveryFee}}" />
         </block>
         <text wx:else>免运费</text>
       </view>
@@ -115,7 +115,7 @@
       <text class="order-num">共{{orderSummary.totalGoodsCount}}件</text>
       <text>小计</text>
       <price
-        priceUnit="yuan"
+        
         class="total-price"
         price="{{orderSummary.totalPayAmount}}"
         fill="{{false}}"
@@ -130,7 +130,7 @@
       <price
         decimalSmaller
         fill
-        priceUnit="yuan"
+        
         class="price"
         price="{{orderSummary.totalPayAmount || '0'}}"
       />
@@ -185,7 +185,7 @@
               price="{{item.price}}"
               fill
               decimalSmaller
-              priceUnit="yuan"
+              
               class="goods-fail-price"
             />
             <view class="goods-fail-num">x{{item.quantity}}</view>

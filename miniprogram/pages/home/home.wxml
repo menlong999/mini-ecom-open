@@ -55,9 +55,9 @@
           >
         </view>
         <view class="goods-price-row">
-          <text class="goods-price">¥{{item.minSalePrice}}</text>
+          <price class="goods-price" price="{{item.minSalePrice}}" />
           <text class="goods-origin-price" wx:if="{{item.minLinePrice}}"
-            >¥{{item.minLinePrice}}</text
+            ><price type="delthrough" price="{{item.minLinePrice}}" /></text
           >
           <view class="goods-cart-btn" catchtap="handleAddCart" data-index="{{index}}">
             <t-icon prefix="wr" name="cartAdd" size="48rpx" color="#4F6F64" />

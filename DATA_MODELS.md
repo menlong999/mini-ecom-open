@@ -25,6 +25,7 @@
 | `images`           | Array    | 详情页轮播图列表     | 是   |
 | `desc`             | Array    | 商品详情图/文字描述  | 否   |
 | `minSalePrice`     | Number   | 最低售价（单位：分） | 否   |
+| `maxLinePrice`     | Number   | 划线售价（单位：分） | 否   |
 | `spuStockQuantity` | Number   | 总库存量             | 否   |
 | `isPutOnSale`      | Boolean  | 是否上架             | 否   |
 | `categoryId`       | Relation | 所属二级分类 ID      | 否   |
@@ -63,8 +64,8 @@
 | `orderNo`      | String   | 订单编号                                     | 是   |
 | `userId`       | String   | 用户唯一标识                                 | 是   |
 | `status`       | String   | 订单状态（待支付、待发货、已取消等）         | 是   |
-| `goodsList`    | Array    | 商品快照列表（包含标题、单价、数量、规格等） | 是   |
-| `orderSummary` | Object   | 订单金额汇总（总价、运费、应付金额等）       | 是   |
+| `goodsList`    | Array    | 商品快照列表（包含标题、单价(分)、数量、规格等） | 是   |
+| `orderSummary` | Object   | 订单金额汇总（均为 Number(分)：总价、运费、应付金额等）       | 是   |
 | `userAddress`  | Object   | 收货地址快照                                 | 否   |
 | `deliveryType` | Number   | 配送方式（1: 快递, 2: 自提）                 | 是   |
 | `pickupStore`  | Object   | 自提门店信息（自提模式下必填）               | 否   |
@@ -110,7 +111,7 @@
 | `rightsNo` | String | 售后单号                           | 是   |
 | `orderId`  | String | 关联订单 ID                        | 是   |
 | `status`   | Number | 售后状态（处理中、已完成、已拒绝） | 是   |
-| `amount`   | Number | 退款金额                           | 是   |
+| `amount`   | Number | 退款金额（单位：分）               | 是   |
 | `reason`   | String | 申请原因描述                       | 否   |
 | `images`   | Array  | 凭证图片列表                       | 否   |
 
