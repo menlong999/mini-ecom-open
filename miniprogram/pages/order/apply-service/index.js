@@ -107,9 +107,18 @@ Page({
   onLoad(query) {
     this.query = query || {};
     if (!this.validateQuery()) return;
+    const canApplyReturn = query.canApplyReturn !== 'false';
     this.setData({
-      canApplyReturn: query.canApplyReturn !== 'false', // 默认为 true，除非明确 false
+      canApplyReturn, // 默认为 true，除非明确 false
     });
+
+    // 如果不支持退货（未发货状态），则收货状态必定是“未收到货”
+    if (!canApplyReturn) {
+      this.setData({
+        'formData.logisticsStatus': this.data.receiptStatusList[0],
+      });
+    }
+
     this.applyServiceTypeFromQuery();
     this.fetchInitialData();
   },
@@ -216,6 +225,7 @@ Page({
 
   // 展开收货状态选择
   handleApplyGoodsStatus() {
+    if (!this.data.canApplyReturn) return; // 不支持退货（未发货）时不能修改收货状态
     this.setData({ showReceiptStatusDialog: true });
   },
 

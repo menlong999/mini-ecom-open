@@ -1,7 +1,31 @@
 {
   "envId": "{{env.ENV_ID}}",
   "functionRoot": "./cloudfunctions",
-  "functions": [],
+  "functions": [
+    { "name": "adminManageAfterService" },
+    { "name": "adminManageCategory" },
+    { "name": "adminManageDistributor" },
+    { "name": "adminManageGoods" },
+    { "name": "adminManageHomeConfig" },
+    { "name": "adminManageOrder" },
+    { "name": "adminManageReport" },
+    { "name": "adminManageStock" },
+    { "name": "cancelOrderTimer" },
+    { "name": "confirmReceiptTimer" },
+    { "name": "createOrder" },
+    { "name": "generateQRCode" },
+    { "name": "getLogisticsTrack" },
+    { "name": "login" },
+    { "name": "manageAddress" },
+    { "name": "manageAfterService" },
+    { "name": "manageCart" },
+    { "name": "manageComments" },
+    { "name": "manageOrder" },
+    { "name": "manageUser" },
+    { "name": "paymentCallback" },
+    { "name": "refundCallback" },
+    { "name": "unifiedOrder" }
+  ],
   "ai": {
     "defaultAgent": "{{env.AI_DEFAULT_AGENT}}",
     "agents": {

@@ -1,6 +1,6 @@
 import Toast from 'tdesign-miniprogram/toast/index';
-import { getDefaultAddress } from '../../user/services/address/address';
-import { addressPicker } from '../../user/services/address/channel';
+import { getDefaultAddress } from '../../../services/address/address';
+import { addressPicker } from '../../../services/address/channel';
 // import { saveOrder, deleteCartItems, checkStock, deductStock } from '../../../services/order/orderConfirm';
 import { getPaymentParams } from '../services/payment';
 import { createOrder } from '../services/createOrder';
@@ -204,9 +204,15 @@ Page({
     const shippingConfig = runtimeConfig.order.shipping || {};
     // 假设配置里填的是元，转换成分
     const freeShippingThreshold = Math.round(
-      Number(shippingConfig.freeShippingThreshold || 0) * 100
+      Number(
+        shippingConfig.freeShippingThreshold !== undefined
+          ? shippingConfig.freeShippingThreshold
+          : 99
+      ) * 100
     );
-    const defaultFee = Math.round(Number(shippingConfig.defaultFee || 0) * 100);
+    const defaultFee = Math.round(
+      Number(shippingConfig.defaultFee !== undefined ? shippingConfig.defaultFee : 10) * 100
+    );
 
     // 1. 商品总价 & 总数 (分)
     const totalGoodsCount = goodsList.reduce((sum, item) => sum + (item.quantity || 1), 0);

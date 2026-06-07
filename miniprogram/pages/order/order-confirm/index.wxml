@@ -49,7 +49,7 @@
   <!-- 商品列表 - 简化：直接展示商品，不分店铺 -->
   <view class="order-wrapper">
     <view class="goods-list">
-      <view wx:for="{{goodsList}}" wx:for-item="goods" wx:key="spuId" class="goods-wrapper">
+      <view wx:for="{{goodsList}}" wx:for-item="goods" wx:key="cartId" class="goods-wrapper">
         <t-image src="{{goods.thumb}}" t-class="goods-image" mode="aspectFill" />
         <view class="goods-content">
           <view class="goods-title">{{goods.title}}</view>
@@ -174,7 +174,7 @@
       <view class="title">商品库存不足或失效</view>
       <view class="info">以下商品暂不可购买，请返回购物车重新选择商品。</view>
       <scroll-view scroll-y class="goods-fail-list">
-        <view wx:for="{{goodsList}}" wx:key="spuId" class="goods-fail-item">
+        <view wx:for="{{goodsList}}" wx:key="cartId" class="goods-fail-item">
           <t-image src="{{item.thumb}}" t-class="goods-fail-img" mode="aspectFill" />
           <view class="goods-fail-content">
             <view class="goods-fail-title">{{item.title}}</view>

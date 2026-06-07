@@ -113,8 +113,8 @@ Page({
         typeDesc: ServiceTypeDesc[serviceRaw.type],
         status: serviceRaw.status,
         statusIcon: this.getStatusIcon(serviceRaw),
-        statusName: this.getStatusName(serviceRaw.status),
-        statusDesc: this.getStatusDesc(serviceRaw.status),
+        statusName: this.getStatusName(serviceRaw),
+        statusDesc: this.getStatusDesc(serviceRaw),
         amount: serviceRaw.amount,
         goodsList,
         orderNo: serviceRaw.orderNo,
@@ -238,7 +238,10 @@ Page({
     return item.type === ServiceType.ONLY_REFUND ? 'goods_refund' : 'goods_return';
   },
 
-  getStatusName(status) {
+  getStatusName(serviceRaw) {
+    const status = serviceRaw.status;
+    const isRefundProcessing = serviceRaw.refund && serviceRaw.refund.status === 'PROCESSING';
+    if (isRefundProcessing) return '退款中';
     switch (status) {
       case AfterServiceStatus.TO_AUDIT:
         return '待审核';
@@ -259,9 +262,16 @@ Page({
     }
   },
 
-  getStatusDesc(status) {
+  getStatusDesc(serviceRaw) {
+    const status = serviceRaw.status;
+    const isRefundProcessing = serviceRaw.refund && serviceRaw.refund.status === 'PROCESSING';
+    if (isRefundProcessing) return '退款已发起，正在处理中，请等待到账';
     if (status === AfterServiceStatus.TO_AUDIT) return '等待商家审核';
-    if (status === AfterServiceStatus.THE_APPROVED) return '商家已同意，请尽快退货';
+    if (status === AfterServiceStatus.THE_APPROVED) {
+      return serviceRaw.type === ServiceType.ONLY_REFUND
+        ? '商家已同意，退款处理中'
+        : '商家已同意，请尽快退货';
+    }
     if (status === AfterServiceStatus.COMPLETE) return '退款已完成';
     if (status === AfterServiceStatus.CLOSED) return '售后单已关闭';
     if (status === AfterServiceStatus.REFUND_ABNORMAL) return '退款异常/关闭，请联系客服';

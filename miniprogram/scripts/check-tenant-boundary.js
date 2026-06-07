@@ -42,6 +42,7 @@ for (const file of listTrackedFiles()) {
   if (!shouldScan(file)) continue;
 
   const fullPath = path.join(repoRoot, file);
+  if (!fs.existsSync(fullPath)) continue;
   const content = fs.readFileSync(fullPath, 'utf8');
   const lines = content.split(/\r?\n/);
 

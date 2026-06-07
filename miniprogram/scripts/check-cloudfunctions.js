@@ -23,7 +23,10 @@ function isAllowed(name) {
 function main() {
   const entries = fs
     .readdirSync(cloudfunctionsDir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
+    .filter(
+      (entry) =>
+        entry.isDirectory() && fs.existsSync(path.join(cloudfunctionsDir, entry.name, 'index.js'))
+    )
     .map((entry) => entry.name)
     .sort();
 

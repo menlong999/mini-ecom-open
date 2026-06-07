@@ -18,9 +18,17 @@ const shippingConfig =
 
 function buildOrderSummary({ goodsTotalAmount, deliveryType }) {
   const freeShippingThreshold = Math.round(
-    Number(shippingConfig.freeShippingThreshold || 0) * 100
+    Number(
+      shippingConfig.freeShippingThreshold !== undefined
+        ? shippingConfig.freeShippingThreshold
+        : 99
+    ) * 100
   );
-  const defaultFee = Math.round(Number(shippingConfig.defaultFee || 0) * 100);
+  const defaultFee = Math.round(
+    Number(
+      shippingConfig.defaultFee !== undefined ? shippingConfig.defaultFee : 10
+    ) * 100
+  );
   const normalizedDeliveryType = Number(deliveryType) === 2 ? 2 : 1;
   const shouldChargeShipping =
     normalizedDeliveryType === 1 && goodsTotalAmount < freeShippingThreshold;

@@ -72,12 +72,15 @@ Page({
         serviceRaw,
         service,
         actionState,
-        refundAmount: serviceRaw.amount || '',
+        refundAmount:
+          typeof serviceRaw.amount === 'number' ? (serviceRaw.amount / 100).toFixed(2) : '',
         refundTraceNo: serviceRaw.refund ? serviceRaw.refund.traceNo || '' : '',
         approvedAmount:
           serviceRaw.audit && typeof serviceRaw.audit.approvedAmount === 'number'
-            ? serviceRaw.audit.approvedAmount
-            : serviceRaw.amount || serviceRaw.applyAmount || '',
+            ? (serviceRaw.audit.approvedAmount / 100).toFixed(2)
+            : serviceRaw.amount || serviceRaw.applyAmount
+            ? ((serviceRaw.amount || serviceRaw.applyAmount) / 100).toFixed(2)
+            : '',
         loading: false,
       });
     } catch (err) {
@@ -101,14 +104,23 @@ Page({
       quantity: goods.refundQuantity || goods.quantity || 0,
     }));
     const historyList = Array.isArray(serviceRaw.history)
-      ? serviceRaw.history.map((item) => ({
-          status: item.status,
-          statusDesc: STATUS_MAP[item.status] || '处理中',
-          timeText: item.time ? formatTime(item.time, 'YYYY-MM-DD HH:mm') : '-',
-          operator: item.operator || '-',
-          remark: item.remark || '',
-        }))
+      ? serviceRaw.history.map((item) => {
+          let statusDesc = STATUS_MAP[item.status] || '处理中';
+          if (item.remark && item.remark.includes('发起退款')) {
+            statusDesc = '退款中';
+          }
+          return {
+            status: item.status,
+            statusDesc,
+            timeText: item.time ? formatTime(item.time, 'YYYY-MM-DD HH:mm') : '-',
+            operator: item.operator || '-',
+            remark: item.remark || '',
+          };
+        })
       : [];
+
+    const isRefundProcessing = serviceRaw.refund && serviceRaw.refund.status === 'PROCESSING';
+    const statusDesc = isRefundProcessing ? '退款中' : STATUS_MAP[serviceRaw.status] || '处理中';
 
     return {
       rightsNo: serviceRaw.rightsNo,
@@ -116,7 +128,7 @@ Page({
       type: serviceRaw.type,
       typeDesc: ServiceTypeDesc[serviceRaw.type] || '售后',
       status: serviceRaw.status,
-      statusDesc: STATUS_MAP[serviceRaw.status] || '处理中',
+      statusDesc,
       amount: serviceRaw.amount,
       applyAmount: serviceRaw.applyAmount,
       approvedAmount: serviceRaw.audit ? serviceRaw.audit.approvedAmount : undefined,
@@ -154,6 +166,7 @@ Page({
     const status = Number(serviceRaw.status);
     const type = Number(serviceRaw.type);
     const hasLogistics = serviceRaw.logistics && serviceRaw.logistics.logisticsNo;
+    const isRefundProcessing = serviceRaw.refund && serviceRaw.refund.status === 'PROCESSING';
 
     return {
       canApprove: status === AfterServiceStatus.TO_AUDIT,
@@ -161,23 +174,29 @@ Page({
       canConfirmReceive:
         type === ServiceType.RETURN_GOODS &&
         status === AfterServiceStatus.THE_APPROVED &&
-        hasLogistics,
+        hasLogistics &&
+        !isRefundProcessing,
       canMarkAbnormal:
         type === ServiceType.RETURN_GOODS &&
         status === AfterServiceStatus.THE_APPROVED &&
-        hasLogistics,
+        hasLogistics &&
+        !isRefundProcessing,
       canRefund:
-        (type !== ServiceType.RETURN_GOODS && status === AfterServiceStatus.THE_APPROVED) ||
-        [
-          AfterServiceStatus.HAVE_THE_GOODS,
-          AfterServiceStatus.ABNORMAL_RECEIVING,
-          AfterServiceStatus.REFUND_ABNORMAL,
-        ].includes(status),
-      canClose: ![AfterServiceStatus.COMPLETE, AfterServiceStatus.CLOSED].includes(status),
+        !isRefundProcessing &&
+        ((type !== ServiceType.RETURN_GOODS && status === AfterServiceStatus.THE_APPROVED) ||
+          [
+            AfterServiceStatus.HAVE_THE_GOODS,
+            AfterServiceStatus.ABNORMAL_RECEIVING,
+            AfterServiceStatus.REFUND_ABNORMAL,
+          ].includes(status)),
+      canClose:
+        !isRefundProcessing &&
+        ![AfterServiceStatus.COMPLETE, AfterServiceStatus.CLOSED].includes(status),
       needLogistics:
         type === ServiceType.RETURN_GOODS &&
         status === AfterServiceStatus.THE_APPROVED &&
         !hasLogistics,
+      isRefundProcessing,
     };
   },
 
@@ -200,17 +219,20 @@ Page({
   async handleApprove() {
     await this.handleAction(async () => {
       const rawAmount = this.data.approvedAmount;
-      const approvedAmount =
+      let approvedAmount =
         rawAmount === '' || rawAmount === null || rawAmount === undefined
           ? undefined
           : Number(rawAmount);
-      if (approvedAmount !== undefined && (Number.isNaN(approvedAmount) || approvedAmount <= 0)) {
-        throw new Error('审核金额不合法');
+      if (approvedAmount !== undefined) {
+        if (Number.isNaN(approvedAmount) || approvedAmount <= 0) {
+          throw new Error('审核金额不合法');
+        }
+        approvedAmount = Math.round(approvedAmount * 100);
       }
       await approveAfterService({
         rightsNo: this.rightsNo,
         remark: this.data.actionRemark,
-        approvedAmount: Number.isNaN(approvedAmount) ? undefined : approvedAmount,
+        approvedAmount,
       });
       Toast({ context: this, selector: '#t-toast', message: '已同意售后' });
     });
@@ -240,10 +262,17 @@ Page({
   async handleRefund() {
     await this.handleAction(async () => {
       const rawAmount = this.data.refundAmount;
-      const amount =
+      let amount =
         rawAmount === '' || rawAmount === null || rawAmount === undefined
           ? undefined
           : Number(rawAmount);
+      if (amount !== undefined) {
+        if (Number.isNaN(amount) || amount <= 0) {
+          throw new Error('退款金额不合法');
+        }
+        amount = Math.round(amount * 100);
+      }
+
       const approvedAmount =
         this.data.serviceRaw &&
         this.data.serviceRaw.audit &&
@@ -252,22 +281,23 @@ Page({
           : this.data.serviceRaw
           ? this.data.serviceRaw.amount
           : undefined;
+
       if (
         approvedAmount !== undefined &&
-        !Number.isNaN(amount) &&
         amount !== undefined &&
         amount !== approvedAmount &&
         !this.data.actionRemark
       ) {
         throw new Error('退款金额与审核金额不一致，请填写原因说明');
       }
+
       await refundAfterService({
         rightsNo: this.rightsNo,
-        amount: Number.isNaN(amount) ? undefined : amount,
+        amount,
         traceNo: this.data.refundTraceNo,
         remark: this.data.actionRemark,
       });
-      Toast({ context: this, selector: '#t-toast', message: '退款已完成' });
+      Toast({ context: this, selector: '#t-toast', message: '退款已发起' });
     });
   },
 

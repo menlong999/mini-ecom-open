@@ -161,6 +161,11 @@
     />
   </view>
 
+  <view class="card" wx:if="{{actionState.isRefundProcessing}}">
+    <view class="card-title">退款处理</view>
+    <view class="info-line" style="color: #fa9600; padding: 10rpx 0;">退款已发起，已向支付网关提交申请，正在处理中，请等待支付结果回调...</view>
+  </view>
+
   <view class="action-bar">
     <t-button
       wx:if="{{actionState.canApprove}}"
