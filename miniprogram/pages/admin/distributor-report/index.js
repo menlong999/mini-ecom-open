@@ -153,6 +153,9 @@ function maskPhone(phone) {
 
 function parseAmount(amount) {
   if (typeof amount === 'string') {
+    if (amount.indexOf('.') !== -1) {
+      return Math.round(Number(amount) * 100);
+    }
     return parseInt(amount, 10) || 0; // 假设数据已修正为分
   }
   return amount || 0;

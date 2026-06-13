@@ -272,8 +272,16 @@ Page({
     }
   },
 
-  navigateToActivityDetail({ detail }) {
-    const idx = detail && detail.index !== undefined ? Number(detail.index) : 0;
+  navigateToActivityDetail(e) {
+    const detail = e && e.detail;
+    let idx = 0;
+    if (typeof detail === 'number') {
+      idx = detail;
+    } else if (detail && typeof detail.index === 'number') {
+      idx = detail.index;
+    } else if (detail && detail.index !== undefined) {
+      idx = Number(detail.index);
+    }
     const item = (this.data.swiperList || [])[idx];
     const linkType = (item && item.linkType) || 'spu';
     if (linkType === 'poi') {

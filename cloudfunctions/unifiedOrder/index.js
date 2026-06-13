@@ -15,9 +15,12 @@ const workflowName =
   (privateConfig.payment && privateConfig.payment.workflowName) || "";
 
 function getOrderTotalFee(order) {
-  const amount = Number(
-    order && order.orderSummary && order.orderSummary.totalPayAmount
-  );
+  const rawAmount =
+    order && order.orderSummary && order.orderSummary.totalPayAmount;
+  let amount = Number(rawAmount);
+  if (typeof rawAmount === "string" && rawAmount.indexOf(".") !== -1) {
+    amount = Math.round(amount * 100);
+  }
   if (!Number.isFinite(amount) || amount <= 0) {
     throw new Error("Invalid order total amount");
   }

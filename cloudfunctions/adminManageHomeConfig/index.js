@@ -56,11 +56,28 @@ async function getAdminInfo(openId) {
 function normalizeConfig(raw = {}) {
   const swiper = Array.isArray(raw.swiper)
     ? raw.swiper
-        .map((item) => ({
-          image: (item && (item.image || item.imageUrl)) || "",
-          spuId: (item && (item.spuId || item.skuId)) || "",
-        }))
-        .filter((item) => item.image || item.spuId)
+        .map((item) => {
+          const linkType = (item && item.linkType) || "spu";
+          const poi = (item && item.poi) || {};
+          return {
+            image: (item && (item.image || item.imageUrl)) || "",
+            linkType,
+            spuId: (item && (item.spuId || item.skuId)) || "",
+            poi: {
+              name: poi.name || "",
+              address: poi.address || "",
+              latitude:
+                typeof poi.latitude === "number"
+                  ? poi.latitude
+                  : Number(poi.latitude) || 0,
+              longitude:
+                typeof poi.longitude === "number"
+                  ? poi.longitude
+                  : Number(poi.longitude) || 0,
+            },
+          };
+        })
+        .filter((item) => item.image)
     : [];
 
   const tabList = Array.isArray(raw.tabList)
@@ -116,12 +133,30 @@ function validateHomeConfigPayload({ tabList, swiper } = {}) {
 
   (swiper || []).forEach((item, idx) => {
     const image = item && item.image;
-    const spuId = item && item.spuId;
+    const linkType = (item && item.linkType) || "spu";
     if (!image || typeof image !== "string") {
       throw new Error(`swiper[${idx}].image required`);
     }
-    if (!spuId || typeof spuId !== "string") {
-      throw new Error(`swiper[${idx}].spuId required`);
+    if (linkType === "poi") {
+      const poi = item && item.poi;
+      if (!poi || typeof poi !== "object") {
+        throw new Error(`swiper[${idx}].poi required`);
+      }
+      if (!poi.name || typeof poi.name !== "string" || !poi.name.trim()) {
+        throw new Error(`swiper[${idx}].poi.name required`);
+      }
+      if (
+        !poi.address ||
+        typeof poi.address !== "string" ||
+        !poi.address.trim()
+      ) {
+        throw new Error(`swiper[${idx}].poi.address required`);
+      }
+    } else {
+      const spuId = item && item.spuId;
+      if (!spuId || typeof spuId !== "string") {
+        throw new Error(`swiper[${idx}].spuId required`);
+      }
     }
   });
 }
@@ -140,10 +175,27 @@ async function saveHomeConfig(payload = {}, adminInfo) {
         }))
       : [],
     swiper: Array.isArray(swiper)
-      ? swiper.map((s) => ({
-          image: (s && (s.image || s.imageUrl)) || "",
-          spuId: (s && (s.spuId || s.skuId)) || "",
-        }))
+      ? swiper.map((s) => {
+          const linkType = (s && s.linkType) || "spu";
+          const poi = (s && s.poi) || {};
+          return {
+            image: (s && (s.image || s.imageUrl)) || "",
+            linkType,
+            spuId: (s && (s.spuId || s.skuId)) || "",
+            poi: {
+              name: poi.name || "",
+              address: poi.address || "",
+              latitude:
+                typeof poi.latitude === "number"
+                  ? poi.latitude
+                  : Number(poi.latitude) || 0,
+              longitude:
+                typeof poi.longitude === "number"
+                  ? poi.longitude
+                  : Number(poi.longitude) || 0,
+            },
+          };
+        })
       : [],
   };
 
