@@ -327,7 +327,7 @@
               <t-image src="{{item.primaryImage}}" mode="aspectFill" width="96rpx" height="96rpx" />
               <view class="picker-info">
                 <view class="picker-title-text">{{item.title}}</view>
-                <view class="picker-sub">¥{{item.minSalePrice}}</view>
+                <price class="picker-sub" price="{{item.minSalePrice}}" />
               </view>
             </view>
           </block>
@@ -343,7 +343,7 @@
               <t-image src="{{item.primaryImage}}" mode="aspectFill" width="96rpx" height="96rpx" />
               <view class="picker-info">
                 <view class="picker-title-text">{{item.title}}</view>
-                <view class="picker-sub">¥{{item.minSalePrice}}</view>
+                <price class="picker-sub" price="{{item.minSalePrice}}" />
               </view>
             </view>
           </block>

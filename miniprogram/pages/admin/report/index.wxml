@@ -10,7 +10,7 @@
       </view>
       <view class="summary-row">
         <text class="label">销售额</text>
-        <text class="value">¥{{summary.day.salesAmount}}</text>
+        <price class="value" price="{{summary.day.salesAmount}}" />
       </view>
     </view>
 
@@ -22,7 +22,7 @@
       </view>
       <view class="summary-row">
         <text class="label">销售额</text>
-        <text class="value">¥{{summary.week.salesAmount}}</text>
+        <price class="value" price="{{summary.week.salesAmount}}" />
       </view>
     </view>
 
@@ -34,7 +34,7 @@
       </view>
       <view class="summary-row">
         <text class="label">销售额</text>
-        <text class="value">¥{{summary.month.salesAmount}}</text>
+        <price class="value" price="{{summary.month.salesAmount}}" />
       </view>
     </view>
   </view>
@@ -50,7 +50,7 @@
       <view wx:for="{{dayRows}}" wx:key="label" class="table-row">
         <text class="col date">{{item.label}}</text>
         <text class="col num">{{item.orderCount}}</text>
-        <text class="col amount">¥{{item.salesAmount}}</text>
+        <price class="col amount" price="{{item.salesAmount}}" />
       </view>
     </view>
   </view>
@@ -66,7 +66,7 @@
       <view wx:for="{{monthRows}}" wx:key="label" class="table-row">
         <text class="col date">{{item.label}}</text>
         <text class="col num">{{item.orderCount}}</text>
-        <text class="col amount">¥{{item.salesAmount}}</text>
+        <price class="col amount" price="{{item.salesAmount}}" />
       </view>
     </view>
   </view>

@@ -3,9 +3,9 @@ import {
   fetchUserAddressList,
   deleteAddress,
   setDefaultAddress,
-} from '../../services/address/address';
+} from '../../../../services/address/address';
 import Toast from 'tdesign-miniprogram/toast/index';
-import { addressPicker, addressEditor } from '../../services/address/channel';
+import { addressPicker, addressEditor } from '../../../../services/address/channel';
 
 Page({
   data: {

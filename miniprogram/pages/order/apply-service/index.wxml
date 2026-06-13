@@ -25,7 +25,7 @@
             price="{{goods.price}}"
             fill="{{true}}"
             decimalSmaller
-            priceUnit="yuan"
+            
           />
           <view class="goods-num">x{{goods.quantity}}</view>
         </view>
@@ -95,14 +95,13 @@
       <t-cell-group>
         <t-cell
           title="商品收货状态"
-          arrow
+          arrow="{{canApplyReturn}}"
           note="{{formData.logisticsStatus.desc || '请选择'}}"
           bind:tap="handleApplyGoodsStatus"
         />
         <t-cell
           bordered="{{false}}"
           title="退款原因"
-          wx:if="{{canApplyReturn}}"
           note="{{formData.reason.desc}}"
           arrow
           bindtap="handleApplyReturnGoodsStatus"
@@ -124,7 +123,7 @@
               wr-class="refund-money-price-class"
               symbol-class="refund-money-price-symbol"
               decimal-class="refund-money-price-decimal"
-              priceUnit="yuan"
+              
             />
             <view class="service-from-group__price">
               修改

@@ -77,7 +77,7 @@ provinceName?: string
 interface IModels {
 
     /**
-    * 数据模型：address
+    * Data Model：address
     */ 
     address: DataModelMethods<IModalAddress>;    
 }

@@ -192,7 +192,7 @@ async function updateCategory2(
       data: {
         category2Name,
         thumbnail,
-        category1Id: { _id: c1Id },
+        category1Id: _.set({ _id: c1Id }),
         updatedAt: Date.now(),
         updateBy: adminInfo.nickName,
       },

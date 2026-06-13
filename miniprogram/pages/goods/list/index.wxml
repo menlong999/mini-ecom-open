@@ -86,8 +86,8 @@
           >
         </view>
         <view class="goods-price-row">
-          <text class="goods-price">¥{{item.price}}</text>
-          <text class="goods-origin-price" wx:if="{{item.originPrice}}">¥{{item.originPrice}}</text>
+          <price class="goods-price" price="{{item.price}}" />
+          <price class="goods-origin-price" type="delthrough" wx:if="{{item.originPrice}}" price="{{item.originPrice}}" />
           <view class="goods-cart-btn" catchtap="handleAddCart" data-index="{{index}}">
             <t-icon prefix="wr" name="cartAdd" size="48rpx" color="#4F6F64" />
           </view>

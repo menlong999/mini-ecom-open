@@ -236,20 +236,23 @@
       return globalObj.navigator.userAgent;
     // 微信小程序
     // @ts-ignore
-    if (typeof wx !== 'undefined' && wx.getSystemInfo) {
+    if (typeof wx !== 'undefined') {
       var ua_1;
-      // 同步接口
-      // @ts-ignore
-      wx.getSystemInfo({
-        success: function (res) {
-          if (!res) return;
+      try {
+        var res = {};
+        if (wx.getDeviceInfo && wx.getAppBaseInfo) {
+          res = Object.assign({}, wx.getDeviceInfo(), wx.getAppBaseInfo());
+        } else if (wx.getSystemInfoSync) {
+          res = wx.getSystemInfoSync();
+        }
+        if (res && res.brand) {
           ua_1 = ['brand', 'model', 'version', 'system', 'platform', 'SDKVersion', 'language']
             .map(function (k) {
               return ''.concat(k, ': ').concat(res[k]);
             })
             .join(', ');
-        },
-      });
+        }
+      } catch (e) {}
       return ua_1;
     }
   }
@@ -1006,3 +1009,4 @@
 
   Object.defineProperty(exports, '__esModule', { value: true });
 });
+// cache bust to force compiler re-analysis

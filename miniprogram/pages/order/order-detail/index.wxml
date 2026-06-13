@@ -81,7 +81,7 @@
                     price="{{goods.price}}"
                     fill
                     decimalSmaller
-                    priceUnit="yuan"
+                    
                     class="goods-price"
                   />
                   <view class="goods-num">x{{goods.quantity}}</view>
@@ -100,7 +100,7 @@
               decimalSmaller
               wr-class="pay-item__right font-bold"
               price="{{order.orderSummary.totalSalePrice || '0'}}"
-              priceUnit="yuan"
+              
             />
           </view>
           <view class="pay-item">
@@ -114,7 +114,7 @@
                   fill
                   decimalSmaller
                   price="{{order.orderSummary.deliveryFee}}"
-                  priceUnit="yuan"
+                  
                 />
               </block>
               <text wx:else>免运费</text>
@@ -134,7 +134,7 @@
           <view class="pay-item__right" catchtap="onOpenCoupons">
             <block wx:if="{{order.orderSummary.couponAmount && order.orderSummary.couponAmount > 0}}">
               -
-              <price fill decimalSmaller price="{{order.orderSummary.couponAmount}}" priceUnit="yuan" />
+              <price fill decimalSmaller price="{{order.orderSummary.couponAmount}}"  />
             </block>
             <text wx:else>无可用</text>
             <t-icon name="chevron-right" size="32rpx" color="#BBBBBB" />
@@ -148,7 +148,7 @@
               decimalSmaller
               wr-class="pay-item__right font-bold primary max-size"
               price="{{order.orderSummary.totalPayAmount || '0'}}"
-              priceUnit="yuan"
+              
             />
           </view>
         </view>

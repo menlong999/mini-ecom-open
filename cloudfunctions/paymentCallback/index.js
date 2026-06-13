@@ -1,14 +1,11 @@
 const cloud = require("wx-server-sdk");
-const { init } = require("./wxCloudClientSDK.umd.js");
 const crypto = require("crypto");
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV,
 });
 
-// 初始化数据模型 SDK
-// 这会挂载 models 到 cloud 对象上，使得我们可以使用 cloud.models.order
-init(cloud);
+const db = cloud.database();
 
 // 对应 OrderStatus.PENDING_DELIVERY (待发货)
 const STATUS_PENDING_DELIVERY = "PENDING_DELIVERY";
@@ -132,19 +129,8 @@ exports.main = async (event, context) => {
 
   try {
     console.log("[paymentCallback] fetching order:", outTradeNo);
-    // 1. 使用 cloud.models 查询订单
-    // 参考 orderConfirm.js 的查询风格 (使用 filter 和 where)
-    const orderRes = await cloud.models.order.get({
-      filter: {
-        where: {
-          $and: [
-            {
-              _id: { $eq: outTradeNo },
-            },
-          ],
-        },
-      },
-    });
+    // 1. 使用原生数据库查询订单
+    const orderRes = await db.collection("order").doc(outTradeNo).get();
 
     const order = orderRes.data;
 
@@ -161,8 +147,7 @@ exports.main = async (event, context) => {
       return { errcode: 0, errmsg: "SUCCESS" };
     }
 
-    // 2. 使用 cloud.models 更新订单
-    // 注意：微搭数据模型 API 通常接收 JSON 数据，时间类型建议使用时间戳
+    // 2. 使用原生数据库更新订单
     console.log("[paymentCallback] updating order:", outTradeNo);
     const updateData = {
       status: nextStatus,
@@ -175,16 +160,7 @@ exports.main = async (event, context) => {
       },
     };
 
-    const updateRes = await cloud.models.order.update({
-      filter: {
-        where: {
-          $and: [
-            {
-              _id: { $eq: outTradeNo },
-            },
-          ],
-        },
-      },
+    const updateRes = await db.collection("order").doc(outTradeNo).update({
       data: updateData,
     });
 

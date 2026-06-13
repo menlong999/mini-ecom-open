@@ -46,7 +46,7 @@
               price="{{goods.itemRefundAmount}}"
               fill="{{true}}"
               decimalSmaller
-              priceUnit="yuan"
+              
             />
             <view class="goods-num">x{{goods.rightsQuantity}}</view>
           </view>

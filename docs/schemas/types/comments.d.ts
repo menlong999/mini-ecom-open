@@ -135,7 +135,7 @@ skuId?: string
 interface IModels {
 
     /**
-    * 数据模型：comments
+    * Data Model：comments
     */ 
     comments: DataModelMethods<IModalComments>;    
 }

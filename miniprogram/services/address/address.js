@@ -1,4 +1,8 @@
-const app = getApp();
+const app = {
+  get cloudModels() {
+    return getApp().cloudModels;
+  },
+};
 
 /**
  * 获取用户地址列表

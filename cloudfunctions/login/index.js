@@ -1,10 +1,8 @@
 const cloud = require("wx-server-sdk");
-const { init } = require("./wxCloudClientSDK.umd.js");
 
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 
-// 初始化数据模型 SDK
-init(cloud);
+const db = cloud.database();
 
 /**
  * 登录云函数：
@@ -15,6 +13,15 @@ init(cloud);
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext();
   const openid = wxContext.OPENID;
+
+  if (!openid) {
+    console.warn("[login] missing openid from context");
+    return {
+      code: 400,
+      message: "未获取到 OpenID",
+    };
+  }
+
   const referrerOpenid = event && event.referrerOpenid;
   const referrerScene = event && event.referrerScene;
   const shouldUpdateReferrer = referrerOpenid && referrerOpenid !== openid;
@@ -38,16 +45,14 @@ exports.main = async (event, context) => {
 
       if (phoneNumber) {
         // 更新用户信息
-        const updateRes = await cloud.models.user_info.update({
-          filter: {
-            where: {
-              $and: [{ _openid: { $eq: openid } }],
+        const updateRes = await db
+          .collection("user_info")
+          .where({ _openid: openid })
+          .update({
+            data: {
+              phoneNumber: phoneNumber,
             },
-          },
-          data: {
-            phoneNumber: phoneNumber,
-          },
-        });
+          });
         console.log("User update response:", updateRes);
 
         return {
@@ -64,38 +69,30 @@ exports.main = async (event, context) => {
     // ------------------------------------------------------------
     // 模式 2: 默认静默登录 (获取或创建用户)
     // ------------------------------------------------------------
-    const userRes = await cloud.models.user_info.list({
-      filter: {
-        where: {
-          $and: [
-            {
-              _openid: { $eq: openid },
-            },
-          ],
-        },
-      },
-      pageSize: 1,
-      pageNumber: 1,
-    });
+    const userRes = await db
+      .collection("user_info")
+      .where({
+        _openid: openid,
+      })
+      .limit(1)
+      .get();
 
-    const userList = userRes.data.records || [];
+    const userList = userRes.data || [];
 
     if (userList.length > 0) {
       // 用户已存在，直接返回
       const user = userList[0];
       if (shouldUpdateReferrer) {
-        await cloud.models.user_info.update({
-          filter: {
-            where: {
-              $and: [{ _openid: { $eq: openid } }],
+        await db
+          .collection("user_info")
+          .where({ _openid: openid })
+          .update({
+            data: {
+              referrerOpenid,
+              referrerScene: referrerScene || "",
+              referrerAt: Date.now(),
             },
-          },
-          data: {
-            referrerOpenid,
-            referrerScene: referrerScene || "",
-            referrerAt: Date.now(),
-          },
-        });
+          });
         user.referrerOpenid = referrerOpenid;
         user.referrerScene = referrerScene || "";
         user.referrerAt = Date.now();
@@ -120,7 +117,7 @@ exports.main = async (event, context) => {
         newUser.referrerAt = Date.now();
       }
 
-      const addUserRes = await cloud.models.user_info.create({
+      const addUserRes = await db.collection("user_info").add({
         data: newUser,
       });
 
@@ -128,7 +125,7 @@ exports.main = async (event, context) => {
         code: 201,
         message: "新用户注册成功",
         data: {
-          id: addUserRes.data.id,
+          id: addUserRes._id,
           ...newUser,
         },
       };

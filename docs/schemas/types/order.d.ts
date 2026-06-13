@@ -262,24 +262,24 @@ deliveryType?: number
 orderSummary?: {
 /**
  * couponAmount
- * 
+ * couponAmount
  */
-couponAmount?: string
-/**
- * deliveryFee
- * 
- */
-deliveryFee?: string
+couponAmount?: number
 /**
  * totalGoodsCount
  * 
  */
 totalGoodsCount?: number
 /**
- * totalSalePrice
- * 
+ * deliveryFee
+ * deliveryFee
  */
-totalSalePrice?: string
+deliveryFee?: number
+/**
+ * totalSalePrice
+ * totalSalePrice
+ */
+totalSalePrice?: number
 /**
  * invoiceSupport
  * 
@@ -287,14 +287,14 @@ totalSalePrice?: string
 invoiceSupport?: boolean
 /**
  * totalPayAmount
- * 
+ * totalPayAmount
  */
-totalPayAmount?: string
+totalPayAmount?: number
 /**
  * promotionAmount
- * 
+ * promotionAmount
  */
-promotionAmount?: string
+promotionAmount?: number
 }
 /**
  * userId
@@ -474,7 +474,7 @@ status?: string
 interface IModels {
 
     /**
-    * 数据模型：order
+    * Data Model：order
     */ 
     order: DataModelMethods<IModalOrder>;    
 }

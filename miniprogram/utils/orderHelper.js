@@ -17,9 +17,10 @@ export const getOrderStatusDesc = (status, deliveryType) => {
     case OrderStatus.PAYMENT_TIMEOUT:
       return '已取消（未支付）';
     case OrderStatus.CANCELED_NOT_PAYMENT:
-    case OrderStatus.CANCELED_PAYMENT:
     case OrderStatus.CANCELED_REJECTION:
       return '订单已取消';
+    case OrderStatus.CANCELED_PAYMENT:
+      return '已退款';
     default:
       return '未知状态';
   }

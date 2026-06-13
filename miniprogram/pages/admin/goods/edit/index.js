@@ -1,4 +1,4 @@
-import { createGoods, updateGoods, getGoodsDetail } from '../../services/goodsMgr';
+import { createGoods, updateGoods, getGoodsDetail, deleteGoods } from '../../services/goodsMgr';
 import {
   fetchAllCategories,
   filterCategory2ByCategory1,
@@ -322,13 +322,14 @@ Page({
         ...sku,
         // 历史数据兼容：之前写入 sku.image = spu.primaryImage，这里视为“未自定义”
         image: sku && sku.image && sku.image === data.primaryImage ? '' : (sku && sku.image) || '',
+        price: sku.price ? sku.price / 100 : 0, // 分转元用于表单展示
       }));
       this.setData(
         {
           formData: {
             title: data.title,
-            minSalePrice: data.minSalePrice,
-            maxLinePrice: data.maxLinePrice,
+            minSalePrice: data.minSalePrice ? data.minSalePrice / 100 : '',
+            maxLinePrice: data.maxLinePrice ? data.maxLinePrice / 100 : '',
             spuStockQuantity: data.spuStockQuantity,
             desc: descUrls,
             categoryId: data.categoryId,
@@ -525,9 +526,15 @@ Page({
         uploadImages(descFileList, 'goods'),
       ]);
 
-      // 3. 更新 formData
+      // 3. 更新 formData (提交前将元转为分)
       const finalData = {
         ...formData,
+        minSalePrice: Math.round(Number(formData.minSalePrice) * 100),
+        maxLinePrice: Math.round(Number(formData.maxLinePrice || 0) * 100),
+        skuList: formData.skuList.map((s) => ({
+          ...s,
+          price: Math.round(Number(s.price || 0) * 100),
+        })),
         primaryImage: primaryUrls[0] || '',
         images: imageUrls,
         desc: descUrls,
@@ -667,5 +674,39 @@ Page({
 
   onCategory2PickerCancel() {
     this.setData({ showCategory2Picker: false });
+  },
+
+  async onDeleteGoods() {
+    const { id } = this.data;
+    if (!id) return;
+
+    wx.showModal({
+      title: '确认删除商品',
+      content: '确定要永久删除该商品及所有规格数据吗？该操作不可撤销。',
+      confirmColor: '#fa5151',
+      success: async (res) => {
+        if (res.confirm) {
+          wx.showLoading({ title: '删除中...' });
+          try {
+            await deleteGoods(id);
+            Toast({ context: this, selector: '#t-toast', theme: 'success', message: '删除成功' });
+            setTimeout(() => {
+              this.markPrevPageRefresh();
+              wx.navigateBack();
+            }, 1000);
+          } catch (err) {
+            console.error(err);
+            Toast({
+              context: this,
+              selector: '#t-toast',
+              theme: 'error',
+              message: err.message || '删除失败',
+            });
+          } finally {
+            wx.hideLoading();
+          }
+        }
+      },
+    });
   },
 });

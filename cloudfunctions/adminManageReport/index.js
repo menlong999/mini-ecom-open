@@ -230,7 +230,7 @@ function parseAmount(order) {
 }
 
 function formatAmount(amount) {
-  return Number(amount || 0).toFixed(2);
+  return (Number(amount || 0) / 100).toFixed(2);
 }
 
 function startOfDay(ts) {

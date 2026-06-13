@@ -20,14 +20,14 @@
             wr-class="class-goods-price"
             symbol-class="class-goods-symbol"
             price="{{minSalePrice}}"
-            priceUnit="yuan"
+            
             type="lighter"
           />
           <view class="goods-price-up">起</view>
           <price
             wr-class="class-goods-del"
             price="{{maxLinePrice}}"
-            priceUnit="yuan"
+            
             type="delthrough"
           />
         </view>
@@ -140,14 +140,14 @@
         <price
           wx:if="{{!isAllSelectedSku || (!promotionSubCode && isAllSelectedSku)}}"
           price="{{selectSkuSellsPrice ? selectSkuSellsPrice : minSalePrice }}"
-          priceUnit="yuan"
+          
           wr-class="popup-sku__price-num"
           symbol-class="popup-sku__price-symbol"
         />
         <price
           wx:if="{{selectSkuSellsPrice === 0 && minSalePrice !== maxSalePrice && !isAllSelectedSku}}"
           price="{{maxSalePrice}}"
-          priceUnit="yuan"
+          
           wr-class="popup-sku__price-del"
           type="delthrough"
         />

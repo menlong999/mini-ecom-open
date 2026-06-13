@@ -61,7 +61,7 @@
                   price="{{goods.price}}"
                   fill="{{true}}"
                   decimalSmaller
-                  priceUnit="yuan"
+                  
                 />
                 <view class="goods-num">x{{goods.quantity}}</view>
               </view>
@@ -79,7 +79,7 @@
               class="real-pay"
               price="{{order.totalPayAmount + ''}}"
               decimalSmaller
-              priceUnit="yuan"
+              
             />
           </view>
           <!-- 订单按钮栏 -->

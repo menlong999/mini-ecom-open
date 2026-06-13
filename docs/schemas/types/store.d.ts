@@ -47,7 +47,7 @@ status?: number
 interface IModels {
 
     /**
-    * 数据模型：store
+    * Data Model：store
     */ 
     store: DataModelMethods<IModalStore>;    
 }

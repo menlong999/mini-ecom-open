@@ -1,18 +1,20 @@
 const cloud = require("wx-server-sdk");
-const { init } = require("./wxCloudClientSDK.umd.js");
 const crypto = require("crypto");
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV,
 });
 
-init(cloud);
-
 const db = cloud.database();
 const _ = db.command;
 
 const AFTER_SERVICE_COLLECTION = "after-service";
 const ORDER_COLLECTION = "order";
+
+const formatMoney = (cents) => {
+  if (typeof cents !== "number" || Number.isNaN(cents)) return "0.00";
+  return (cents / 100).toFixed(2);
+};
 
 const AfterServiceStatus = {
   TO_AUDIT: 10,
@@ -115,10 +117,20 @@ async function updateOrderGoodsStatus(service, status) {
       (item) => item.skuId === goods.skuId
     );
     if (index < 0) return;
+    order.goodsList[index].afterServiceStatus = status;
     updateData[`goodsList.${index}.afterServiceStatus`] = status;
     updateData[`goodsList.${index}.afterServiceId`] = service._id;
     updateData[`goodsList.${index}.rightsNo`] = service.rightsNo;
   });
+
+  if (status === AfterServiceStatus.COMPLETE) {
+    const allRefunded = order.goodsList.every(
+      (item) => item.afterServiceStatus === AfterServiceStatus.COMPLETE
+    );
+    if (allRefunded) {
+      updateData.status = "CANCELED_PAYMENT";
+    }
+  }
 
   if (Object.keys(updateData).length) {
     await db
@@ -268,11 +280,11 @@ exports.main = async (event, context) => {
     const now = Date.now();
     const refundAmountCents = Number(amount && amount.refund);
     const refundAmount = Number.isFinite(refundAmountCents)
-      ? Math.round(refundAmountCents) / 100
+      ? Math.round(refundAmountCents)
       : undefined;
     const totalAmountCents = Number(amount && amount.total);
     const totalAmount = Number.isFinite(totalAmountCents)
-      ? Math.round(totalAmountCents) / 100
+      ? Math.round(totalAmountCents)
       : undefined;
 
     const nextRefund = {
@@ -297,7 +309,9 @@ exports.main = async (event, context) => {
     }
 
     const historyRemarkMap = {
-      [RefundStatus.SUCCESS]: `退款成功，金额: ${nextRefund.amount || 0}`,
+      [RefundStatus.SUCCESS]: `退款成功，金额: ¥${formatMoney(
+        nextRefund.amount
+      )}`,
       [RefundStatus.ABNORMAL]: "退款异常，请联系客服处理",
       [RefundStatus.CLOSED]: "退款已关闭，请联系客服处理",
       [RefundStatus.PROCESSING]: "退款处理中",

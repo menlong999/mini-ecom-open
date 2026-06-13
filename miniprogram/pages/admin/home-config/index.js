@@ -71,7 +71,7 @@ Page({
   },
 
   initDragMetrics() {
-    const sys = wx.getSystemInfoSync();
+    const sys = wx.getWindowInfo();
     const pxPerRpx = sys.windowWidth / 750;
     this.setData({
       swiperItemHeightPx: Math.round(700 * pxPerRpx),

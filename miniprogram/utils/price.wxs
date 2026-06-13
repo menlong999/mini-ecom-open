@@ -1,0 +1,12 @@
+var format = function(price) {
+  if (price === undefined || price === null || price === '') return '0.00';
+  var p = parseFloat(price);
+  if (isNaN(p)) return '0.00';
+  // p is in fen, e.g., 1500
+  // convert to yuan and format to 2 decimal places
+  return (p / 100).toFixed(2);
+}
+
+module.exports = {
+  format: format
+};

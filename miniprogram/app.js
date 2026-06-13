@@ -2,6 +2,8 @@ import updateManager from './utils/updateManager';
 import { runtimeConfig } from './config/index';
 import { dispatchLogin } from './services/common/login';
 // 引入主包共享依赖以消除“主包内未使用JS文件”警告
+import './services/address/address';
+import './services/address/channel';
 import './services/common/upload';
 import './services/order/logistics';
 import './utils/orderHelper';
@@ -13,9 +15,9 @@ App({
   onLaunch: function (options) {
     const envId = runtimeConfig.cloud.envId;
     if (envId) {
-      wx.cloud.init({ env: envId });
+      wx.cloud.init({ env: envId, traceUser: true });
     } else {
-      wx.cloud.init({});
+      wx.cloud.init({ traceUser: true });
       console.warn('[app] cloud env is not configured, using default environment resolution');
     }
     // 自动挂载 env 到 wx.cloud.config，兼容 wxCloudClientSDK 取 env

@@ -88,7 +88,7 @@ skuId?: string
 interface IModels {
 
     /**
-    * 数据模型：cart
+    * Data Model：cart
     */ 
     cart: DataModelMethods<IModalCart>;    
 }

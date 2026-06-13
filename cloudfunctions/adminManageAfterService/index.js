@@ -11,8 +11,6 @@ try {
   privateConfig = {};
 }
 
-const SKIP_PAY_AMOUNT_CHECK = process.env.SKIP_PAY_AMOUNT_CHECK === "true";
-
 const db = cloud.database();
 const _ = db.command;
 
@@ -21,6 +19,11 @@ const ORDER_COLLECTION = "order";
 const USER_COLLECTION = "user_info";
 const REFUND_WORKFLOW_NAME =
   (privateConfig.payment && privateConfig.payment.refundWorkflowName) || "";
+
+const formatMoney = (cents) => {
+  if (typeof cents !== "number" || Number.isNaN(cents)) return "0.00";
+  return (cents / 100).toFixed(2);
+};
 
 const AfterServiceStatus = {
   TO_AUDIT: 10,
@@ -223,21 +226,19 @@ async function approveService(
     const order = await getOrderById(service.orderId);
     const wechatPayInfo = order && order.wechatPayInfo;
     const totalFee = Number(wechatPayInfo && wechatPayInfo.totalFee);
-    if (!SKIP_PAY_AMOUNT_CHECK && Number.isFinite(totalFee) && totalFee > 0) {
-      const approvedAmountCents = Math.round(finalApprovedAmount * 100);
+    if (Number.isFinite(totalFee) && totalFee > 0) {
+      const approvedAmountCents = finalApprovedAmount;
       if (approvedAmountCents > totalFee) {
         throw new Error("Approved amount exceeds paid total");
       }
-    } else if (SKIP_PAY_AMOUNT_CHECK) {
-      console.warn("[approveService] skip paid total check", { totalFee });
     }
   }
 
   const now = Date.now();
   const reasonText = remark || "无";
-  const historyRemark = `申请金额: ${
-    applyAmount || 0
-  }，审核金额: ${finalApprovedAmount}，原因: ${reasonText}`;
+  const historyRemark = `申请金额: ¥${formatMoney(
+    applyAmount
+  )}，审核金额: ¥${formatMoney(finalApprovedAmount)}，原因: ${reasonText}`;
   const updateData = {
     status: AfterServiceStatus.THE_APPROVED,
     amount: finalApprovedAmount,
@@ -415,33 +416,16 @@ async function refundService(
     throw new Error("Missing transactionId");
   }
   const totalFee = Number(wechatPayInfo && wechatPayInfo.totalFee);
-  let refundAmountCents = Math.round(refundAmount * 100);
-  if (SKIP_PAY_AMOUNT_CHECK) {
-    refundAmountCents = 1;
-  }
+  let refundAmountCents = refundAmount;
   console.log("[refundService] amount check:", {
     refundAmount,
     refundAmountCents,
     totalFee,
-    SKIP_PAY_AMOUNT_CHECK,
   });
   if (!Number.isFinite(totalFee) || totalFee <= 0) {
-    if (SKIP_PAY_AMOUNT_CHECK) {
-      console.warn("[refundService] skip invalid totalFee check", { totalFee });
-    } else {
-      throw new Error("Invalid totalFee");
-    }
-  } else if (!SKIP_PAY_AMOUNT_CHECK && refundAmountCents > totalFee) {
+    throw new Error("Invalid totalFee");
+  } else if (refundAmountCents > totalFee) {
     throw new Error("Refund amount exceeds paid total");
-  } else if (
-    SKIP_PAY_AMOUNT_CHECK &&
-    Number.isFinite(totalFee) &&
-    refundAmountCents > totalFee
-  ) {
-    console.warn("[refundService] skip refund > paid total", {
-      refundAmountCents,
-      totalFee,
-    });
   }
 
   const outRefundNo = `${service.rightsNo || rightsNo}-${Date.now()}`;
@@ -453,7 +437,7 @@ async function refundService(
     totalAmount: totalFee,
   });
 
-  const requestAmount = SKIP_PAY_AMOUNT_CHECK ? 0.01 : refundAmount;
+  const requestAmount = refundAmount;
   const updateData = {
     amount: requestAmount,
     refund: {
@@ -470,9 +454,9 @@ async function refundService(
       status: service.status,
       time: now,
       operator: adminInfo.nickName,
-      remark: `发起退款，审核金额: ${
-        approvedAmount || 0
-      }，退款金额: ${requestAmount}，原因: ${remark || "无"}`,
+      remark: `发起退款，审核金额: ¥${formatMoney(
+        approvedAmount
+      )}，退款金额: ¥${formatMoney(requestAmount)}，原因: ${remark || "无"}`,
     }),
   };
 
@@ -547,10 +531,20 @@ async function updateOrderGoodsStatus(service, status) {
       (item) => item.skuId === goods.skuId
     );
     if (index < 0) return;
+    order.goodsList[index].afterServiceStatus = status;
     updateData[`goodsList.${index}.afterServiceStatus`] = status;
     updateData[`goodsList.${index}.afterServiceId`] = service._id;
     updateData[`goodsList.${index}.rightsNo`] = service.rightsNo;
   });
+
+  if (status === AfterServiceStatus.COMPLETE) {
+    const allRefunded = order.goodsList.every(
+      (item) => item.afterServiceStatus === AfterServiceStatus.COMPLETE
+    );
+    if (allRefunded) {
+      updateData.status = "CANCELED_PAYMENT";
+    }
+  }
 
   if (Object.keys(updateData).length) {
     await db

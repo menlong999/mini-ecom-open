@@ -38,7 +38,7 @@
           </view>
           <view class="service-meta">
             <text>申请时间: {{item.createdAtText || '-'}}</text>
-            <text>退款金额: ¥{{item.amount || '0'}}</text>
+            <view style="display:inline-flex;align-items:center;">退款金额: <price price="{{item.amount || '0'}}" /></view>
           </view>
           <view class="service-goods-list">
             <view
@@ -53,7 +53,7 @@
                 <view class="service-goods-specs">规格: {{goods.specs || '-'}}</view>
               </view>
               <view class="service-goods-aside">
-                <text class="service-goods-price">¥{{goods.price}}</text>
+                <price class="service-goods-price" price="{{goods.price}}" />
                 <text class="service-goods-qty">x{{goods.quantity}}</text>
               </view>
             </view>
